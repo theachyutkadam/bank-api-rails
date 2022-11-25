@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  building: MyString
+  flat_number: MyString
+  road: MyString
+  taluka: MyString
+  district: MyString
+  state: MyString
+
+two:
+  building: MyString
+  flat_number: MyString
+  road: MyString
+  taluka: MyString
+  district: MyString
+  state: MyString
