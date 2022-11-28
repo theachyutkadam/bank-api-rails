@@ -152,6 +152,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.datetime "birth_date"
     t.integer "gender"
     t.boolean "is_active"
+    t.boolean "is_admin"
     t.boolean "is_deleted"
     t.integer "accountable_id"
     t.string "accountable_type"

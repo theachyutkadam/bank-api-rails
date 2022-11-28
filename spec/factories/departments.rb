@@ -8,7 +8,9 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-class Department < ApplicationRecord
-  has_many :employees
-  has_one :manager
+FactoryBot.define do
+  factory :department do
+    name { "Finance" }
+    employee_count { Faker::Number.number(digits: 2) }
+  end
 end

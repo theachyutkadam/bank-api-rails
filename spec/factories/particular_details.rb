@@ -21,8 +21,10 @@
 #  fk_rails_...  (receiver_id => users.id)
 #  fk_rails_...  (sender_id => users.id)
 #
-class ParticularDetail < ApplicationRecord
-  belongs_to :particular
-  belongs_to :sender, class_name: "User"
-  belongs_to :receiver, class_name: "User"
+FactoryBot.define do
+  factory :particular_detail do
+    association :particular, factory: :particular
+    association :sender, factory: :user
+    association :receiver, factory: :user
+  end
 end

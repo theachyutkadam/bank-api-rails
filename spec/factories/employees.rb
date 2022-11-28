@@ -26,13 +26,19 @@
 #  fk_rails_...  (department_id => departments.id)
 #  fk_rails_...  (manager_id => managers.id)
 #
-class Employee < ApplicationRecord
-  belongs_to :department
-  belongs_to :manager
-  belongs_to :address
+FactoryBot.define do
+  factory :employee do
+    date_of_joining { Faker::Date.between(from: '2014-09-23', to: '2023-01-29') }
+    designation { "cashier" }
+    education { Faker::Educator.degree }
+    official_email { Faker::Internet.email }
+    work_status { 0 }
+    association :address, factory: :address
+    association :department, factory: :department
+    association :manager, factory: :manager
 
-  has_one :user, as: :accountable
-  has_many :salaries
-
-  enum work_status: { available: 0, on_leave: 1}
+    trait :for_user do
+      association :accountable, factory: :user
+    end
+  end
 end

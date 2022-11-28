@@ -21,10 +21,15 @@
 #
 #  fk_rails_...  (address_id => addresses.id)
 #
-class Nominee < ApplicationRecord
-  belongs_to :address
+FactoryBot.define do
+  factory :nominee do
+    first_name { Faker::Name.first_name }
+    middle_name { Faker::Name.middle_name }
+    last_name { Faker::Name.last_name }
+    contact { Faker::Number.number(digits: 10) }
+    gender { 0 }
+    relation { 1 }
 
-  has_one :customer
-  enum gender: { male: 0, female: 1, transgender: 2 }
-  enum relation: { mother: 0, father: 1, wife: 2, child: 3 }
+    association :address, factory: :address
+  end
 end

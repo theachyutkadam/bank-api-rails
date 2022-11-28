@@ -24,13 +24,18 @@
 #  fk_rails_...  (address_id => addresses.id)
 #  fk_rails_...  (nominee_id => nominees.id)
 #
-class Customer < ApplicationRecord
-  belongs_to :nominee
-  belongs_to :account_type
-  belongs_to :address
+FactoryBot.define do
+  factory :customer do
+    account_number { Faker::Number.number(digits: 10)  }
+    amount_limit { 50000.00 }
+    current_balance { Faker::Number.decimal(l_digits: 5) }
 
-  has_many :cards
-  has_many :transactions
-  has_many :transactions_details
-  has_one :user, as: :accountable
+    association :address, factory: :address
+    association :nominee, factory: :nominee
+    association :account_type, factory: :account_type
+
+    trait :for_user do
+      association :accountable, factory: :user
+    end
+  end
 end

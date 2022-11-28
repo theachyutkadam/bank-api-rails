@@ -21,10 +21,12 @@
 #  fk_rails_...  (card_id => cards.id)
 #  fk_rails_...  (customer_id => customers.id)
 #
-class Particular < ApplicationRecord
-  belongs_to :card
-  belongs_to :customer
-
-  has_one :particular_details
-  has_many :salaries
+FactoryBot.define do
+  factory :particular do
+    credit_amount { Faker::Number.decimal }
+    debit_amount { Faker::Number.decimal }
+    # current_balance { feel from auto }
+    association :card, factory: :card
+    association :customer, factory: :customer
+  end
 end

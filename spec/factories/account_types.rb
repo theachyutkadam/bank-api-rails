@@ -9,6 +9,10 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
-class AccountType < ApplicationRecord
-  has_one :customer
+FactoryBot.define do
+  factory :account_type do
+    loan_intrest_rate { Faker::Number.decimal(l_digits: 2) }
+    saving_intrest_rate { Faker::Number.decimal(l_digits: 2) }
+    title { "Saving"  }
+  end
 end
