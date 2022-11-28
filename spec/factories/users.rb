@@ -46,7 +46,7 @@ FactoryBot.define do
     gender { 0 }
     birth_date { 18.years.ago }
     maritial_status { 0 }
-    # is_admin { false }
+    is_admin { false }
     is_active { true }
     is_deleted { false }
     pan_card_number { Faker::Base.bothify('?????####?') }

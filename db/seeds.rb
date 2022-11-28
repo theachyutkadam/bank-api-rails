@@ -11,6 +11,7 @@ p "start +++++++++++="
 require 'factory_bot'
 
 10.times do
-  FactoryBot.create :user
+  FactoryBot.create :customer
+  FactoryBot.create :employee
 end
 p "end +++++++++++="

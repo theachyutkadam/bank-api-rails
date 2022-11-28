@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.datetime :birth_date
       t.integer :gender
       t.boolean :is_active
+      t.boolean :is_admin
       t.boolean :is_deleted
       t.integer :accountable_id
       t.string :accountable_type
