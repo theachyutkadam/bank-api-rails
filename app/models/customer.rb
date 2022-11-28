@@ -5,5 +5,6 @@ class Customer < ApplicationRecord
 
   has_many :cards
   has_many :transactions
+  has_many :transactions_details
   has_one :user, as: :accountable
 end

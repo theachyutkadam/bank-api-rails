@@ -1,6 +1,6 @@
 require "test_helper"
 
-class TransactionUserTest < ActiveSupport::TestCase
+class TransactionDetailTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
