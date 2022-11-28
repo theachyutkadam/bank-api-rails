@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nominee: one
+  account_type: one
+  account_number: 
+  amount_limit: 1
+  address: one
+  current_balance: 1.5
+
+two:
+  nominee: two
+  account_type: two
+  account_number: 
+  amount_limit: 1
+  address: two
+  current_balance: 1.5

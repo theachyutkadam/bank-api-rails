@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  number: 
+  expire_date: 2022-11-28 12:29:24
+  csv: 1
+  customer: one
+  is_active: false
+  is_deleted: false
+  pin: 1
+
+two:
+  title: MyString
+  number: 
+  expire_date: 2022-11-28 12:29:24
+  csv: 1
+  customer: two
+  is_active: false
+  is_deleted: false
+  pin: 1
