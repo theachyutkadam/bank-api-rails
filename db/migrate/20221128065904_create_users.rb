@@ -8,13 +8,14 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :middle_name
       t.string :last_name
       t.string :contact
+      t.datetime :birth_date
       t.integer :gender
       t.boolean :is_active
       t.boolean :is_deleted
       t.integer :accountable_id
       t.string :accountable_type
-      t.string :pan_card
-      t.string :adhaar_card
+      t.string :pan_card_number
+      t.string :adhaar_card_number
       t.boolean :is_handicap
       t.text :handicap_details
       t.integer :maritial_status

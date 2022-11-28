@@ -25,10 +25,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
   create_table "addresses", force: :cascade do |t|
     t.string "building"
     t.string "flat_number"
-    t.string "road"
-    t.string "taluka"
-    t.string "district"
-    t.string "state"
+    t.string "street"
+    t.string "pin_code"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -150,13 +149,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.string "middle_name"
     t.string "last_name"
     t.string "contact"
+    t.datetime "birth_date"
     t.integer "gender"
     t.boolean "is_active"
     t.boolean "is_deleted"
     t.integer "accountable_id"
     t.string "accountable_type"
-    t.string "pan_card"
-    t.string "adhaar_card"
+    t.string "pan_card_number"
+    t.string "adhaar_card_number"
     t.boolean "is_handicap"
     t.text "handicap_details"
     t.integer "maritial_status"

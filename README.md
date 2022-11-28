@@ -17,8 +17,8 @@ Added a command for Fastly create a controller and models.
 
 *Create Models using following commands*
 
-- rails g model address building flat_number road taluka district state
-- rails g model user username password email first_name middle_name last_name contact gender:integer is_active:boolean is_deleted:boolean accountable_id:integer accountable_type pan_card adhaar_card is_handicap:boolean handicap_details:text maritial_status:integer address:references
+- rails g model address building street flat_number pin_code description:text
+- rails g model user username password email first_name middle_name last_name contact gender:integer birth_date:datetime is_active:boolean is_deleted:boolean accountable_id:integer accountable_type pan_card_number adhaar_card_number is_handicap:boolean handicap_details:text maritial_status:integer address:references
 
 - rails g model account_type title loan_intrest_rate:float saving_intrest_rate:float
 - rails g model department name employee_count:integer
@@ -28,7 +28,7 @@ Added a command for Fastly create a controller and models.
 - rails g model particular card:references customer:references debit_amount:float credit_amount:float current_balance:float
 
 - rails g model manager user:references department:references designation is_active:boolean
-- rails g model employee  department:references manager:references education date_of_joining:datetime work_status designation official_email address:references
+- rails g model employee department:references manager:references education date_of_joining:datetime work_status designation official_email address:references
 - rails g model salary employee:references amount:float status:integer particular:references
 
 - rails g model particular_details particular:references sender:references receiver:references
