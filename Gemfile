@@ -43,6 +43,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem 'database_cleaner'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+  gem 'simplecov'
 end
 
 group :development do
@@ -53,6 +54,5 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-rails', '~> 2.17', '>= 2.17.3'
-  gem 'simplecov'
 end
 
