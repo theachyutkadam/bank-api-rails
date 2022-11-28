@@ -20,3 +20,11 @@
 #  fk_rails_...  (employee_id => employees.id)
 #  fk_rails_...  (particular_id => particulars.id)
 #
+FactoryBot.define do
+  factory :salary do
+    amount { Faker::Number.decimal }
+    status { "Unpaid" }
+    association :employee, factory: :employee
+    association :particular, factory: :particular
+  end
+end

@@ -42,8 +42,8 @@ FactoryBot.define do
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
     contact { Faker::PhoneNumber.cell_phone_in_e164 }
-    birth_date { 18.years.ago }
     gender { 0 }
+    birth_date { 18.years.ago }
     maritial_status { 0 }
     is_admin { false }
     is_active { true }

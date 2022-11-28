@@ -25,4 +25,5 @@ class Nominee < ApplicationRecord
   belongs_to :address
 
   has_one :customer
+  enum gender: { male: 0, female: 1, transgender: 2 }
 end

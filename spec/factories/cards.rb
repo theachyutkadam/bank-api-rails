@@ -22,3 +22,16 @@
 #
 #  fk_rails_...  (customer_id => customers.id)
 #
+FactoryBot.define do
+  factory :card do
+    title { "Debit" }
+    csv { Faker::Number.binary(digits: 3) }
+    expire_date { 5.years.after }
+    is_active { true }
+    is_deleted { false }
+    number { Faker::Number.number(digits: 16) }
+    pin { Faker::Number.binary(digits: 4) }
+
+    association :customer, factory: :customer
+  end
+end

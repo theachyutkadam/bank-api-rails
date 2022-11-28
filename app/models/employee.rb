@@ -33,4 +33,6 @@ class Employee < ApplicationRecord
 
   has_one :user, as: :accountable
   has_many :salaries
+
+  enum work_status: { available: 0, on_leave: 1}
 end

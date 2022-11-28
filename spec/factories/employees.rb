@@ -26,3 +26,19 @@
 #  fk_rails_...  (department_id => departments.id)
 #  fk_rails_...  (manager_id => managers.id)
 #
+FactoryBot.define do
+  factory :employee do
+    date_of_joining { Faker::Date.between(from: '2014-09-23', to: '2023-01-29') }
+    designation { "cashier" }
+    education { Faker::Educator.degree}
+    official_email { Faker::Internet.email }
+    work_status { 0 }
+    association :address, factory: :address
+    association :department, factory: :department
+    association :manager, factory: :manager
+
+    trait :for_user do
+      association :accountable, factory: :user
+    end
+  end
+end

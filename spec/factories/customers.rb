@@ -26,11 +26,15 @@
 #
 FactoryBot.define do
   factory :customer do
-    # status { Faker::Number.within(range: 0..1) }
-    # birthdate { Faker::Date.birthday(min_age: 5, max_age: 65) }
+    account_number { Faker::Bank.account_number(digits: 10) }
+    amount_limit { 50000.00 }
+    current_balance { Faker::Number.decimal(l_digits: 5, r_digits: 2) }
 
-    # trait :for_user do
-    #   association :information, factory: :user
-    # end
+    association :address, factory: :address
+    association :nominee, factory: :nominee
+
+    trait :for_user do
+      association :accountable, factory: :user
+    end
   end
 end

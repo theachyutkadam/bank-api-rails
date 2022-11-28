@@ -21,3 +21,10 @@
 #  fk_rails_...  (receiver_id => users.id)
 #  fk_rails_...  (sender_id => users.id)
 #
+FactoryBot.define do
+  factory :particular_detail do
+    association :particular, factory: :particular
+    association :sender, factory: :user
+    association :receiver, factory: :user
+  end
+end

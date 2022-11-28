@@ -20,3 +20,12 @@
 #  fk_rails_...  (department_id => departments.id)
 #  fk_rails_...  (user_id => users.id)
 #
+FactoryBot.define do
+  factory :manager do
+    designation { "Senior Manager" }
+    is_active { true }
+
+    association :department, factory: :department
+    association :user, factory: :user
+  end
+end
