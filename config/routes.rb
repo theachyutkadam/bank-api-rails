@@ -1,3 +1,6 @@
+# == Route Map
+#
+
 Rails.application.routes.draw do
   get 'salaries/index'
   get 'salaries/new'
