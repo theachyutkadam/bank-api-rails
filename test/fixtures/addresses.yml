@@ -1,4 +1,16 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id          :bigint           not null, primary key
+#  building    :string
+#  description :text
+#  flat_number :string
+#  pin_code    :string
+#  street      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 
 one:
   building: MyString
