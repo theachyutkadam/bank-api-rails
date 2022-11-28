@@ -42,7 +42,7 @@ group :development, :test do
   gem "rspec-rails", "~> 3.6"
   gem "factory_bot_rails"
   gem 'database_cleaner'
-  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 end
 
 group :development do

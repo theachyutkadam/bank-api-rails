@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-include FactoryBot::Syntax::Methods
 
-user1 = create(:user)
+p "start +++++++++++="
+require 'factory_bot'
+
+10.times do
+  FactoryBot.create :user
+end
+p "end +++++++++++="

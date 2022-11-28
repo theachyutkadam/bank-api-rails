@@ -33,9 +33,10 @@
 #
 #  fk_rails_...  (address_id => addresses.id)
 #
+p "now we are in user factory +++++++++++="
 FactoryBot.define do
   factory :user do
-    user_name { Faker::IDNumber.brazilian_id }
+    username { Faker::IDNumber.brazilian_id }
     password { "123456" }
     email { Faker::Internet.email }
     first_name { Faker::Name.first_name }
@@ -45,7 +46,7 @@ FactoryBot.define do
     gender { 0 }
     birth_date { 18.years.ago }
     maritial_status { 0 }
-    is_admin { false }
+    # is_admin { false }
     is_active { true }
     is_deleted { false }
     pan_card_number { Faker::Base.bothify('?????####?') }

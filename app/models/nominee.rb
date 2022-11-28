@@ -26,4 +26,5 @@ class Nominee < ApplicationRecord
 
   has_one :customer
   enum gender: { male: 0, female: 1, transgender: 2 }
+  enum relation: { mother: 0, father: 1, wife: 2, child: 3 }
 end

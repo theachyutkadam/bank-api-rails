@@ -26,9 +26,9 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
-    contact { Faker::PhoneNumber.cell_phone_in_e164 }
+    contact { Faker::Number.number(digits: 10) }
     gender { 0 }
-    relation { Faker::Relationship.familial(connection: 'direct')  }
+    relation { 1 }
 
     association :address, factory: :address
   end
