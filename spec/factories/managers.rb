@@ -27,5 +27,9 @@ FactoryBot.define do
 
     association :department, factory: :department
     association :user, factory: :user
+    # for_employee
+    # trait :for_employee do
+    #   association :accountable, factory: :employee
+    # end
   end
 end

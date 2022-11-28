@@ -7,11 +7,25 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-p "start +++++++++++="
 require 'factory_bot'
 
-10.times do
-  FactoryBot.create :customer
-  FactoryBot.create :employee
+5.times do
+FactoryBot.create :customer
+FactoryBot.create :employee
+  FactoryBot.create :particular_detail
+  FactoryBot.create :salary
 end
-p "end +++++++++++="
+p "Start+++++++++++="
+puts "#{Address.count} = Addresses"
+puts "#{User.count} = Users"
+puts "#{Department.count} = Departments"
+puts "#{Nominee.count} = Nominees"
+puts "#{Customer.count} = Customers"
+puts "#{Card.count} = Cards"
+puts "#{Particular.count} = Particulars"
+puts "#{Manager.count} = Managers"
+puts "#{Employee.count} = Employees"
+puts "#{Salary.count} = Salaries"
+puts "#{AccountType.count} = Account_types"
+puts "#{ParticularDetail.count} = Particular_details"
+p "End+++++++++++="

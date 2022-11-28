@@ -12,6 +12,7 @@
 #  gender             :integer
 #  handicap_details   :text
 #  is_active          :boolean
+#  is_admin           :boolean
 #  is_deleted         :boolean
 #  is_handicap        :boolean
 #  last_name          :string
