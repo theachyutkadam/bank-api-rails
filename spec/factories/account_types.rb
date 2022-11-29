@@ -13,6 +13,6 @@ FactoryBot.define do
   factory :account_type do
     loan_intrest_rate { Faker::Number.decimal(l_digits: 2) }
     saving_intrest_rate { Faker::Number.decimal(l_digits: 2) }
-    title { "Saving"  }
+    title { 'Saving' }
   end
 end

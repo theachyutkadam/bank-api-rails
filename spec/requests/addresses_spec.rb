@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Addresses', type: :request do
-  let!(:addresses) {FactoryBot.create_list(:address, 20)}
-  before {get '/addresses/index'}
+  let!(:addresses) { FactoryBot.create_list(:address, 20) }
+  before { get '/addresses/index' }
   it 'returns all addresses' do
     create_list(:address, 20)
     expect(JSON.parse(response.body).size).to eq(20)

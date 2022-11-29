@@ -26,8 +26,8 @@
 #
 FactoryBot.define do
   factory :customer do
-    account_number { Faker::Number.number(digits: 10)  }
-    amount_limit { 50000.00 }
+    account_number { Faker::Number.number(digits: 10) }
+    amount_limit { 50_000.00 }
     current_balance { Faker::Number.decimal(l_digits: 5) }
 
     association :address, factory: :address

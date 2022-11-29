@@ -37,7 +37,7 @@
 FactoryBot.define do
   factory :user do
     username { Faker::IDNumber.brazilian_id }
-    password { "123456" }
+    password { '123456' }
     email { Faker::Internet.email }
     first_name { Faker::Name.first_name }
     middle_name { Faker::Name.middle_name }
