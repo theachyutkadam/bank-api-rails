@@ -48,7 +48,8 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
       - run:
           name: Setup DB
-          command: bundle exec rails db:create db:schema:load --trace
+          command: bin/rails db:create db:schema:load --trace
+          # command: bundle exec rails db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |
