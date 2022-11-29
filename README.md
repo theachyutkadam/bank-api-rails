@@ -2,18 +2,18 @@
 create a bank API for learning phase.
 Added a command for Fastly create a controller and models.
 *Create Controllers using following commands*
-- rails g controller users index new create update show delete
-- rails g controller employees index new create update show delete
-- rails g controller customers index new create update show delete
-- rails g controller managers index new create update show delete
-- rails g controller departments index new create update show delete
-- rails g controller particulars index new create update show delete
-- rails g controller particular_users index new create update show delete
-- rails g controller addresses index new create update show delete
-- rails g controller nominees index new create update show delete
-- rails g controller cards index new create update show delete
-- rails g controller account_types index new create update show delete
-- rails g controller salary index new create update show delete
+- rails g controller users index create update show delete
+- rails g controller employees index create update show delete
+- rails g controller customers index create update show delete
+- rails g controller managers index create update show delete
+- rails g controller departments index create update show delete
+- rails g controller particulars index create update show delete
+- rails g controller particular_users index create update show delete
+- rails g controller addresses index create update show delete
+- rails g controller nominees index create update show delete
+- rails g controller cards index create update show delete
+- rails g controller account_types index create update show delete
+- rails g controller salary index create update show delete
 
 *Create Models using following commands*
 
