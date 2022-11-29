@@ -40,9 +40,10 @@ jobs:
             - bank_api_rails-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - bank_api_rails-
       - configure_bundler
-
-      name: Install dependent libraries
-      - run: sudo apt-get install libpq-dev
+   
+      - run: 
+          name: Install dependent libraries
+          command: sudo apt-get install libpq-dev
 
       - run:
           name: Install bundle
