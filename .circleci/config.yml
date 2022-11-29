@@ -48,9 +48,13 @@ jobs:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
+
+      - run:
+          name: Restart Postgres
+          command: services restart postgresql
+
       - run:
           name: Setup DB
-          command: services restart postgresql
           command: bundle exec rails db:drop db:create db:schema:load --trace
       - run:
           name: RSpec
