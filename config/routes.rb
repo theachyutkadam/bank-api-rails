@@ -3,67 +3,78 @@
 
 Rails.application.routes.draw do
   get 'salaries/index'
-  get 'salaries/create'
-  get 'salaries/update'
+  post 'salaries/create'
+  put 'salaries/update'
   get 'salaries/show'
   get 'salaries/delete'
+
   get 'account_types/index'
-  get 'account_types/create'
-  get 'account_types/update'
+  post 'account_types/create'
+  put 'account_types/update'
   get 'account_types/show'
   get 'account_types/delete'
+
   get 'cards/index'
-  get 'cards/create'
-  get 'cards/update'
+  post 'cards/create'
+  put 'cards/update'
   get 'cards/show'
   get 'cards/delete'
+
   get 'nominees/index'
-  get 'nominees/create'
-  get 'nominees/update'
+  post 'nominees/create'
+  put 'nominees/update'
   get 'nominees/show'
   get 'nominees/delete'
+
   get 'addresses/index'
-  get 'addresses/create'
-  get 'addresses/update'
+  post 'addresses/create'
+  put 'addresses/update'
   get 'addresses/show'
   get 'addresses/delete'
+
   get 'particular_users/index'
-  get 'particular_users/create'
-  get 'particular_users/update'
+  post 'particular_users/create'
+  put 'particular_users/update'
   get 'particular_users/show'
   get 'particular_users/delete'
+
   get 'particulars/index'
-  get 'particulars/create'
-  get 'particulars/update'
+  post 'particulars/create'
+  put 'particulars/update'
   get 'particulars/show'
   get 'particulars/delete'
+
   get 'departments/index'
-  get 'departments/create'
-  get 'departments/update'
+  post 'departments/create'
+  put 'departments/update'
   get 'departments/show'
   get 'departments/delete'
+
   get 'managers/index'
-  get 'managers/create'
-  get 'managers/update'
+  post 'managers/create'
+  put 'managers/update'
   get 'managers/show'
   get 'managers/delete'
+
   get 'customers/index'
-  get 'customers/create'
-  get 'customers/update'
+  post 'customers/create'
+  put 'customers/update'
   get 'customers/show'
   get 'customers/delete'
+
   get 'employees/index'
-  get 'employees/create'
-  get 'employees/update'
+  post 'employees/create'
+  put 'employees/update'
   get 'employees/show'
   get 'employees/delete'
+
   get 'users/index'
-  get 'users/create'
-  get 'users/update'
+  post 'users/create'
+  put 'users/update'
   get 'users/show'
   get 'users/delete'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
   # root "articles#index"
 end
