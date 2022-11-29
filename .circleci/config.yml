@@ -18,6 +18,7 @@ executors:
         environment:
           POSTGRES_DB: bank_api_rails_test
           POSTGRES_USER: hixonrails
+          PORTS: 5432
 
 commands:
   configure_bundler:
@@ -48,6 +49,7 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
       - run:
           name: Setup DB
+          command: services restart postgresql
           command: bundle exec rails db:drop db:create db:schema:load --trace
       - run:
           name: RSpec
