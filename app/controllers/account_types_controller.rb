@@ -1,5 +1,8 @@
 class AccountTypesController < ApplicationController
-  def index; end
+  def index
+    @account_types = AccountType.all
+    render json: @account_types
+  end
 
   def create; end
 
