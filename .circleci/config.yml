@@ -18,7 +18,7 @@ executors:
         environment:
           POSTGRES_DB: bank_api_rails_test
           POSTGRES_USER: hixonrails
-          PORTS: 5432
+          PORTS: 5430
 
 
 commands:
