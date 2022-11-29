@@ -6,16 +6,15 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-
 require 'factory_bot'
 
 5.times do
-FactoryBot.create :customer
-FactoryBot.create :employee
+  FactoryBot.create :customer
+  FactoryBot.create :employee
   FactoryBot.create :particular_detail
   FactoryBot.create :salary
 end
-p "Start+++++++++++="
+p 'Start+++++++++++='
 puts "#{Address.count} = Addresses"
 puts "#{User.count} = Users"
 puts "#{Department.count} = Departments"
@@ -28,4 +27,4 @@ puts "#{Employee.count} = Employees"
 puts "#{Salary.count} = Salaries"
 puts "#{AccountType.count} = Account_types"
 puts "#{ParticularDetail.count} = Particular_details"
-p "End+++++++++++="
+p 'End+++++++++++='

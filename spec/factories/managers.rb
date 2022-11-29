@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :manager do
-    designation { "Senior Manager" }
+    designation { 'Senior Manager' }
     is_active { true }
 
     association :department, factory: :department
