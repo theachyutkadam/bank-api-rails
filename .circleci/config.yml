@@ -12,7 +12,7 @@ executors:
           BUNDLER_VERSION: 2.0.1
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-          PG_HOST: 127.0.0.1
+          PG_HOST: localhost
           PGUSER: hixonrails
       - image: circleci/postgres:12.0
         environment:
@@ -45,7 +45,7 @@ jobs:
           command: bundle install
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
+          command: dockerize -wait tcp://localhost:5432 -timeout 2m
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
