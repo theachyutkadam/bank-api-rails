@@ -12,7 +12,7 @@ executors:
           BUNDLER_VERSION: 2.0.1
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-          PG_HOST: localhost
+          PG_HOST: 127.0.0.1
           PGUSER: hixonrails
       - image: circleci/postgres:12.0
         environment:
@@ -45,14 +45,14 @@ jobs:
           command: bundle install
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 2m
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
       - run:
           name: Setup DB
-          command: bin/rails db:create db:migrate --trace
+          command: bundle exec rails db:drop db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |
-            bin/rails spec --profile 10 \
+            bundle exec rspec --profile 10 \
                               --format progress
       - store_artifacts:
           path: coverage
