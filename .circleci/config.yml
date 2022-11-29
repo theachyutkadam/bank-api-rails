@@ -48,11 +48,11 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 2m
       - run:
           name: Setup DB
-          command: bundle exec rails db:create db:schema:load --trace
+          command: bin/rails db:create db:migrate --trace
       - run:
           name: RSpec
           command: |
-            bundle exec rspec --profile 10 \
+            bin/rails spec --profile 10 \
                               --format progress
       - store_artifacts:
           path: coverage
