@@ -14,7 +14,7 @@ executors:
           DB_HOST: 127.0.0.1
           PG_HOST: 127.0.0.1
           PGUSER: hixonrails
-      - image: circleci/postgres:12.2
+      - image: circleci/postgres:12.0
         environment:
           POSTGRES_DB: bank_api_rails_test
           POSTGRES_USER: hixonrails
@@ -40,10 +40,6 @@ jobs:
             - bank_api_rails-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - bank_api_rails-
       - configure_bundler
-
-      name: Install dependent libraries
-      - run: sudo apt-get install libpq-dev
-
       - run:
           name: Install bundle
           command: bundle install
@@ -52,10 +48,7 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
       - run:
           name: Setup DB
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          RAILS_ENV: test
-          command: bundle exec rails db:setup --trace
+          command: bundle exec rails db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |
