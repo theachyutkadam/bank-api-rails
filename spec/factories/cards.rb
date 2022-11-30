@@ -24,7 +24,7 @@
 #
 FactoryBot.define do
   factory :card do
-    title { "Debit" }
+    title { 'Debit' }
     csv { Faker::Number.binary(digits: 3) }
     expire_date { 5.years.after }
     is_active { true }

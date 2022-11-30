@@ -20,4 +20,3 @@ FactoryBot.define do
     description { Faker::Address.full_address }
   end
 end
-

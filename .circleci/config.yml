@@ -18,6 +18,8 @@ executors:
         environment:
           POSTGRES_DB: bank_api_rails_test
           POSTGRES_USER: hixonrails
+          PORTS: 5430
+
 
 commands:
   configure_bundler:
@@ -45,10 +47,15 @@ jobs:
           command: bundle install
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
+
+      - run:
+          name: Restart Postgres
+          command: sudo services restart postgresql
+
       - run:
           name: Setup DB
-          command: bundle exec rails db:create db:schema:load --trace
+          command: bundle exec rails db:drop db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |
@@ -65,34 +72,8 @@ jobs:
           paths:
             - ./bank_api_rails
 
-rubocop:
-  executor: default
-  steps:
-    - attach_workspace:
-        at: ~/
-    - configure_bundler
-    - run:
-        name: Rubocop
-        command: bundle exec rubocop
-
-fasterer:
-  executor: default
-  steps:
-    - attach_workspace:
-        at: ~/
-    - configure_bundler
-    - run:
-        name: Fasterer
-        command: bundle exec fasterer
-
 workflows:
   version: 2
   integration:
     jobs:
       - build
-      - rubocop:
-          requires:
-            - build
-      - fasterer:
-          requires:
-            - build

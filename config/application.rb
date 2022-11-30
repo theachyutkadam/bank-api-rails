@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -24,6 +24,7 @@ module BankApiRails
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.logger = Logger.new(STDOUT)
+    # print the log on console
+    # config.logger = Logger.new(STDOUT)
   end
 end
