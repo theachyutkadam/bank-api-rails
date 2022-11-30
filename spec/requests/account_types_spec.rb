@@ -15,10 +15,8 @@ RSpec.describe 'AccountType', type: :request do
   context 'Create method' do
     let(:account_type_attributes) { build(:account_type) }
     context 'when request attributes are valid' do
-      # before { post '/account_types/create', params: account_type_attributes }
-      # before { post '/account_types/create', params: { title: "sample", loan_intrest_rate: 45.98, saving_intrest_rate: 26.39 } }
       it 'returns status code 201' do
-        post '/account_types/create', params: { title: "sample", loan_intrest_rate: 45.98, saving_intrest_rate: 26.39 }
+        post '/account_types/create', params: account_type_attributes.attributes
         expect(response).to have_http_status(201)
       end
     end
