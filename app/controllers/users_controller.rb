@@ -56,7 +56,6 @@ class UsersController < ApplicationController
       :is_handicap,
       :handicap_details,
       :maritial_status,
-      :address_id,
       :is_admin
     )
   end

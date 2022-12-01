@@ -20,7 +20,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.boolean :is_handicap
       t.text :handicap_details
       t.integer :maritial_status
-      t.references :address, null: false, foreign_key: true
 
       t.timestamps
     end

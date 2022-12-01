@@ -24,18 +24,8 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  accountable_id     :integer
-#  address_id         :bigint           not null
-#
-# Indexes
-#
-#  index_users_on_address_id  (address_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (address_id => addresses.id)
 #
 class User < ApplicationRecord
-  belongs_to :address
   belongs_to :accountable, polymorphic: true
 
   enum gender: { male: 0, female: 1, transgender: 2 }

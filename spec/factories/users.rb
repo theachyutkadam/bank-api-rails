@@ -24,15 +24,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  accountable_id     :integer
-#  address_id         :bigint           not null
-#
-# Indexes
-#
-#  index_users_on_address_id  (address_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (address_id => addresses.id)
 #
 FactoryBot.define do
   factory :user do
@@ -52,7 +43,6 @@ FactoryBot.define do
     pan_card_number { Faker::Base.bothify('?????####?') }
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
-    association :address, factory: :address
 
     for_customer # default customer association if none of specified.
 

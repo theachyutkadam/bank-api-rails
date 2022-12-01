@@ -161,10 +161,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.boolean "is_handicap"
     t.text "handicap_details"
     t.integer "maritial_status"
-    t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_users_on_address_id"
   end
 
   add_foreign_key "cards", "customers"
@@ -184,5 +182,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
   add_foreign_key "particulars", "customers"
   add_foreign_key "salaries", "employees"
   add_foreign_key "salaries", "particulars"
-  add_foreign_key "users", "addresses"
 end
