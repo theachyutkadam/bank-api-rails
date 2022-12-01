@@ -23,11 +23,11 @@ RSpec.describe 'User', type: :request do
     end
   end
 
-  describe "GET #show" do
+  describe 'GET #show' do
     before { get "/users/#{user.id}" }
     let(:user) { create(:user) }
 
-    it "returns http success" do
+    it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
   end

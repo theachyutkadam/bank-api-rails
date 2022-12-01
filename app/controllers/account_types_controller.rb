@@ -1,5 +1,5 @@
 class AccountTypesController < ApplicationController
-  before_action :set_account_type, only: [:destroy, :show, :update]
+  before_action :set_account_type, only: %i[destroy show update]
   def index
     @account_types = AccountType.all
     render json: @account_types

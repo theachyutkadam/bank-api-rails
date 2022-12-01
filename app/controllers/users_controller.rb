@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:destroy, :show, :update]
+  before_action :set_user, only: %i[destroy show update]
   def index
     @users = User.all
     render json: @users

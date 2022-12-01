@@ -2,18 +2,18 @@
 #
 
 Rails.application.routes.draw do
-  resources :salaries, except: [:new, :edit]
-  resources :account_types, except: [:new, :edit]
-  resources :cards, except: [:new, :edit]
-  resources :nominees, except: [:new, :edit]
-  resources :addresses, except: [:new, :edit]
-  resources :particular_users, except: [:new, :edit]
-  resources :particulars, except: [:new, :edit]
-  resources :departments, except: [:new, :edit]
-  resources :managers, except: [:new, :edit]
-  resources :customers, except: [:new, :edit]
-  resources :employees, except: [:new, :edit]
-  resources :users, except: [:new, :edit]
+  resources :salaries, except: %i[new edit]
+  resources :account_types, except: %i[new edit]
+  resources :cards, except: %i[new edit]
+  resources :nominees, except: %i[new edit]
+  resources :addresses, except: %i[new edit]
+  resources :particular_users, except: %i[new edit]
+  resources :particulars, except: %i[new edit]
+  resources :departments, except: %i[new edit]
+  resources :managers, except: %i[new edit]
+  resources :customers, except: %i[new edit]
+  resources :employees, except: %i[new edit]
+  resources :users, except: %i[new edit]
 
   # get 'salaries/index'
   # post 'salaries/create'

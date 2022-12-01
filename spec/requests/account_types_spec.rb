@@ -22,11 +22,11 @@ RSpec.describe 'AccountType', type: :request do
     end
   end
 
-  describe "GET #show" do
+  describe 'GET #show' do
     before { get "/account_types/#{account_type.id}" }
     let(:account_type) { create(:account_type) }
 
-    it "returns http success" do
+    it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
   end
