@@ -5,10 +5,10 @@
 #  id          :bigint           not null, primary key
 #  csv         :integer
 #  expire_date :datetime
-#  is_active   :boolean
 #  is_deleted  :boolean
 #  number      :bigint
 #  pin         :integer
+#  status      :integer
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -25,4 +25,5 @@
 class Card < ApplicationRecord
   belongs_to :customer
   has_many :transactions
+  enum status: { active: 0, inactive: 1, pending: 2 }
 end

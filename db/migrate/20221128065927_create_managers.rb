@@ -4,7 +4,7 @@ class CreateManagers < ActiveRecord::Migration[7.0]
       t.references :user, null: false, foreign_key: true
       t.references :department, null: false, foreign_key: true
       t.string :designation
-      t.boolean :is_active
+      t.integer :status
 
       t.timestamps
     end

@@ -38,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.datetime "expire_date"
     t.integer "csv"
     t.bigint "customer_id", null: false
-    t.boolean "is_active"
+    t.integer "status"
     t.boolean "is_deleted"
     t.integer "pin"
     t.datetime "created_at", null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.bigint "user_id", null: false
     t.bigint "department_id", null: false
     t.string "designation"
-    t.boolean "is_active"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_managers_on_department_id"
@@ -151,7 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.string "contact"
     t.datetime "birth_date"
     t.integer "gender"
-    t.boolean "is_active"
+    t.integer "status"
     t.boolean "is_admin"
     t.boolean "is_deleted"
     t.integer "accountable_id"

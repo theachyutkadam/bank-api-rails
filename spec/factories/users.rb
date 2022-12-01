@@ -11,7 +11,6 @@
 #  first_name         :string
 #  gender             :integer
 #  handicap_details   :text
-#  is_active          :boolean
 #  is_admin           :boolean
 #  is_deleted         :boolean
 #  is_handicap        :boolean
@@ -20,6 +19,7 @@
 #  middle_name        :string
 #  pan_card_number    :string
 #  password           :string
+#  status             :integer
 #  username           :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -38,7 +38,7 @@ FactoryBot.define do
     birth_date { 18.years.ago }
     maritial_status { 0 }
     is_admin { false }
-    is_active { true }
+    status { 0 }
     is_deleted { false }
     pan_card_number { Faker::Base.bothify('?????####?') }
     adhaar_card_number { Faker::Number.number(digits: 12) }
