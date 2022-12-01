@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -141,26 +141,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.index ["particular_id"], name: "index_salaries_on_particular_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
-    t.string "email"
+  create_table "user_informations", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
     t.string "contact"
-    t.datetime "birth_date"
     t.integer "gender"
-    t.integer "status"
-    t.boolean "is_admin"
-    t.boolean "is_deleted"
-    t.integer "accountable_id"
-    t.string "accountable_type"
+    t.datetime "birth_date"
     t.string "pan_card_number"
     t.string "adhaar_card_number"
     t.boolean "is_handicap"
     t.text "handicap_details"
     t.integer "maritial_status"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_informations_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+    t.string "email"
+    t.integer "status"
+    t.boolean "is_admin"
+    t.datetime "deleted_at"
+    t.integer "accountable_id"
+    t.string "accountable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -182,4 +189,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
   add_foreign_key "particulars", "customers"
   add_foreign_key "salaries", "employees"
   add_foreign_key "salaries", "particulars"
+  add_foreign_key "user_informations", "users"
 end
