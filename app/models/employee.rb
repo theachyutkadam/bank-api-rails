@@ -35,4 +35,19 @@ class Employee < ApplicationRecord
   has_many :salaries
 
   enum work_status: { available: 0, on_leave: 1 }
+
+  after_create :create_user
+
+  private
+
+  def create_user
+    random_value = SecureRandom.alphanumeric(5) 
+    User.create(
+      username: (id.to_s + '_' + random_value),
+      email: "#{random_value}@sample.com",
+      password: '123456',
+      accountable: self,
+      status: 2
+    )
+  end
 end
