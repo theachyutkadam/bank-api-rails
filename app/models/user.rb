@@ -19,4 +19,10 @@ class User < ApplicationRecord
   has_one :user_information
 
   enum status: { active: 0, inactive: 1, pending: 2 }
+
+  validates :email, :password, presence: true
+  validates :email, uniqueness: true
+  validates :status, inclusion: { in: statuses.keys }
+  validates :password, length: { in: 6..20 }
+
 end

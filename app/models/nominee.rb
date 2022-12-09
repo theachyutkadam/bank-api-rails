@@ -27,4 +27,16 @@ class Nominee < ApplicationRecord
   has_one :customer
   enum gender: { male: 0, female: 1, transgender: 2 }
   enum relation: { mother: 0, father: 1, wife: 2, child: 3 }
+
+
+  validates :contact,
+            :first_name,
+            :last_name,
+            :gender,
+            :middle_name,
+             presence: true
+
+  validates :gender, inclusion: { in: genders.keys }
+  validates :relation, inclusion: { in: relations.keys }
+  validates :contact, numericality: true, length: { is: 10 }
 end

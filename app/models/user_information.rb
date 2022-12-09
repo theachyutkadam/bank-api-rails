@@ -29,6 +29,25 @@
 class UserInformation < ApplicationRecord
   belongs_to :user
 
-  enum gender: { male: 0, female: 1, transgender: 2 }
+  enum gender: { male: 0, female: 1, other: 2 }
   enum maritial_status: { single: 0, married: 1, devorsed: 2 }
+
+  validates :adhaar_card_number,
+            :birth_date,
+            :contact,
+            :first_name,
+            :gender,
+            :last_name,
+            :maritial_status,
+            :middle_name,
+             presence: true
+
+  validates :gender, inclusion: { in: genders.keys }
+  validates :adhaar_card_number, uniqueness: true, numericality: true, length: { is: 12 }
+  validates :contact, numericality: true, length: { is: 10 }
+
+  def self.full_name
+    "#{first_name} #{last_name}"
+  end
+
 end

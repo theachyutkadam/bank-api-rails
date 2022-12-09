@@ -23,4 +23,9 @@
 class Salary < ApplicationRecord
   belongs_to :employee
   belongs_to :particular
+
+  enum status: { complete: 0, process: 1, pending: 2 }
+
+  validates :status, inclusion: { in: statuses.keys }
+  validates :amount, length: { in: 1..200000 }
 end

@@ -33,4 +33,15 @@ class Customer < ApplicationRecord
   has_many :transactions
   has_many :transactions_details
   has_one :user, as: :accountable
+
+  AMOUNT_LIMIT = 20000
+
+  validates :account_number, :amount_limit, presence: true
+  validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
+
+
+  def self.generate_account_number
+    rand(1111111111..9999999999)
+  end
+
 end

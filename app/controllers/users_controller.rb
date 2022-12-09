@@ -41,21 +41,10 @@ class UsersController < ApplicationController
       :username,
       :password,
       :email,
-      :first_name,
-      :middle_name,
-      :last_name,
-      :contact,
-      :birth_date,
-      :gender,
-      :is_active,
+      :status,
       :is_deleted,
       :accountable_id,
       :accountable_type,
-      :pan_card_number,
-      :adhaar_card_number,
-      :is_handicap,
-      :handicap_details,
-      :maritial_status,
       :is_admin
     )
   end

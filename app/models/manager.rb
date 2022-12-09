@@ -26,4 +26,8 @@ class Manager < ApplicationRecord
 
   has_many :employee
   enum status: { active: 0, inactive: 1, pending: 2 }
+
+  validates :designation, :password, presence: true
+  validates :designation, uniqueness: true
+  validates :status, inclusion: { in: statuses.keys }
 end

@@ -11,4 +11,9 @@
 #
 class AccountType < ApplicationRecord
   has_one :customer
+
+  LOAN_INTREST_RATE = 8.0
+  SAVING_INTREST_RATE = 4.0
+
+  validates :title, presence: true
 end

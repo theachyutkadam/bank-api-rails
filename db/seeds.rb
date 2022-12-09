@@ -8,11 +8,13 @@
 
 require 'factory_bot'
 
-5.times do
+100.times do
   FactoryBot.create :customer
   FactoryBot.create :employee
   FactoryBot.create :particular_detail
   FactoryBot.create :salary
+  FactoryBot.create :card
+  FactoryBot.create :particular_detail
 end
 p 'Start+++++++++++='
 puts "#{Address.count} = Addresses"

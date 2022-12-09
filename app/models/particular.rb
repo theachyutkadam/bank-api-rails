@@ -27,4 +27,7 @@ class Particular < ApplicationRecord
 
   has_one :particular_details
   has_many :salaries
+
+
+  validates :current_balance, presence: true
 end
