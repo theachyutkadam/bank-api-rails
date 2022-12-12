@@ -13,9 +13,9 @@ RSpec.describe 'Employee', type: :request do
   end
 
   describe 'POST #create' do
-    let(:department) { create(:department) }
-    let(:manager) { create(:manager) }
-    let(:employee) { build(:employee, department:, manager:) }
+    let(:department ) { create(:department) }
+    let(:manager ) { create(:manager) }
+    let(:employee ) { build(:employee, department: department, manager: manager) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/employees', params: employee.attributes

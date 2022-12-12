@@ -13,10 +13,10 @@ RSpec.describe 'ParticularDetail', type: :request do
   end
 
   describe 'POST #create' do
-    let(:particular) { create(:particular) }
-    let(:sender) { create(:user) }
-    let(:receiver) { create(:user) }
-    let(:particular_detail) { build(:particular_detail, receiver:, sender:, particular:) }
+    let(:particular ) { create(:particular) }
+    let(:sender ) { create(:user) }
+    let(:receiver ) { create(:user) }
+    let(:particular_detail ) { build(:particular_detail, receiver: receiver, sender: sender, particular: particular) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/particular_details', params: particular_detail.attributes

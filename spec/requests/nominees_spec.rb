@@ -13,8 +13,8 @@ RSpec.describe 'Nominee', type: :request do
   end
 
   describe 'POST #create' do
-    let(:customer) { create(:customer) }
-    let(:nominee) { build(:nominee, customer:) }
+    let(:customer ) { create(:customer) }
+    let(:nominee ) { build(:nominee, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/nominees', params: nominee.attributes

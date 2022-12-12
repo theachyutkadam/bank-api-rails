@@ -13,9 +13,9 @@ RSpec.describe 'Particular', type: :request do
   end
 
   describe 'POST #create' do
-    let(:card) { create(:card) }
-    let(:customer) { create(:customer) }
-    let(:particular) { build(:particular, card:, customer:) }
+    let(:card ) { create(:card) }
+    let(:customer ) { create(:customer) }
+    let(:particular ) { build(:particular, card: card, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/particulars', params: particular.attributes
