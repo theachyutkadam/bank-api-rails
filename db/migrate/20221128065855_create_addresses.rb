@@ -6,6 +6,8 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.string :street
       t.string :pin_code
       t.text :description
+      t.integer :addressable_id
+      t.string :addressable_type
 
       t.timestamps
     end

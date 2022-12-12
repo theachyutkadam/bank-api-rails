@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.string "street"
     t.string "pin_code"
     t.text "description"
+    t.integer "addressable_id"
+    t.string "addressable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.datetime "expire_date"
     t.integer "csv"
     t.bigint "customer_id", null: false
-    t.boolean "is_active"
+    t.integer "status"
     t.boolean "is_deleted"
     t.integer "pin"
     t.datetime "created_at", null: false
@@ -47,17 +49,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.bigint "nominee_id", null: false
     t.bigint "account_type_id", null: false
     t.bigint "account_number"
     t.integer "amount_limit"
-    t.bigint "address_id", null: false
     t.float "current_balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_type_id"], name: "index_customers_on_account_type_id"
-    t.index ["address_id"], name: "index_customers_on_address_id"
-    t.index ["nominee_id"], name: "index_customers_on_nominee_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -75,10 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.string "work_status"
     t.string "designation"
     t.string "official_email"
-    t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_employees_on_address_id"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["manager_id"], name: "index_employees_on_manager_id"
   end
@@ -87,7 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.bigint "user_id", null: false
     t.bigint "department_id", null: false
     t.string "designation"
-    t.boolean "is_active"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_managers_on_department_id"
@@ -101,10 +97,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.string "contact"
     t.integer "gender"
     t.integer "relation"
-    t.bigint "address_id", null: false
+    t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_nominees_on_address_id"
+    t.index ["customer_id"], name: "index_nominees_on_customer_id"
   end
 
   create_table "particular_details", force: :cascade do |t|
@@ -141,42 +137,44 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
     t.index ["particular_id"], name: "index_salaries_on_particular_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
-    t.string "email"
+  create_table "user_informations", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
     t.string "contact"
-    t.datetime "birth_date"
     t.integer "gender"
-    t.boolean "is_active"
-    t.boolean "is_admin"
-    t.boolean "is_deleted"
-    t.integer "accountable_id"
-    t.string "accountable_type"
+    t.datetime "birth_date"
     t.string "pan_card_number"
     t.string "adhaar_card_number"
     t.boolean "is_handicap"
     t.text "handicap_details"
     t.integer "maritial_status"
-    t.bigint "address_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_users_on_address_id"
+    t.index ["user_id"], name: "index_user_informations_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+    t.string "email"
+    t.integer "status"
+    t.boolean "is_admin"
+    t.datetime "deleted_at"
+    t.integer "accountable_id"
+    t.string "accountable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "cards", "customers"
   add_foreign_key "customers", "account_types"
-  add_foreign_key "customers", "addresses"
-  add_foreign_key "customers", "nominees"
-  add_foreign_key "employees", "addresses"
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "managers"
   add_foreign_key "managers", "departments"
   add_foreign_key "managers", "users"
-  add_foreign_key "nominees", "addresses"
+  add_foreign_key "nominees", "customers"
   add_foreign_key "particular_details", "particulars"
   add_foreign_key "particular_details", "users", column: "receiver_id"
   add_foreign_key "particular_details", "users", column: "sender_id"
@@ -184,5 +182,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_065930) do
   add_foreign_key "particulars", "customers"
   add_foreign_key "salaries", "employees"
   add_foreign_key "salaries", "particulars"
-  add_foreign_key "users", "addresses"
+  add_foreign_key "user_informations", "users"
 end

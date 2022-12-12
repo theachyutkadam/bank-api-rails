@@ -7,7 +7,7 @@ class CreateNominees < ActiveRecord::Migration[7.0]
       t.string :contact
       t.integer :gender
       t.integer :relation
-      t.references :address, null: false, foreign_key: true
+      t.references :customer, null: false, foreign_key: true
 
       t.timestamps
     end

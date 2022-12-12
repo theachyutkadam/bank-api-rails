@@ -5,10 +5,10 @@
 #  id          :bigint           not null, primary key
 #  csv         :integer
 #  expire_date :datetime
-#  is_active   :boolean
 #  is_deleted  :boolean
 #  number      :bigint
 #  pin         :integer
+#  status      :integer
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -24,13 +24,13 @@
 #
 FactoryBot.define do
   factory :card do
-    title { 'Debit' }
-    csv { Faker::Number.binary(digits: 3) }
+    title { 'debit' }
+    csv { Faker::Number.number(digits: 3) }
     expire_date { 5.years.after }
-    is_active { true }
+    status { 1 }
     is_deleted { false }
-    number { Faker::Number.number(digits: 16) }
-    pin { Faker::Number.binary(digits: 4) }
+    number { Faker::Number.number(digits: 12) }
+    pin { Faker::Number.number(digits: 4) }
 
     association :customer, factory: :customer
   end

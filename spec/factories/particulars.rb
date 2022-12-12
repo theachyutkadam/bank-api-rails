@@ -25,7 +25,7 @@ FactoryBot.define do
   factory :particular do
     credit_amount { Faker::Number.decimal }
     debit_amount { Faker::Number.decimal }
-    # current_balance { feel from auto }
+    current_balance { Faker::Number.decimal }
     association :card, factory: :card
     association :customer, factory: :customer
   end

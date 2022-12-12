@@ -4,7 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  designation   :string
-#  is_active     :boolean
+#  status        :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  department_id :bigint           not null
@@ -25,4 +25,9 @@ class Manager < ApplicationRecord
   belongs_to :department
 
   has_many :employee
+  enum status: { active: 0, inactive: 1, pending: 2 }
+
+  validates :designation, presence: true
+  # validates :designation, uniqueness: true
+  validates :status, inclusion: { in: statuses.keys }
 end
