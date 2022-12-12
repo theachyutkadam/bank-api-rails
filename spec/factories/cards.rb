@@ -29,7 +29,7 @@ FactoryBot.define do
     expire_date { 5.years.after }
     status { 1 }
     is_deleted { false }
-    number { Faker::Number.number(digits: 16) }
+    number { Faker::Number.number(digits: 12) }
     pin { Faker::Number.number(digits: 4) }
 
     association :customer, factory: :customer
