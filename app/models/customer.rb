@@ -29,14 +29,13 @@ class Customer < ApplicationRecord
   has_one :user, as: :accountable
   has_one :address, as: :addressable
 
-  AMOUNT_LIMIT = 20000
+  AMOUNT_LIMIT = 20_000
 
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
 
-
   def self.generate_account_number
-    rand(1111111111..9999999999)
+    rand(1_111_111_111..9_999_999_999)
   end
 
   def create_user

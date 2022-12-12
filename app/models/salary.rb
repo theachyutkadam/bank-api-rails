@@ -27,5 +27,5 @@ class Salary < ApplicationRecord
   enum status: { paid: 0, unpaid: 1, pending: 2 }
 
   validates :status, inclusion: { in: statuses.keys }
-  validates :amount, length: { in: 1..200000 }
+  validates :amount, length: { in: 1..200_000 }
 end

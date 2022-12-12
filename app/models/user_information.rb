@@ -40,7 +40,7 @@ class UserInformation < ApplicationRecord
             :last_name,
             :maritial_status,
             :middle_name,
-             presence: true
+            presence: true
 
   validates :gender, inclusion: { in: genders.keys }
   validates :adhaar_card_number, uniqueness: true, numericality: true, length: { is: 12 }
@@ -49,5 +49,4 @@ class UserInformation < ApplicationRecord
   def self.full_name
     "#{first_name} #{last_name}"
   end
-
 end

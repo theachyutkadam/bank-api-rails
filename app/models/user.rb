@@ -24,5 +24,4 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
-
 end

@@ -34,7 +34,7 @@ class Nominee < ApplicationRecord
             :last_name,
             :gender,
             :middle_name,
-             presence: true
+            presence: true
 
   validates :gender, inclusion: { in: genders.keys }
   validates :relation, inclusion: { in: relations.keys }
