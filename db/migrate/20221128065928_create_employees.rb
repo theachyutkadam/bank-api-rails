@@ -8,7 +8,6 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.string :work_status
       t.string :designation
       t.string :official_email
-      t.references :address, null: false, foreign_key: true
 
       t.timestamps
     end

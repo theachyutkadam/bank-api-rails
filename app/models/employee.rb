@@ -10,28 +10,26 @@
 #  work_status     :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  address_id      :bigint           not null
 #  department_id   :bigint           not null
 #  manager_id      :bigint           not null
 #
 # Indexes
 #
-#  index_employees_on_address_id     (address_id)
 #  index_employees_on_department_id  (department_id)
 #  index_employees_on_manager_id     (manager_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (address_id => addresses.id)
 #  fk_rails_...  (department_id => departments.id)
 #  fk_rails_...  (manager_id => managers.id)
 #
 class Employee < ApplicationRecord
   belongs_to :department
   belongs_to :manager
-  belongs_to :address
 
   has_one :user, as: :accountable
+  has_one :address, as: :addressable
+
   has_many :salaries
 
   enum work_status: { available: 0, on_leave: 1 }
@@ -43,7 +41,7 @@ class Employee < ApplicationRecord
   private
 
   def create_user
-    random_value = SecureRandom.alphanumeric(5) 
+    random_value = SecureRandom.alphanumeric(5)
     User.create(
       username: (id.to_s + '_' + random_value),
       email: "#{random_value}@sample.com",

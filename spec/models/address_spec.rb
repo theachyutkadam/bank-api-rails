@@ -2,12 +2,14 @@
 #
 # Table name: addresses
 #
-#  id          :bigint           not null, primary key
-#  building    :string
-#  description :text
-#  flat_number :string
-#  pin_code    :string
-#  street      :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id               :bigint           not null, primary key
+#  addressable_type :string
+#  building         :string
+#  description      :text
+#  flat_number      :string
+#  pin_code         :string
+#  street           :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  addressable_id   :integer
 #

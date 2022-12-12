@@ -4,7 +4,6 @@ class CreateCustomers < ActiveRecord::Migration[7.0]
       t.references :account_type, null: false, foreign_key: true
       t.bigint :account_number
       t.integer :amount_limit
-      t.references :address, null: false, foreign_key: true
       t.float :current_balance
 
       t.timestamps

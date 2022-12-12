@@ -10,19 +10,16 @@
 #  work_status     :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  address_id      :bigint           not null
 #  department_id   :bigint           not null
 #  manager_id      :bigint           not null
 #
 # Indexes
 #
-#  index_employees_on_address_id     (address_id)
 #  index_employees_on_department_id  (department_id)
 #  index_employees_on_manager_id     (manager_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (address_id => addresses.id)
 #  fk_rails_...  (department_id => departments.id)
 #  fk_rails_...  (manager_id => managers.id)
 #
@@ -33,12 +30,14 @@ FactoryBot.define do
     education { Faker::Educator.degree }
     official_email { Faker::Internet.email }
     work_status { 0 }
-    association :address, factory: :address
     association :department, factory: :department
     association :manager, factory: :manager
 
     trait :for_user do
       association :accountable, factory: :user
+    end
+    trait :for_address do
+      association :addressable, factory: :address
     end
   end
 end

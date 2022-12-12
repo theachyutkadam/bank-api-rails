@@ -28,6 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.string "street"
     t.string "pin_code"
     t.text "description"
+    t.integer "addressable_id"
+    t.string "addressable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,12 +52,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.bigint "account_type_id", null: false
     t.bigint "account_number"
     t.integer "amount_limit"
-    t.bigint "address_id", null: false
     t.float "current_balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_type_id"], name: "index_customers_on_account_type_id"
-    t.index ["address_id"], name: "index_customers_on_address_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -73,10 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.string "work_status"
     t.string "designation"
     t.string "official_email"
-    t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_employees_on_address_id"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["manager_id"], name: "index_employees_on_manager_id"
   end
@@ -174,8 +172,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
 
   add_foreign_key "cards", "customers"
   add_foreign_key "customers", "account_types"
-  add_foreign_key "customers", "addresses"
-  add_foreign_key "employees", "addresses"
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "managers"
   add_foreign_key "managers", "departments"
