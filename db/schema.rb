@@ -47,7 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.bigint "nominee_id", null: false
     t.bigint "account_type_id", null: false
     t.bigint "account_number"
     t.integer "amount_limit"
@@ -57,7 +56,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.datetime "updated_at", null: false
     t.index ["account_type_id"], name: "index_customers_on_account_type_id"
     t.index ["address_id"], name: "index_customers_on_address_id"
-    t.index ["nominee_id"], name: "index_customers_on_nominee_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -102,9 +100,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.integer "gender"
     t.integer "relation"
     t.bigint "address_id", null: false
+    t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_nominees_on_address_id"
+    t.index ["customer_id"], name: "index_nominees_on_customer_id"
   end
 
   create_table "particular_details", force: :cascade do |t|
@@ -175,13 +175,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
   add_foreign_key "cards", "customers"
   add_foreign_key "customers", "account_types"
   add_foreign_key "customers", "addresses"
-  add_foreign_key "customers", "nominees"
   add_foreign_key "employees", "addresses"
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "managers"
   add_foreign_key "managers", "departments"
   add_foreign_key "managers", "users"
   add_foreign_key "nominees", "addresses"
+  add_foreign_key "nominees", "customers"
   add_foreign_key "particular_details", "particulars"
   add_foreign_key "particular_details", "users", column: "receiver_id"
   add_foreign_key "particular_details", "users", column: "sender_id"

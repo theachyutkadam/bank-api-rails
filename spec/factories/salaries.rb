@@ -23,7 +23,7 @@
 FactoryBot.define do
   factory :salary do
     amount { Faker::Number.decimal }
-    status { 'Unpaid' }
+    status { 1 }
     association :employee, factory: :employee
     association :particular, factory: :particular
   end
