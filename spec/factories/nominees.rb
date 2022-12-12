@@ -29,10 +29,10 @@ FactoryBot.define do
     contact { Faker::Number.number(digits: 10) }
     gender { 0 }
     relation { 1 }
+    association :customer, factory: :customer
 
     trait :for_address do
       association :addressable, factory: :address
     end
-    association :customer, factory: :customer
   end
 end

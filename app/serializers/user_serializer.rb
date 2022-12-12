@@ -15,5 +15,6 @@
 #  accountable_id   :integer
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :password, :email, :status, :deleted_at, :accountable_id, :accountable_type, :accountable, :is_admin
+  attributes :id, :username, :password, :email, :status, :deleted_at, :accountable_id, :accountable_type, :accountable,
+             :is_admin
 end
