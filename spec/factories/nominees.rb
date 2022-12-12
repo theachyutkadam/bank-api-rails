@@ -11,17 +11,14 @@
 #  relation    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  address_id  :bigint           not null
 #  customer_id :bigint           not null
 #
 # Indexes
 #
-#  index_nominees_on_address_id   (address_id)
 #  index_nominees_on_customer_id  (customer_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (address_id => addresses.id)
 #  fk_rails_...  (customer_id => customers.id)
 #
 FactoryBot.define do
@@ -33,7 +30,9 @@ FactoryBot.define do
     gender { 0 }
     relation { 1 }
 
-    association :address, factory: :address
+    trait :for_address do
+      association :addressable, factory: :address
+    end
     association :customer, factory: :customer
   end
 end

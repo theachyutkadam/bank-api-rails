@@ -15,7 +15,4 @@
 #
 class Address < ApplicationRecord
   belongs_to :addressable, polymorphic: true
-
-  has_one :customer
-  has_one :employee
 end

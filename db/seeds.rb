@@ -14,8 +14,10 @@ require 'factory_bot'
   FactoryBot.create :particular_detail
   FactoryBot.create :salary
   FactoryBot.create :card
-  FactoryBot.create :particular_detail
+  FactoryBot.create :address
+  FactoryBot.create :nominee
 end
+
 p 'Start+++++++++++='
 puts "#{Address.count} = Addresses"
 puts "#{User.count} = Users"

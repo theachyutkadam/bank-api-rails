@@ -97,11 +97,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.string "contact"
     t.integer "gender"
     t.integer "relation"
-    t.bigint "address_id", null: false
     t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_nominees_on_address_id"
     t.index ["customer_id"], name: "index_nominees_on_customer_id"
   end
 
@@ -176,7 +174,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
   add_foreign_key "employees", "managers"
   add_foreign_key "managers", "departments"
   add_foreign_key "managers", "users"
-  add_foreign_key "nominees", "addresses"
   add_foreign_key "nominees", "customers"
   add_foreign_key "particular_details", "particulars"
   add_foreign_key "particular_details", "users", column: "receiver_id"
