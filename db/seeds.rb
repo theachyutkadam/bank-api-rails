@@ -8,7 +8,7 @@
 
 require 'factory_bot'
 
-10.times do
+100.times do
   FactoryBot.create :customer
   FactoryBot.create :employee
   FactoryBot.create :particular_detail
