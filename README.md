@@ -52,3 +52,18 @@ Added a command for Fastly create a controller and models.
 - touch spec/requests/salaries_spec.rb
 - touch spec/requests/users_spec.rb
 - touch spec/requests/user_informations_spec.rb
+
+*Create a serializer files using following commands*
+- rails g serializer address building street flat_number pin_code description addressable_id addressable_type
+- rails g serializer user username password email status deleted_at accountable_id accountable_type is_admin
+- rails g serializer user_information first_name middle_name last_name contact gender birth_date pan_card_number adhaar_card_number is_handicap handicap_details  maritial_status user
+- rails g serializer account_type title loan_intrest_rate saving_intrest_rate
+- rails g serializer department name employee_count
+- rails g serializer customer account_type account_number amount_limit current_balance
+- rails g serializer nominee first_name middle_name last_name contact gender relation customer
+- rails g serializer card title number expire_date csv customer status is_deleted pin
+- rails g serializer particular card customer debit_amount credit_amount current_balance
+- rails g serializer manager user_information department designation status
+- rails g serializer employee department manager education date_of_joining work_status designation official_email
+- rails g serializer salary employee amount status particular
+- rails g serializer particular_details particular sender receiver

@@ -1,5 +1,8 @@
 class CardsController < ApplicationController
-  def index; end
+  def index
+    @cards = Card.all
+    render json: @cards
+  end
 
   def create; end
 
