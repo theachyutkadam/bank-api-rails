@@ -9,7 +9,7 @@ Added a command for Fastly create a controller and models.
 - rails g controller managers index create update show delete
 - rails g controller departments index create update show delete
 - rails g controller particulars index create update show delete
-- rails g controller particular_users index create update show delete
+- rails g controller particular_details index create update show delete
 - rails g controller addresses index create update show delete
 - rails g controller nominees index create update show delete
 - rails g controller cards index create update show delete
@@ -45,7 +45,7 @@ Added a command for Fastly create a controller and models.
 - touch spec/requests/managers_spec.rb
 - touch spec/requests/departments_spec.rb
 - touch spec/requests/particulars_spec.rb
-- touch spec/requests/particular_users_spec.rb
+- touch spec/requests/particular_details_spec.rb
 - touch spec/requests/addresses_spec.rb
 - touch spec/requests/nominees_spec.rb
 - touch spec/requests/cards_spec.rb
