@@ -6,7 +6,7 @@ class SalariesController < ApplicationController
   end
 
   def create
-    @salary = Salary.new(user_params)
+    @salary = Salary.new(salary_params)
     if @salary.save
       render json: @salary, status: :created
     else
@@ -15,7 +15,7 @@ class SalariesController < ApplicationController
   end
 
   def update
-    if @salary.update_attributes(user_params)
+    if @salary.update_attributes(salary_params)
       render json: @salary, status: :updated
     else
       render json: @salary.errors, status: :unprocessable_entity
@@ -36,7 +36,7 @@ class SalariesController < ApplicationController
 
   private
 
-  def user_params
+  def salary_params
     params.permit(
       :status,
       :amount,

@@ -1,42 +1,42 @@
 class ParticularDetailsController < ApplicationController
-  before_action :set_particular_user, only: %i[destroy show update]
+  before_action :set_particular_detail, only: %i[destroy show update]
   def index
     @particular_details = ParticularDetail.all
     render json: @particular_details
   end
 
   def create
-    @particular_user = ParticularDetail.new(particular_user_params)
-    if @particular_user.save
-      render json: @particular_user, status: :created
+    @particular_detail = ParticularDetail.new(particular_detail_params)
+    if @particular_detail.save
+      render json: @particular_detail, status: :created
     else
-      render json: @particular_user.errors, status: :unprocessable_entity
+      render json: @particular_detail.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    if @particular_user.update_attributes(particular_user_params)
-      render json: @particular_user, status: :updated
+    if @particular_detail.update_attributes(particular_detail_params)
+      render json: @particular_detail, status: :updated
     else
-      render json: @particular_user.errors, status: :unprocessable_entity
+      render json: @particular_detail.errors, status: :unprocessable_entity
     end
   end
 
   def show
-    render json: @particular_user
+    render json: @particular_detail
   end
 
   def delete
-    if @particular_user.destroy
+    if @particular_detail.destroy
       head :no_content
     else
-      render json: @particular_user.errors, status: :unprocessable_entity
+      render json: @particular_detail.errors, status: :unprocessable_entity
     end
   end
 
   private
 
-  def particular_user_params
+  def particular_detail_params
     params.permit(
       :particular_id,
       :receiver_id,
@@ -44,7 +44,7 @@ class ParticularDetailsController < ApplicationController
     )
   end
 
-  def set_particular_user
-    @particular_user = ParticularDetail.find(params[:id])
+  def set_particular_detail
+    @particular_detail = ParticularDetail.find(params[:id])
   end
 end
