@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @addresss = Address.all
+    @addresss = Address.includes(:addressable).all
     render json: @addresss
   end
 

@@ -1,7 +1,7 @@
 class NomineesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @nominees = Nominee.all
+    @nominees = Nominee.includes(:customer).all
     render json: @nominees
   end
 

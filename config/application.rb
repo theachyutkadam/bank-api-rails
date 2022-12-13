@@ -25,6 +25,6 @@ module BankApiRails
     config.api_only = true
 
     # print the log on console
-    config.logger = Logger.new(STDOUT)
+    # config.logger = Logger.new(STDOUT)
   end
 end

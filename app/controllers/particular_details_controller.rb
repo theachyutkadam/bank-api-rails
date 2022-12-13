@@ -1,7 +1,7 @@
 class ParticularDetailsController < ApplicationController
   before_action :set_particular_detail, only: %i[destroy show update]
   def index
-    @particular_details = ParticularDetail.all
+    @particular_details = ParticularDetail.includes(:particular, :sender, :receiver).all
     render json: @particular_details
   end
 

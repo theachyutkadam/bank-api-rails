@@ -16,19 +16,21 @@ require 'factory_bot'
   FactoryBot.create :card
   FactoryBot.create :address
   FactoryBot.create :nominee
+  FactoryBot.create :user_information
 end
 
 p 'Start+++++++++++='
-puts "#{Address.count} = Addresses"
 puts "#{User.count} = Users"
-puts "#{Department.count} = Departments"
-puts "#{Nominee.count} = Nominees"
-puts "#{Customer.count} = Customers"
 puts "#{Card.count} = Cards"
-puts "#{Particular.count} = Particulars"
-puts "#{Manager.count} = Managers"
-puts "#{Employee.count} = Employees"
 puts "#{Salary.count} = Salaries"
-puts "#{AccountType.count} = Account_types"
-puts "#{ParticularDetail.count} = Particular_details"
+puts "#{Manager.count} = Managers"
+puts "#{Nominee.count} = Nominees"
+puts "#{Address.count} = Addresses"
+puts "#{Customer.count} = Customers"
+puts "#{Employee.count} = Employees"
+puts "#{Department.count} = Departments"
+puts "#{Particular.count} = Particulars"
+puts "#{AccountType.count} = AccountTypes"
+puts "#{UserInformation.count} = UserInformation"
+puts "#{ParticularDetail.count} = ParticularDetails"
 p 'End+++++++++++='

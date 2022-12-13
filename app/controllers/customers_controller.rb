@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @customers = Customer.all
+    @customers = Customer.includes(:account_type).all
     render json: @customers
   end
 

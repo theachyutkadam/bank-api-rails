@@ -1,7 +1,7 @@
 class ManagersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @managers = Manager.all
+    @managers = Manager.includes(:user, :department).all
     render json: @managers
   end
 

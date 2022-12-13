@@ -1,7 +1,7 @@
 class SalariesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @salaries = Salary.all
+    @salaries = Salary.includes(:employee, :particular).all
     render json: @salaries
   end
 
