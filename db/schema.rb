@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
 
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "employee_count"
+    t.integer "employee_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -103,27 +103,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
     t.index ["customer_id"], name: "index_nominees_on_customer_id"
   end
 
-  create_table "particular_details", force: :cascade do |t|
-    t.bigint "particular_id", null: false
+  create_table "particulars", force: :cascade do |t|
+    t.bigint "card_id", null: false
+    t.float "amount", null: false
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["particular_id"], name: "index_particular_details_on_particular_id"
-    t.index ["receiver_id"], name: "index_particular_details_on_receiver_id"
-    t.index ["sender_id"], name: "index_particular_details_on_sender_id"
-  end
-
-  create_table "particulars", force: :cascade do |t|
-    t.bigint "card_id", null: false
-    t.bigint "customer_id", null: false
-    t.float "debit_amount", null: false
-    t.float "credit_amount", null: false
-    t.float "current_balance", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_particulars_on_card_id"
-    t.index ["customer_id"], name: "index_particulars_on_customer_id"
+    t.index ["receiver_id"], name: "index_particulars_on_receiver_id"
+    t.index ["sender_id"], name: "index_particulars_on_sender_id"
   end
 
   create_table "salaries", force: :cascade do |t|
@@ -175,11 +164,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061828) do
   add_foreign_key "managers", "departments"
   add_foreign_key "managers", "users"
   add_foreign_key "nominees", "customers"
-  add_foreign_key "particular_details", "particulars"
-  add_foreign_key "particular_details", "users", column: "receiver_id"
-  add_foreign_key "particular_details", "users", column: "sender_id"
   add_foreign_key "particulars", "cards"
-  add_foreign_key "particulars", "customers"
+  add_foreign_key "particulars", "user_informations", column: "receiver_id"
+  add_foreign_key "particulars", "user_informations", column: "sender_id"
   add_foreign_key "salaries", "employees"
   add_foreign_key "salaries", "particulars"
   add_foreign_key "user_informations", "users"

@@ -22,10 +22,7 @@
 #
 FactoryBot.define do
   factory :manager do
-    designation { 'Senior Manager' }
+    designation { Manager.designations.values[rand(4)] }
     status { 0 }
-
-    # association :department, factory: :department
-    # association :user, factory: :user
   end
 end

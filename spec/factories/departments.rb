@@ -3,14 +3,14 @@
 # Table name: departments
 #
 #  id             :bigint           not null, primary key
-#  employee_count :integer
+#  employee_count :integer          default(0)
 #  name           :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
 FactoryBot.define do
   factory :department do
-    name { 'Finance' }
-    employee_count { Faker::Number.number(digits: 2) }
+    # name { 'Finance' }
+    # employee_count { Faker::Number.number(digits: 2) }
   end
 end

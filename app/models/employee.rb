@@ -33,20 +33,7 @@ class Employee < ApplicationRecord
   has_many :salaries
 
   enum work_status: { available: 0, on_leave: 1 }
-  # after_create :create_user
 
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
-
-  # private
-
-  # def create_user
-  #   random_value = SecureRandom.alphanumeric(5)
-  #   User.create(
-  #     username: (id.to_s + '_' + random_value),
-  #     email: "#{random_value}@sample.com",
-  #     password: '123456',
-  #     status: 2
-  #   )
-  # end
 end

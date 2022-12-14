@@ -38,11 +38,10 @@ class ParticularsController < ApplicationController
 
   def particular_params
     params.permit(
-      :credit_amount,
-      :current_balance,
-      :debit_amount,
+      :amount,
       :card_id,
-      :customer_id
+      :sender_id
+      :receiver_id,
     )
   end
 

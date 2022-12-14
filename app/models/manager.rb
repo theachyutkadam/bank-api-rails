@@ -26,8 +26,13 @@ class Manager < ApplicationRecord
 
   has_many :employee
   enum status: { active: 0, inactive: 1, pending: 2 }
+  enum designation: { 
+    ceo: 'ceo',
+    team_leader: 'team_leader', 
+    desk_manager: 'desk_manager', 
+    senior_manager: 'senior_manager'
+  }, _default: 'debit'
 
   validates :designation, presence: true
-  # validates :designation, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
 end

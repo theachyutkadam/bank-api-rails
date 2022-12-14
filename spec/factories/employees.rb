@@ -30,17 +30,5 @@ FactoryBot.define do
     education { Faker::Educator.degree }
     official_email { Faker::Internet.email }
     work_status { 0 }
-    # association :department, factory: :department
-    # association :manager, factory: :manager
-
-    # for_user_information
-    # trait :for_user_information do
-    #   association :accountable, factory: :user_information
-    # end
-
-    # for_address
-    # trait :for_address do
-    #   association :addressable, factory: :address
-    # end
   end
 end

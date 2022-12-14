@@ -15,7 +15,6 @@ class ApplicationRecord < ActiveRecord::Base
     puts "     - Particular = #{Particular.count}"
     puts "     - Account_type = #{AccountType.count}"
     puts "     - User_information = #{UserInformation.count}"
-    puts "     - Particular_detail = #{ParticularDetail.count}"
     puts "***************************************"
   end
 end

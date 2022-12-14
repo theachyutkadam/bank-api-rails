@@ -4,7 +4,8 @@ RSpec.describe UserInformation, type: :request do
 
 	describe 'GET #index' do
 		let(:user ) { create(:user) }
-		let(:customer ) { create(:customer) }
+		let(:account_type) { create(:account_type, title: "Saving") }
+		let(:customer ) { create(:customer, account_type: account_type) }
 	  let!(:user_informations) { FactoryBot.create_list(:user_information, 5, user: user, accountable: customer) }
 	  before { get '/user_informations' }
 	  it 'returns all user_informations' do
@@ -17,7 +18,8 @@ RSpec.describe UserInformation, type: :request do
 
 	describe 'POST #create' do
 	  let(:user ) { create(:user) }
-	  let(:customer ) { create(:customer) }
+	  let(:account_type) { create(:account_type, title: "Saving") }
+	  let(:customer ) { create(:customer, account_type: account_type) }
 	  let(:user_information ) { build(:user_information, user: user, accountable: customer) }
 	  context 'when request attributes are valid' do
 	    it 'returns status code 201' do
@@ -30,7 +32,8 @@ RSpec.describe UserInformation, type: :request do
 	describe 'GET #show' do
 	  before { get "/user_informations/#{user_information.id}" }
 		let(:user ) { create(:user) }
-		let(:customer ) { create(:customer) }
+		let(:account_type) { create(:account_type, title: "Saving") }
+		let(:customer ) { create(:customer, account_type: account_type) }
 
 	  let(:user_information) { create(:user_information, user: user, accountable: customer) }
 

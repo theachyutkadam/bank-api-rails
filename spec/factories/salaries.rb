@@ -24,7 +24,5 @@ FactoryBot.define do
   factory :salary do
     amount { Faker::Number.decimal }
     status { 1 }
-    # association :employee, factory: :employee
-    # association :particular, factory: :particular
   end
 end

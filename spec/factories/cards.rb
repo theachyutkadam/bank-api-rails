@@ -27,11 +27,5 @@ FactoryBot.define do
     status { 1 }
     title { 'debit' }
     is_deleted { false }
-    # expire_date { 5.years.after }
-    # pin { Faker::Number.number(digits: 4) }
-    # csv { Faker::Number.number(digits: 3) }
-    # number { Faker::Number.number(digits: 12) }
-
-    # association :customer, factory: :customer
   end
 end

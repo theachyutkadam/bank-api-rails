@@ -34,7 +34,7 @@ class Customer < ApplicationRecord
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
 
-  before_validation :set_customer_details, on: :create
+  before_validation :set_customer_details
 
   def set_customer_details
     self.account_number = generate_account_number

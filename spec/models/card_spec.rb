@@ -28,10 +28,13 @@ RSpec.describe Card, type: :model do
   context '#create' do
     it 'should create new card' do
       customer = create(:customer)
-      card = build(:card, customer: customer)
-      card.save
-      expect(card).to be_valid
-      expect(Card.count).to eq(1)
+
+      let(:account_type ) { create(:account_type) }
+      let(:customer ) { build(:customer, account_type: account_type) }
+      let!(:cards) { FactoryBot.create_list(:card, 5, customer: customer) }
+
+      expect(cards).to be_valid
+      expect(Card.count).to eq(5)
     end
   end
 
