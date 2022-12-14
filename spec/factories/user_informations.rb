@@ -3,19 +3,21 @@
 # Table name: user_informations
 #
 #  id                 :bigint           not null, primary key
-#  adhaar_card_number :string
-#  birth_date         :datetime
-#  contact            :string
-#  first_name         :string
-#  gender             :integer
+#  accountable_type   :string
+#  adhaar_card_number :string           not null
+#  birth_date         :datetime         not null
+#  contact            :string           not null
+#  first_name         :string           not null
+#  gender             :integer          not null
 #  handicap_details   :text
 #  is_handicap        :boolean
-#  last_name          :string
-#  maritial_status    :integer
-#  middle_name        :string
-#  pan_card_number    :string
+#  last_name          :string           not null
+#  maritial_status    :integer          not null
+#  middle_name        :string           not null
+#  pan_card_number    :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  accountable_id     :integer
 #  user_id            :bigint           not null
 #
 # Indexes
@@ -41,5 +43,16 @@ FactoryBot.define do
     handicap_details { 'MyText' }
 
     association :user, factory: :user
+
+    for_customer # default customer association if none of specified.
+
+    trait :for_customer do
+      association :accountable, factory: :customer
+    end
+
+    trait :for_employee do
+      association :accountable, factory: :employee
+    end
+
   end
 end

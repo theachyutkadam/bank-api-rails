@@ -3,9 +3,9 @@
 # Table name: customers
 #
 #  id              :bigint           not null, primary key
-#  account_number  :bigint
-#  amount_limit    :integer
-#  current_balance :float
+#  account_number  :bigint           not null
+#  amount_limit    :integer          not null
+#  current_balance :float            default(0.0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  account_type_id :bigint           not null
@@ -26,8 +26,8 @@ FactoryBot.define do
 
     association :account_type, factory: :account_type
 
-    trait :for_user do
-      association :accountable, factory: :user
+    trait :for_user_infomation do
+      association :accountable, factory: :user_infomation
     end
     trait :for_address do
       association :addressable, factory: :address

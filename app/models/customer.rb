@@ -3,9 +3,9 @@
 # Table name: customers
 #
 #  id              :bigint           not null, primary key
-#  account_number  :bigint
-#  amount_limit    :integer
-#  current_balance :float
+#  account_number  :bigint           not null
+#  amount_limit    :integer          not null
+#  current_balance :float            default(0.0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  account_type_id :bigint           not null
@@ -26,8 +26,8 @@ class Customer < ApplicationRecord
   has_many :transactions
   has_many :transactions_details
 
-  has_one :user, as: :accountable
   has_one :address, as: :addressable
+  has_one :user_information, as: :accountable
 
   AMOUNT_LIMIT = 20_000
 
@@ -54,14 +54,13 @@ class Customer < ApplicationRecord
     end
   end
 
-  def create_user
-    random_value = SecureRandom.alphanumeric(5)
-    User.create(
-      username: (id.to_s + '_' + random_value),
-      email: "#{random_value}@sample.com",
-      password: '123456',
-      accountable: self,
-      status: 2
-    )
-  end
+  # def create_user
+  #   random_value = SecureRandom.alphanumeric(5)
+  #   User.create(
+  #     username: (id.to_s + '_' + random_value),
+  #     email: "#{random_value}@sample.com",
+  #     password: '123456',
+  #     status: 2
+  #   )
+  # end
 end

@@ -3,11 +3,11 @@
 # Table name: employees
 #
 #  id              :bigint           not null, primary key
-#  date_of_joining :datetime
-#  designation     :string
-#  education       :string
+#  date_of_joining :datetime         not null
+#  designation     :string           not null
+#  education       :string           not null
 #  official_email  :string
-#  work_status     :string
+#  work_status     :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  department_id   :bigint           not null
@@ -33,8 +33,8 @@ FactoryBot.define do
     association :department, factory: :department
     association :manager, factory: :manager
 
-    trait :for_user do
-      association :accountable, factory: :user
+    trait :for_user_infomation do
+      association :accountable, factory: :user_infomation
     end
     trait :for_address do
       association :addressable, factory: :address
