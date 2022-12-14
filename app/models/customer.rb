@@ -34,8 +34,24 @@ class Customer < ApplicationRecord
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
 
-  def self.generate_account_number
-    rand(1_111_111_111..9_999_999_999)
+  before_validation :set_customer_details, on: :create
+
+  def set_customer_details
+    self.account_number = generate_account_number
+    self.amount_limit = AMOUNT_LIMIT
+  end
+
+  def generate_account_number
+    account_number = rand(1111111111..9999999999)
+    check_account_number(account_number)
+  end
+
+  def check_account_number account_number
+    if Customer.where(account_number: account_number).any?
+      generate_account_number 
+    else
+      account_number
+    end
   end
 
   def create_user
