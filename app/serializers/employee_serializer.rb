@@ -24,5 +24,5 @@
 #  fk_rails_...  (manager_id => managers.id)
 #
 class EmployeeSerializer < ActiveModel::Serializer
-  attributes :id, :department, :manager, :education, :date_of_joining, :work_status, :designation, :official_email
+  attributes :id, :department, :manager, :education, :date_of_joining, :work_status, :designation, :official_email, :user_information
 end

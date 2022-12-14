@@ -26,7 +26,7 @@ class Card < ApplicationRecord
   belongs_to :customer
   has_many :transactions
 
-  enum status: { active: 0, inactive: 1, pending: 2 }, _default: 'inactive'
+  enum status: { active: 0, inactive: 1, blocked: 2, closed: 3 }, _default: 'inactive'
   enum title: { debit: 'debit', credit: 'credit' }, _default: 'debit'
 
   validates :csv, :expire_date, :number, :pin, :title, presence: true

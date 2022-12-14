@@ -19,5 +19,5 @@
 #  fk_rails_...  (account_type_id => account_types.id)
 #
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :id, :account_type, :account_number, :amount_limit, :current_balance
+  attributes :id, :account_type, :account_number, :amount_limit, :current_balance, :user_information
 end
