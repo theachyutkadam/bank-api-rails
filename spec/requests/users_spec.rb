@@ -13,8 +13,7 @@ RSpec.describe 'User', type: :request do
   end
 
   describe 'POST #create' do
-    let(:customer) { create(:customer) }
-    let(:user) { build(:user, accountable: customer) }
+    let(:user) { build(:user) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/users', params: user.attributes

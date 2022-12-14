@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @users = User.includes(:accountable).all
+    @users = User.all
     render json: @users
   end
 
@@ -43,8 +43,6 @@ class UsersController < ApplicationController
       :email,
       :status,
       :is_deleted,
-      :accountable_id,
-      :accountable_type,
       :is_admin
     )
   end

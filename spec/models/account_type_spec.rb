@@ -57,8 +57,8 @@ RSpec.describe AccountType, type: :model do
   end
 
   context 'ActiveRecord associations' do
-    it 'should has_one customer' do
-      expect(AccountType.reflect_on_association(:customer).macro).to eq(:has_one)
+    it 'should has_many customer' do
+      expect(AccountType.reflect_on_association(:customer).macro).to eq(:has_many)
     end
   end
 end

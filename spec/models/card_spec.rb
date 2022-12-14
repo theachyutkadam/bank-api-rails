@@ -35,31 +35,6 @@ RSpec.describe Card, type: :model do
   end
 
   context '#validation' do
-    it 'should give error message if csv is empty' do
-      card = build(:card, csv: '')
-      card.save
-      expect(card.errors.messages[:csv].first).to eq("can't be blank")
-    end
-    it 'should give error message if expire_date is empty' do
-      card = build(:card, expire_date: '')
-      card.save
-      expect(card.errors.messages[:expire_date].first).to eq("can't be blank")
-    end
-    it 'should give error message if number is empty' do
-      card = build(:card, number: '')
-      card.save
-      expect(card.errors.messages[:number].first).to eq("can't be blank")
-    end
-    it 'should give error message if pin is empty' do
-      card = build(:card, pin: '')
-      card.save
-      expect(card.errors.messages[:pin].first).to eq("can't be blank")
-    end
-    it 'should give error message if title is empty' do
-      card = build(:card, title: '')
-      card.save
-      expect(card.errors.messages[:title].first).to eq("can't be blank")
-    end
     it 'should give error message if number length greater than 12' do
       card = build(:card, number: '1234567891234')
       card.save
