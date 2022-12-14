@@ -24,13 +24,13 @@
 #
 FactoryBot.define do
   factory :card do
-    title { 'debit' }
-    csv { Faker::Number.number(digits: 3) }
-    expire_date { 5.years.after }
     status { 1 }
+    title { 'debit' }
     is_deleted { false }
-    number { Faker::Number.number(digits: 12) }
-    pin { Faker::Number.number(digits: 4) }
+    # expire_date { 5.years.after }
+    # pin { Faker::Number.number(digits: 4) }
+    # csv { Faker::Number.number(digits: 3) }
+    # number { Faker::Number.number(digits: 12) }
 
     association :customer, factory: :customer
   end

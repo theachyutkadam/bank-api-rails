@@ -37,10 +37,26 @@ class Card < ApplicationRecord
   validates :csv, length: { is: 3 }
   validates :pin, length: { is: 4 }
 
-  def generate_card
-    self.csv ||= rand(111..999)
-    self.pin ||= rand(1111..9999)
-    self.number ||= rand(10**12)
+
+  before_validation :set_card_details, on: :create
+
+  def set_card_details
+    self.csv ||= rand(100..999)
+    self.pin ||= rand(1000..9999)
+    self.number ||= generate_number
     self.expire_date ||= Date.today + 5.years
+  end
+
+  def generate_number
+    card_number = rand(100000000000..999999999999)
+    is_exits(card_number)
+  end
+
+  def is_exits card_number
+    if Card.where(number: card_number).any?
+      generate_number
+    else
+      card_number
+    end
   end
 end
