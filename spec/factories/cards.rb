@@ -32,6 +32,6 @@ FactoryBot.define do
     # csv { Faker::Number.number(digits: 3) }
     # number { Faker::Number.number(digits: 12) }
 
-    association :customer, factory: :customer
+    # association :customer, factory: :customer
   end
 end

@@ -42,17 +42,17 @@ FactoryBot.define do
     is_handicap { false }
     handicap_details { 'MyText' }
 
-    association :user, factory: :user
+    # association :user, factory: :user
 
-    for_customer # default customer association if none of specified.
+    # # for_customer # default customer association if none of specified.
 
-    trait :for_customer do
-      association :accountable, factory: :customer
-    end
+    # trait :for_customer do
+    #   association :accountable, factory: :customer
+    # end
 
-    trait :for_employee do
-      association :accountable, factory: :employee
-    end
+    # trait :for_employee do
+    #   association :accountable, factory: :employee
+    # end
 
   end
 end

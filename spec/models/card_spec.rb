@@ -27,7 +27,8 @@ require 'rails_helper'
 RSpec.describe Card, type: :model do
   context '#create' do
     it 'should create new card' do
-      card = build(:card)
+      customer = create(:customer)
+      card = build(:card, customer: customer)
       card.save
       expect(card).to be_valid
       expect(Card.count).to eq(1)
@@ -66,7 +67,8 @@ RSpec.describe Card, type: :model do
       expect(card.errors.messages[:pin].first).to eq('is the wrong length (should be 4 characters)')
     end
     it 'should give error message if number not unique' do
-      create(:card, number: '111111111111')
+      customer = create(:customer)
+      create(:card, number: '111111111111', customer: customer)
       card = build(:card, number: '111111111111')
       card.save
       expect { card.save! }.to raise_error(ActiveRecord::RecordInvalid)

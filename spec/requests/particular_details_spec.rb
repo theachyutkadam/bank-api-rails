@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'ParticularDetail', type: :request do
   describe 'GET #index' do
-    let!(:particular_details) { FactoryBot.create_list(:particular_detail, 5) }
+    let(:sender ) { create(:user) }
+    let(:receiver ) { create(:user) }
+    let(:customer ) { create(:customer) }
+    let(:card ) { create(:card, customer: customer) }
+    let(:particular) { create(:particular, card:card, customer: customer) }
+
+    let!(:particular_details) { FactoryBot.create_list(:particular_detail, 5, particular:particular, sender: sender, receiver: receiver) }
     before { get '/particular_details' }
     it 'returns all particular_details' do
       expect(JSON.parse(response.body).size).to eq(5)
@@ -13,9 +19,12 @@ RSpec.describe 'ParticularDetail', type: :request do
   end
 
   describe 'POST #create' do
-    let(:particular ) { create(:particular) }
     let(:sender ) { create(:user) }
     let(:receiver ) { create(:user) }
+    let(:customer ) { create(:customer) }
+    let(:card ) { create(:card, customer: customer) }
+    let(:particular) { create(:particular, card:card, customer: customer) }
+
     let(:particular_detail ) { build(:particular_detail, receiver: receiver, sender: sender, particular: particular) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -27,7 +36,14 @@ RSpec.describe 'ParticularDetail', type: :request do
 
   describe 'GET #show' do
     before { get "/particular_details/#{particular_detail.id}" }
-    let(:particular_detail) { create(:particular_detail) }
+
+    let(:sender ) { create(:user) }
+    let(:receiver ) { create(:user) }
+    let(:customer ) { create(:customer) }
+    let(:card ) { create(:card, customer: customer) }
+    let(:particular) { create(:particular, card:card, customer: customer) }
+
+    let(:particular_detail) { create(:particular_detail, particular:particular, sender: sender, receiver: receiver) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)

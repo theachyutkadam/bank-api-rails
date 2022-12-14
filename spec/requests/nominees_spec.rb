@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Nominee', type: :request do
   describe 'GET #index' do
-    let!(:nominees) { FactoryBot.create_list(:nominee, 5) }
+    let!(:customer ) { create(:customer) }
+    let!(:nominees) { FactoryBot.create_list(:nominee, 5, customer: customer) }
     before { get '/nominees' }
     it 'returns all nominees' do
       expect(JSON.parse(response.body).size).to eq(5)
@@ -25,7 +26,8 @@ RSpec.describe 'Nominee', type: :request do
 
   describe 'GET #show' do
     before { get "/nominees/#{nominee.id}" }
-    let(:nominee) { create(:nominee) }
+    let(:customer ) { create(:customer) }
+    let(:nominee) { create(:nominee, customer: customer) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)

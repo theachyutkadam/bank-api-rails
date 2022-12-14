@@ -1,8 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'Employee', type: :request do
+  # before do
+  #   let(:user ) { create(:user) }
+  #   let(:department ) { create(:department) }
+  #   let(:manager ) { create(:manager, user: user, department: department) }
+  # end
   describe 'GET #index' do
-    let!(:employees) { FactoryBot.create_list(:employee, 5) }
+    let!(:user ) { create(:user) }
+    let!(:department ) { create(:department) }
+    let!(:manager ) { create(:manager, user: user, department: department) }
+    let!(:employees) { FactoryBot.create_list(:employee, 5, department: department, manager: manager) }
     before { get '/employees' }
     it 'returns all employees' do
       expect(JSON.parse(response.body).size).to eq(5)
@@ -13,8 +21,10 @@ RSpec.describe 'Employee', type: :request do
   end
 
   describe 'POST #create' do
-    let(:department ) { create(:department) }
-    let(:manager ) { create(:manager) }
+    let!(:user ) { create(:user) }
+    let!(:department ) { create(:department) }
+    let!(:manager ) { create(:manager, user: user, department: department) }
+
     let(:employee ) { build(:employee, department: department, manager: manager) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -26,7 +36,10 @@ RSpec.describe 'Employee', type: :request do
 
   describe 'GET #show' do
     before { get "/employees/#{employee.id}" }
-    let(:employee) { create(:employee) }
+    let!(:user ) { create(:user) }
+    let!(:department ) { create(:department) }
+    let!(:manager ) { create(:manager, user: user, department: department) }
+    let(:employee) { create(:employee, department: department, manager: manager) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)

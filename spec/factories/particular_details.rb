@@ -23,8 +23,8 @@
 #
 FactoryBot.define do
   factory :particular_detail do
-    association :particular, factory: :particular
-    association :sender, factory: :user
-    association :receiver, factory: :user
+    # association :particular, factory: :particular
+    # association :sender, factory: :user
+    # association :receiver, factory: :user
   end
 end

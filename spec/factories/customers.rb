@@ -26,11 +26,14 @@ FactoryBot.define do
 
     association :account_type, factory: :account_type
 
-    trait :for_user_infomation do
-      association :accountable, factory: :user_infomation
-    end
-    trait :for_address do
-      association :addressable, factory: :address
-    end
+    # for_user_information
+    # trait :for_user_information do
+    #   association :accountable, factory: :user_information
+    # end
+
+    # for_address
+    # trait :for_address do
+    #   association :addressable, factory: :address
+    # end
   end
 end

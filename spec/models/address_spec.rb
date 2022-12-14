@@ -18,7 +18,8 @@ require 'rails_helper'
 RSpec.describe Address, type: :model do
   context '#create' do
     it 'should create new address' do
-      address = build(:address)
+      customer = create(:customer)
+      address = build(:address, addressable: customer)
       address.save
       expect(address).to be_valid
       expect(Address.count).to eq(1)

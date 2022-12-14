@@ -25,7 +25,7 @@ FactoryBot.define do
     designation { 'Senior Manager' }
     status { 0 }
 
-    association :department, factory: :department
-    association :user, factory: :user
+    # association :department, factory: :department
+    # association :user, factory: :user
   end
 end
