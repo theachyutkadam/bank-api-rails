@@ -2,17 +2,15 @@
 #
 # Table name: users
 #
-#  id               :bigint           not null, primary key
-#  accountable_type :string
-#  deleted_at       :datetime
-#  email            :string
-#  is_admin         :boolean
-#  password         :string
-#  status           :integer
-#  username         :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  accountable_id   :integer
+#  id         :bigint           not null, primary key
+#  deleted_at :datetime
+#  email      :string           not null
+#  is_admin   :boolean          not null
+#  password   :string           not null
+#  status     :integer          not null
+#  username   :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :password, :email, :status, :deleted_at, :accountable_id, :accountable_type, :accountable,

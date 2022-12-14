@@ -3,8 +3,8 @@
 # Table name: salaries
 #
 #  id            :bigint           not null, primary key
-#  amount        :float
-#  status        :integer
+#  amount        :float            not null
+#  status        :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  employee_id   :bigint           not null

@@ -3,7 +3,7 @@
 # Table name: managers
 #
 #  id            :bigint           not null, primary key
-#  designation   :string
+#  designation   :string           not null
 #  status        :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

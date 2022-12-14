@@ -3,9 +3,9 @@
 # Table name: particulars
 #
 #  id              :bigint           not null, primary key
-#  credit_amount   :float
-#  current_balance :float
-#  debit_amount    :float
+#  credit_amount   :float            not null
+#  current_balance :float            not null
+#  debit_amount    :float            not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  card_id         :bigint           not null
