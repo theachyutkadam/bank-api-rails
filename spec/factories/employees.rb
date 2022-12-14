@@ -33,8 +33,8 @@ FactoryBot.define do
     association :department, factory: :department
     association :manager, factory: :manager
 
-    trait :for_user_infomation do
-      association :accountable, factory: :user_infomation
+    trait :for_user_information do
+      association :accountable, factory: :user_information
     end
     trait :for_address do
       association :addressable, factory: :address

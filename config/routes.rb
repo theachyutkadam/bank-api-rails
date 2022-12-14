@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :customers, except: %i[new edit]
   resources :employees, except: %i[new edit]
   resources :users, except: %i[new edit]
+  resources :user_informations, except: %i[new edit]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
