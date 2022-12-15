@@ -50,10 +50,10 @@ end
   employee = FactoryBot.create(:employee, manager: manager, department:department)
   FactoryBot.create(:address, addressable:employee)
   FactoryBot.create(:user_information, user: user, accountable: employee)
-  p "employee created #{i}"
+  p "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
 end
 
-1000.times do |i|
+999.times do |i|
   # create customer
   user = FactoryBot.create(:user)
   account_type = AccountType.take

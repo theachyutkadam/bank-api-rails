@@ -36,4 +36,11 @@ class Employee < ApplicationRecord
 
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
+
+  after_create :update_employee_count
+
+  def update_employee_count
+    old_count = department.employee_count
+    department.update(employee_count: old_count + 1)
+  end
 end
