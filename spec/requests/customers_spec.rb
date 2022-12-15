@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Customer', type: :request do
   describe 'GET #index' do
-    let!(:customers) { FactoryBot.create_list(:customer, 5) }
+    let(:account_type) { create(:account_type) }
+    let!(:customers) { FactoryBot.create_list(:customer, 5, account_type: account_type) }
     before { get '/customers' }
     it 'returns all customers' do
       expect(JSON.parse(response.body).size).to eq(5)
@@ -25,8 +26,8 @@ RSpec.describe 'Customer', type: :request do
 
   describe 'GET #show' do
     before { get "/customers/#{customer.id}" }
-    let(:customer) { create(:customer) }
-
+    let(:account_type ) { create(:account_type) }
+    let(:customer ) { build(:customer, account_type: account_type) }
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end

@@ -10,7 +10,7 @@
 #
 FactoryBot.define do
   factory :department do
-    # name { 'Finance' }
-    # employee_count { Faker::Number.number(digits: 2) }
+    name { 'Finance' }
+    employee_count { Faker::Number.number(digits: 2) }
   end
 end

@@ -27,13 +27,10 @@ require 'rails_helper'
 RSpec.describe Card, type: :model do
   context '#create' do
     it 'should create new card' do
-      customer = create(:customer)
+      account_type = FactoryBot.create(:account_type)
+      customer = FactoryBot.create(:customer, account_type: account_type)
+      FactoryBot.create_list(:card, 5, customer: customer)
 
-      let(:account_type ) { create(:account_type) }
-      let(:customer ) { build(:customer, account_type: account_type) }
-      let!(:cards) { FactoryBot.create_list(:card, 5, customer: customer) }
-
-      expect(cards).to be_valid
       expect(Card.count).to eq(5)
     end
   end
@@ -70,9 +67,12 @@ RSpec.describe Card, type: :model do
       expect(card.errors.messages[:pin].first).to eq('is the wrong length (should be 4 characters)')
     end
     it 'should give error message if number not unique' do
-      customer = create(:customer)
-      create(:card, number: '111111111111', customer: customer)
-      card = build(:card, number: '111111111111')
+      # let(:account_type) { create(:account_type) }
+      # let(:customer) { build(:customer, account_type: account_type) }
+      account_type = FactoryBot.create(:account_type)
+      customer = FactoryBot.create(:customer, account_type: account_type)
+      FactoryBot.create(:card, number: '111111111111', customer: customer)
+      card = build(:card, number: '111111111111', customer: customer)
       card.save
       expect { card.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end

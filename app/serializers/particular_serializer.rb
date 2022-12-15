@@ -23,5 +23,5 @@
 #  fk_rails_...  (sender_id => user_informations.id)
 #
 class ParticularSerializer < ActiveModel::Serializer
-  attributes :id, :card, :customer, :debit_amount, :credit_amount, :current_balance
+  attributes :id, :card, :sender, :receiver, :amount
 end

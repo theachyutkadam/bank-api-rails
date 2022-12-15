@@ -1,7 +1,7 @@
 class ParticularsController < ApplicationController
   before_action :set_particular, only: %i[destroy show update]
   def index
-    @particulars = Particular.includes(:customer, :card).all
+    @particulars = Particular.includes(:sender, :receiver, :card).all
     render json: @particulars
   end
 
@@ -40,8 +40,8 @@ class ParticularsController < ApplicationController
     params.permit(
       :amount,
       :card_id,
-      :sender_id
-      :receiver_id,
+      :sender_id,
+      :receiver_id
     )
   end
 

@@ -18,11 +18,9 @@ require 'rails_helper'
 RSpec.describe Address, type: :model do
   context '#create' do
     it 'should create new address' do
-      let(:account_type ) { create(:account_type) }
-      let(:customer ) { build(:customer, account_type: account_type) }
-      let!(:addresses) { FactoryBot.create_list(:address, 5) }
-
-      expect(addresses).to be_valid
+      account_type = FactoryBot.create(:account_type)
+      customer = FactoryBot.create(:customer, account_type: account_type)
+      FactoryBot.create_list(:address, 5, addressable: customer)
       expect(Address.count).to eq(5)
     end
   end

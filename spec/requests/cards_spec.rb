@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Card', type: :request do
   describe 'GET #index' do
-    let!(:customer) { create(:customer) }
-    let!(:cards) { FactoryBot.create_list(:card, 5, customer: customer) }
+    let(:account_type ) { create(:account_type) }
+    let(:customer ) { build(:customer, account_type: account_type) }
+    FactoryBot.create_list(:card, 2, customer: customer)
     before { get '/cards' }
     it 'returns all cards' do
-      expect(JSON.parse(response.body).size).to eq(5)
+      expect(JSON.parse(response.body).size).to eq(2)
     end
     it 'returns status code 200' do
       expect(response).to have_http_status(:success)
@@ -14,8 +15,9 @@ RSpec.describe 'Card', type: :request do
   end
 
   describe 'POST #create' do
-    let!(:customer) { create(:customer) }
-    let(:card) { build(:card, customer:customer) }
+    let(:account_type) { create(:account_type) }
+    let(:customer) { build(:customer, account_type: account_type) }
+    let!(:card) { build(:card, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/cards', params: card.attributes
@@ -26,7 +28,8 @@ RSpec.describe 'Card', type: :request do
 
   describe 'GET #show' do
     before { get "/cards/#{card.id}" }
-    let!(:customer) { create(:customer) }
+    let(:account_type ) { create(:account_type) }
+    let(:customer ) { build(:customer, account_type: account_type) }
     let(:card) { create(:card, customer: customer) }
 
     it 'returns http success' do

@@ -2,7 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   def self.record_count
-    puts "***************************************"
+    puts '***************************************'
     puts "     - Card = #{Card.count}"
     puts "     - User = #{User.count}"
     puts "     - Manager = #{Manager.count}"
@@ -15,6 +15,6 @@ class ApplicationRecord < ActiveRecord::Base
     puts "     - Particular = #{Particular.count}"
     puts "     - Account_type = #{AccountType.count}"
     puts "     - User_information = #{UserInformation.count}"
-    puts "***************************************"
+    puts '***************************************'
   end
 end

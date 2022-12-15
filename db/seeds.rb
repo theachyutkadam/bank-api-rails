@@ -29,8 +29,7 @@ admin_card = FactoryBot.create(:card, customer: admin_customer)
 
 FactoryBot.create(:address, addressable:admin_customer)
 FactoryBot.create(:address, addressable:admin_nominee)
-admin_sender = FactoryBot.create(:user_information, user: admin_user, accountable: admin_customer)  
-
+admin_sender = FactoryBot.create(:user_information, user: admin_user, accountable: admin_customer)
 
 10.times do |i|
   # create manager
@@ -42,8 +41,6 @@ admin_sender = FactoryBot.create(:user_information, user: admin_user, accountabl
   FactoryBot.create(:user_information, user: user, accountable: employee)
   p "manager created #{i}"
 end
-puts "@@@@@@@@@@@@@@@@@@@"
-p "create manager"
 
 90.times do |i|
   # create employee
@@ -55,8 +52,6 @@ p "create manager"
   FactoryBot.create(:user_information, user: user, accountable: employee)
   p "employee created #{i}"
 end
-puts "@@@@@@@@@@@@@@@@@@@"
-p "create employee"
 
 1000.times do |i|
   # create customer
@@ -70,8 +65,6 @@ p "create employee"
   FactoryBot.create(:card, customer: customer)
   puts "customer created #{i}"
 end
-puts "@@@@@@@@@@@@@@@@@@@"
-p "create customer"
 
 1000.times do |i|
   # create customer transactions
@@ -81,8 +74,6 @@ p "create customer"
   particular = FactoryBot.create(:particular, card: card, sender:sender, receiver:receiver)
   puts "customer particular #{i}"
 end
-puts "@@@@@@@@@@@@@@@@@@@"
-p "create customer transactions"
 
 100.times do |i|
   # create employee salary transactions
@@ -93,18 +84,4 @@ p "create customer transactions"
   puts "Salary created #{i}"
 end
 
-
-p 'Start+++++++++++='
-puts "#{User.count} = Users"
-puts "#{Card.count} = Cards"
-puts "#{Salary.count} = Salaries"
-puts "#{Manager.count} = Managers"
-puts "#{Nominee.count} = Nominees"
-puts "#{Address.count} = Addresses"
-puts "#{Customer.count} = Customers"
-puts "#{Employee.count} = Employees"
-puts "#{Department.count} = Departments"
-puts "#{Particular.count} = Particulars"
-puts "#{AccountType.count} = AccountTypes"
-puts "#{UserInformation.count} = UserInformation"
-p 'End+++++++++++='
+ApplicationRecord.record_count

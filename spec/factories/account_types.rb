@@ -11,5 +11,6 @@
 #
 FactoryBot.define do
   factory :account_type do
+    title { 'Saving' }
   end
 end

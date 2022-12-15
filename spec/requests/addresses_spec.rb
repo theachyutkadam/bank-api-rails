@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Addresses', type: :request do
-  let!(:customer) { create(:customer) }
+  let(:account_type ) { create(:account_type) }
+  let(:customer ) { build(:customer, account_type: account_type) }
   let!(:addresses) { FactoryBot.create_list(:address, 5, addressable: customer) }
   before { get '/addresses' }
   it 'returns all addresses' do
@@ -12,7 +13,8 @@ RSpec.describe 'Addresses', type: :request do
   end
 
   describe 'POST #create' do
-    let!(:customer) { create(:customer) }
+    let(:account_type ) { create(:account_type) }
+    let(:customer ) { build(:customer, account_type: account_type) }
     let(:address) { build(:address, addressable: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -24,7 +26,8 @@ RSpec.describe 'Addresses', type: :request do
 
   describe 'GET #show' do
     before { get "/addresses/#{address.id}" }
-    let!(:customer) { create(:customer) }
+    let(:account_type ) { create(:account_type) }
+    let(:customer ) { build(:customer, account_type: account_type) }
     let(:address) { create(:address, addressable: customer) }
 
     it 'returns http success' do
