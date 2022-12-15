@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Card', type: :request do
   describe 'GET #index' do
     let(:account_type ) { create(:account_type) }
-    let(:customer ) { build(:customer, account_type: account_type) }
-    FactoryBot.create_list(:card, 2, customer: customer)
+    let(:customer ) { create(:customer, account_type: account_type) }
+    let!(:cards) { create_list(:card, 2, customer: customer) }
     before { get '/cards' }
     it 'returns all cards' do
       expect(JSON.parse(response.body).size).to eq(2)
@@ -16,7 +16,7 @@ RSpec.describe 'Card', type: :request do
 
   describe 'POST #create' do
     let(:account_type) { create(:account_type) }
-    let(:customer) { build(:customer, account_type: account_type) }
+    let(:customer) { create(:customer, account_type: account_type) }
     let!(:card) { build(:card, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -29,7 +29,7 @@ RSpec.describe 'Card', type: :request do
   describe 'GET #show' do
     before { get "/cards/#{card.id}" }
     let(:account_type ) { create(:account_type) }
-    let(:customer ) { build(:customer, account_type: account_type) }
+    let(:customer ) { create(:customer, account_type: account_type) }
     let(:card) { create(:card, customer: customer) }
 
     it 'returns http success' do
