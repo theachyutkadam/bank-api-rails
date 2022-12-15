@@ -10,9 +10,9 @@
 #  updated_at          :datetime         not null
 #
 class AccountType < ApplicationRecord
-  has_one :customer
+  has_many :customer
 
-  before_create :set_intrest_rate
+  before_validation :set_intrest_rate
   LOAN_INTREST_RATE = 8.0
   SAVING_INTREST_RATE = 4.0
 

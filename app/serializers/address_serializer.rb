@@ -14,5 +14,6 @@
 #  addressable_id   :integer
 #
 class AddressSerializer < ActiveModel::Serializer
-  attributes :id, :building, :description, :flat_number, :pin_code, :street
+  attributes :id, :building, :description, :flat_number, :pin_code, :street, :addressable_id, :addressable_type,
+             :addressable
 end

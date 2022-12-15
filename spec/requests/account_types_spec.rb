@@ -13,10 +13,10 @@ RSpec.describe 'AccountType', type: :request do
   end
 
   describe 'POST #create' do
-    let(:account_type_attributes) { build(:account_type) }
+    let(:account_type) { build(:account_type) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
-        post '/account_types', params: account_type_attributes.attributes
+        post '/account_types', params: account_type.attributes
         expect(response).to have_http_status(201)
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe 'AccountType', type: :request do
 
   describe 'GET #show' do
     before { get "/account_types/#{account_type.id}" }
-    let(:account_type) { create(:account_type) }
+    let(:account_type) { create(:account_type, title: "Saving") }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)

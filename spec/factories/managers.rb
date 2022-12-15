@@ -3,7 +3,7 @@
 # Table name: managers
 #
 #  id            :bigint           not null, primary key
-#  designation   :string
+#  designation   :string           not null
 #  status        :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -22,14 +22,7 @@
 #
 FactoryBot.define do
   factory :manager do
-    designation { 'Senior Manager' }
+    designation { Manager.designations.values[rand(4)] }
     status { 0 }
-
-    association :department, factory: :department
-    association :user, factory: :user
-    # for_employee
-    # trait :for_employee do
-    #   association :accountable, factory: :employee
-    # end
   end
 end

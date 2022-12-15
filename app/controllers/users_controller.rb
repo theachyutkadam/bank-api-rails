@@ -43,8 +43,6 @@ class UsersController < ApplicationController
       :email,
       :status,
       :is_deleted,
-      :accountable_id,
-      :accountable_type,
       :is_admin
     )
   end

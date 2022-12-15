@@ -3,7 +3,7 @@
 # Table name: managers
 #
 #  id            :bigint           not null, primary key
-#  designation   :string
+#  designation   :string           not null
 #  status        :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -26,8 +26,13 @@ class Manager < ApplicationRecord
 
   has_many :employee
   enum status: { active: 0, inactive: 1, pending: 2 }
+  enum designation: { 
+    ceo: 'ceo',
+    team_leader: 'team_leader', 
+    desk_manager: 'desk_manager', 
+    senior_manager: 'senior_manager'
+  }, _default: 'debit'
 
   validates :designation, presence: true
-  # validates :designation, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
 end

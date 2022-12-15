@@ -20,15 +20,5 @@ FactoryBot.define do
     street { Faker::Address.street_address }
     pin_code { Faker::Number.number(digits: 6) }
     description { Faker::Address.full_address }
-
-    for_customer # default customer association if none of specified.
-
-    trait :for_customer do
-      association :addressable, factory: :customer
-    end
-
-    trait :for_employee do
-      association :addressable, factory: :employee
-    end
   end
 end

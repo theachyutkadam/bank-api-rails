@@ -2,22 +2,23 @@
 #
 # Table name: particulars
 #
-#  id              :bigint           not null, primary key
-#  credit_amount   :float
-#  current_balance :float
-#  debit_amount    :float
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  card_id         :bigint           not null
-#  customer_id     :bigint           not null
+#  id          :bigint           not null, primary key
+#  amount      :float            not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  card_id     :bigint           not null
+#  receiver_id :bigint           not null
+#  sender_id   :bigint           not null
 #
 # Indexes
 #
 #  index_particulars_on_card_id      (card_id)
-#  index_particulars_on_customer_id  (customer_id)
+#  index_particulars_on_receiver_id  (receiver_id)
+#  index_particulars_on_sender_id    (sender_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (card_id => cards.id)
-#  fk_rails_...  (customer_id => customers.id)
+#  fk_rails_...  (receiver_id => user_informations.id)
+#  fk_rails_...  (sender_id => user_informations.id)
 #

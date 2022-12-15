@@ -3,19 +3,21 @@
 # Table name: user_informations
 #
 #  id                 :bigint           not null, primary key
-#  adhaar_card_number :string
-#  birth_date         :datetime
-#  contact            :string
-#  first_name         :string
-#  gender             :integer
+#  accountable_type   :string
+#  adhaar_card_number :string           not null
+#  birth_date         :date             not null
+#  contact            :string           not null
+#  first_name         :string           not null
+#  gender             :integer          not null
 #  handicap_details   :text
 #  is_handicap        :boolean
-#  last_name          :string
-#  maritial_status    :integer
-#  middle_name        :string
-#  pan_card_number    :string
+#  last_name          :string           not null
+#  maritial_status    :integer          not null
+#  middle_name        :string           not null
+#  pan_card_number    :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  accountable_id     :integer
 #  user_id            :bigint           not null
 #
 # Indexes
@@ -31,7 +33,7 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
-    contact { Faker::PhoneNumber.cell_phone_in_e164 }
+    contact { Faker::Base.numerify('##########') }
     gender { 0 }
     birth_date { 18.years.ago }
     maritial_status { 0 }
@@ -39,7 +41,5 @@ FactoryBot.define do
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
     handicap_details { 'MyText' }
-
-    association :user, factory: :user
   end
 end

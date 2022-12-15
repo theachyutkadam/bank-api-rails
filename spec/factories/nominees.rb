@@ -3,12 +3,12 @@
 # Table name: nominees
 #
 #  id          :bigint           not null, primary key
-#  contact     :string
-#  first_name  :string
-#  gender      :integer
-#  last_name   :string
-#  middle_name :string
-#  relation    :integer
+#  contact     :string           not null
+#  first_name  :string           not null
+#  gender      :integer          not null
+#  last_name   :string           not null
+#  middle_name :string           not null
+#  relation    :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :bigint           not null
@@ -29,10 +29,5 @@ FactoryBot.define do
     contact { Faker::Number.number(digits: 10) }
     gender { 0 }
     relation { 1 }
-
-    trait :for_address do
-      association :addressable, factory: :address
-    end
-    association :customer, factory: :customer
   end
 end
