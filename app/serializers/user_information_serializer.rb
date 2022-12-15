@@ -5,7 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  accountable_type   :string
 #  adhaar_card_number :string           not null
-#  birth_date         :datetime         not null
+#  birth_date         :date             not null
 #  contact            :string           not null
 #  first_name         :string           not null
 #  gender             :integer          not null
@@ -29,6 +29,24 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class UserInformationSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number,
-             :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :user, :accountable_id, :accountable_type, :accountable
+  attributes :id,
+             :first_name,
+             :middle_name,
+             :last_name,
+             :contact,
+             :gender,
+             :birth_date,
+             :pan_card_number,
+             :adhaar_card_number,
+             :is_handicap,
+             :handicap_details,
+             :maritial_status,
+             :user,
+             :accountable_id,
+             :accountable_type,
+             :accountable
+
+  def birth_date
+    return object.birth_date.to_fs(:long)
+  end
 end

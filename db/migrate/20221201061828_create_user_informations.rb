@@ -6,7 +6,7 @@ class CreateUserInformations < ActiveRecord::Migration[7.0]
       t.string :last_name, null: false
       t.string :contact, null: false
       t.integer :gender, null: false
-      t.datetime :birth_date, null: false
+      t.date :birth_date, null: false
       t.string :pan_card_number, null: false
       t.string :adhaar_card_number, null: false
       t.boolean :is_handicap

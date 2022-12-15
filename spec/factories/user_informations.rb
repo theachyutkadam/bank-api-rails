@@ -5,7 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  accountable_type   :string
 #  adhaar_card_number :string           not null
-#  birth_date         :datetime         not null
+#  birth_date         :date             not null
 #  contact            :string           not null
 #  first_name         :string           not null
 #  gender             :integer          not null

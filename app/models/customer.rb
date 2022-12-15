@@ -37,8 +37,8 @@ class Customer < ApplicationRecord
   before_validation :set_customer_details
 
   def set_customer_details
-    self.account_number = generate_account_number
-    self.amount_limit = AMOUNT_LIMIT
+    self.account_number ||= generate_account_number
+    self.amount_limit ||= AMOUNT_LIMIT
   end
 
   def generate_account_number

@@ -58,7 +58,7 @@ end
 puts "@@@@@@@@@@@@@@@@@@@"
 p "create employee"
 
-100.times do |i|
+1000.times do |i|
   # create customer
   user = FactoryBot.create(:user)
   account_type = AccountType.take
@@ -73,22 +73,23 @@ end
 puts "@@@@@@@@@@@@@@@@@@@"
 p "create customer"
 
-100.times do |i|
+1000.times do |i|
   # create customer transactions
   card = Card.take
   sender = card.customer.user_information
   receiver = UserInformation.take
   particular = FactoryBot.create(:particular, card: card, sender:sender, receiver:receiver)
-  puts "particular #{i}"
+  puts "customer particular #{i}"
 end
 puts "@@@@@@@@@@@@@@@@@@@"
 p "create customer transactions"
 
 100.times do |i|
   # create employee salary transactions
-  receiver = Employee.take.user_information
+  employee_user_information = Employee.take.user_information
 
-  FactoryBot.create(:particular, card: admin_card, sender: admin_sender, receiver: receiver)
+  particular = FactoryBot.create(:particular, card: admin_card, sender: admin_sender, receiver: employee_user_information)
+  salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
   puts "Salary created #{i}"
 end
 
