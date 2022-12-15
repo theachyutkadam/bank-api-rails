@@ -15,8 +15,8 @@ class ParticularsController < ApplicationController
   end
 
   def update
-    if @particular.update_attributes(particular_params)
-      render json: @particular, status: :updated
+    if @particular.update(particular_params)
+      render json: @particular
     else
       render json: @particular.errors, status: :unprocessable_entity
     end

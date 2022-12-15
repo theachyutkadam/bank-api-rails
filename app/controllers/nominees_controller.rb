@@ -15,8 +15,8 @@ class NomineesController < ApplicationController
   end
 
   def update
-    if @nominee.update_attributes(nominee_params)
-      render json: @nominee, status: :updated
+    if @nominee.update(nominee_params)
+      render json: @nominee
     else
       render json: @nominee.errors, status: :unprocessable_entity
     end

@@ -8,7 +8,7 @@ class UserInformationsController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @user_information = UserInformation.new(user_information_params)
-      customer = Customer.create()
+      customer = Customer.create
       @user_information.update(accountable: customer)
       if @user_information.save
         render json: @user_information, status: :created
@@ -16,13 +16,13 @@ class UserInformationsController < ApplicationController
         render json: @user_information.errors, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
-      puts "Oops. We tried to do an invalid operation!"
+      puts 'Oops. We tried to do an invalid operation!'
     end
   end
 
   def update
-    if @user_information.update_attributes(user_information_params)
-      render json: @user_information, status: :updated
+    if @user_information.update(user_information_params)
+      render json: @user_information
     else
       render json: @user_information.errors, status: :unprocessable_entity
     end

@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  deleted_at :datetime
 #  email      :string           not null
-#  is_admin   :boolean          not null
+#  is_admin   :boolean          default(FALSE), not null
 #  password   :string           not null
 #  status     :integer          not null
 #  username   :string           not null
@@ -17,8 +17,8 @@ class User < ApplicationRecord
 
   enum status: { active: 0, inactive: 1, pending: 2 }
 
-  validates :email, :password, presence: true
-  validates :email, uniqueness: true
+  validates :email, :password, :username, presence: true
+  validates :email, :username, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
 end

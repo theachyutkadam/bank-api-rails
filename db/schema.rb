@@ -151,7 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.string "password", null: false
     t.string "email", null: false
     t.integer "status", null: false
-    t.boolean "is_admin", null: false
+    t.boolean "is_admin", default: false, null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

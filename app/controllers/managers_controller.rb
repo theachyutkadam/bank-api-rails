@@ -15,8 +15,8 @@ class ManagersController < ApplicationController
   end
 
   def update
-    if @manager.update_attributes(manager_params)
-      render json: @manager, status: :updated
+    if @manager.update(manager_params)
+      render json: @manager
     else
       render json: @manager.errors, status: :unprocessable_entity
     end

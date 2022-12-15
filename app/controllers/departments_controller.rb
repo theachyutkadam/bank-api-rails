@@ -15,8 +15,8 @@ class DepartmentsController < ApplicationController
   end
 
   def update
-    if @department.update_attributes(department_params)
-      render json: @department, status: :updated
+    if @department.update(department_params)
+      render json: @department
     else
       render json: @department.errors, status: :unprocessable_entity
     end

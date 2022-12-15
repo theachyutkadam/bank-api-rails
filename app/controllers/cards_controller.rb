@@ -15,8 +15,8 @@ class CardsController < ApplicationController
   end
 
   def update
-    if @card.update_attributes(card_params)
-      render json: @card, status: :updated
+    if @card.update(card_params)
+      render json: @card
     else
       render json: @card.errors, status: :unprocessable_entity
     end

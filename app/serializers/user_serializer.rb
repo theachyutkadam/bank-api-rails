@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  deleted_at :datetime
 #  email      :string           not null
-#  is_admin   :boolean          not null
+#  is_admin   :boolean          default(FALSE), not null
 #  password   :string           not null
 #  status     :integer          not null
 #  username   :string           not null

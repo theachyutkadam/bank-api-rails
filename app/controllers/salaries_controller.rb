@@ -15,8 +15,8 @@ class SalariesController < ApplicationController
   end
 
   def update
-    if @salary.update_attributes(salary_params)
-      render json: @salary, status: :updated
+    if @salary.update(salary_params)
+      render json: @salary
     else
       render json: @salary.errors, status: :unprocessable_entity
     end

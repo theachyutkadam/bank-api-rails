@@ -15,8 +15,8 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    if @employee.update_attributes(employee_params)
-      render json: @employee, status: :updated
+    if @employee.update(employee_params)
+      render json: @employee
     else
       render json: @employee.errors, status: :unprocessable_entity
     end
