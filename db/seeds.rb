@@ -8,8 +8,6 @@
 
 require 'factory_bot'
 
-admin_user = FactoryBot.create(:user, is_admin: true, email: "admin@gmail.com")
-
 ['Saving', 'Salary','Current'].each do |title|
   AccountType.create(title: title)
 end
@@ -21,6 +19,18 @@ Department.create([
   { name: "Insurance" },
   { name: "Marketing" }
 ])
+
+
+admin_user = FactoryBot.create(:user, is_admin: true, email: "admin@gmail.com")
+account_type = AccountType.where(title: "Current").first
+admin_customer = FactoryBot.create(:customer, account_type: account_type, current_balance: 1000000.00)
+admin_nominee = FactoryBot.create(:nominee, customer:admin_customer)
+admin_card = FactoryBot.create(:card, customer: admin_customer)
+
+FactoryBot.create(:address, addressable:admin_customer)
+FactoryBot.create(:address, addressable:admin_nominee)
+admin_sender = FactoryBot.create(:user_information, user: admin_user, accountable: admin_customer)  
+
 
 10.times do |i|
   # create manager
@@ -63,7 +73,7 @@ end
 puts "@@@@@@@@@@@@@@@@@@@"
 p "create customer"
 
-1000.times do |i|
+100.times do |i|
   # create customer transactions
   card = Card.take
   sender = card.customer.user_information
@@ -74,20 +84,11 @@ end
 puts "@@@@@@@@@@@@@@@@@@@"
 p "create customer transactions"
 
-1000.times do |i|
+100.times do |i|
   # create employee salary transactions
-  account_type = AccountType.where(title: "Current").first
-  customer = FactoryBot.create(:customer, account_type: account_type, current_balance: 1000000.00)
-  nominee = FactoryBot.create(:nominee, customer:customer)
-  card = FactoryBot.create(:card, customer: customer)
-  
-  FactoryBot.create(:address, addressable:customer)
-  FactoryBot.create(:address, addressable:nominee)
-
-  sender = FactoryBot.create(:user_information, user: admin_user, accountable: customer)  
   receiver = Employee.take.user_information
 
-  particular = FactoryBot.create(:particular, card: card, sender:sender, receiver:receiver)
+  FactoryBot.create(:particular, card: admin_card, sender: admin_sender, receiver: receiver)
   puts "Salary created #{i}"
 end
 
