@@ -30,4 +30,15 @@ class Particular < ApplicationRecord
   has_many :salaries
 
   validates :amount, presence: true
+
+  validate :validate_amount
+
+  def validate_amount
+    sender = self.sender.accountable
+    if sender.class.name == "Employee"
+      errors.add(:amount, "Insuficiant balance") if sender.customer.current_balance < amount 
+    else
+      errors.add(:amount, "Insuficiant balance") if sender.current_balance < amount 
+    end
+  end
 end

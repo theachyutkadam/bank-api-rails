@@ -49,4 +49,12 @@ class UserInformationSerializer < ActiveModel::Serializer
   def birth_date
     return object.birth_date.to_fs(:long)
   end
+
+  def accountable
+    if object.accountable.class.name == "Employee"
+      ActiveModel::SerializableResource.new(object.accountable,  each_serializer: EmployeeSerializer)
+    else
+      ActiveModel::SerializableResource.new(object.accountable,  each_serializer: CustomerSerializer)
+    end
+  end
 end

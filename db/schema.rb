@@ -66,15 +66,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.bigint "department_id", null: false
     t.bigint "manager_id", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "department_id", null: false
+    t.string "official_email"
     t.string "education", null: false
-    t.datetime "date_of_joining", null: false
     t.string "work_status", null: false
     t.string "designation", null: false
-    t.string "official_email"
+    t.float "salary_amount", default: 0.0, null: false
+    t.datetime "date_of_joining", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_employees_on_customer_id"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["manager_id"], name: "index_employees_on_manager_id"
   end
@@ -159,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
 
   add_foreign_key "cards", "customers"
   add_foreign_key "customers", "account_types"
+  add_foreign_key "employees", "customers"
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "managers"
   add_foreign_key "managers", "departments"

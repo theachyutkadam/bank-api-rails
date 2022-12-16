@@ -33,13 +33,16 @@ admin_sender = FactoryBot.create(:user_information, user: admin_user, accountabl
 
 10.times do |i|
   # create manager
+  p "manager created #{i}"
   user = FactoryBot.create(:user)
   department = Department.take
   manager = FactoryBot.create(:manager, user: user, department: department)
-  employee = FactoryBot.create(:employee, manager: manager, department:department)
+  account_type = AccountType.where(title: "Salary").first
+  customer = FactoryBot.create(:customer, account_type: account_type)
+  FactoryBot.create(:card, customer: customer)
+  employee = FactoryBot.create(:employee, manager: manager, department:department, customer: customer)
   employee_address = FactoryBot.create(:address, addressable:employee)
   FactoryBot.create(:user_information, user: user, accountable: employee)
-  p "manager created #{i}"
 end
 
 90.times do |i|
@@ -47,7 +50,10 @@ end
   user = FactoryBot.create(:user)
   department = Department.take
   manager = Manager.take
-  employee = FactoryBot.create(:employee, manager: manager, department:department)
+  account_type = AccountType.where(title: "Salary").first
+  customer = FactoryBot.create(:customer, account_type: account_type)
+  FactoryBot.create(:card, customer: customer)
+  employee = FactoryBot.create(:employee, manager: manager, department:department, customer: customer)
   FactoryBot.create(:address, addressable:employee)
   FactoryBot.create(:user_information, user: user, accountable: employee)
   p "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"

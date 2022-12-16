@@ -15,7 +15,7 @@
 class User < ApplicationRecord
   has_one :user_information
 
-  enum status: { active: 0, inactive: 1, pending: 2 }
+  enum status: { active: 0, inactive: 1, pending: 2 }, _default: 'active'
 
   validates :email, :password, :username, presence: true
   validates :email, :username, uniqueness: true

@@ -43,8 +43,10 @@ class EmployeesController < ApplicationController
       :education,
       :official_email,
       :work_status,
-      :department_id,
-      :manager_id
+      :manager_id,
+      :customer_id,
+      :salary_amount,
+      :department_id
     )
   end
 

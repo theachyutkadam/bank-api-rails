@@ -22,6 +22,7 @@ class Customer < ApplicationRecord
   belongs_to :account_type
 
   has_one :nominee
+  has_one :employee
   has_many :cards
   has_many :transactions
   has_many :transactions_details
