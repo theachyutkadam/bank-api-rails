@@ -59,7 +59,7 @@ end
   p "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
 end
 
-999.times do |i|
+1999.times do |i|
   # create customer
   user = FactoryBot.create(:user)
   account_type = AccountType.take
@@ -72,7 +72,7 @@ end
   puts "customer created #{i}"
 end
 
-1000.times do |i|
+10000.times do |i|
   # create customer transactions
   card = Card.take
   sender = card.customer.user_information
@@ -81,7 +81,7 @@ end
   puts "customer particular #{i}"
 end
 
-100.times do |i|
+10000.times do |i|
   # create employee salary transactions
   employee_user_information = Employee.take.user_information
 

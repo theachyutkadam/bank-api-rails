@@ -24,6 +24,6 @@
 #
 FactoryBot.define do
   factory :particular do
-    amount { Faker::Number.decimal }
+    amount { Faker::Number.decimal(l_digits: 3) }
   end
 end

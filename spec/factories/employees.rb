@@ -29,10 +29,11 @@
 #
 FactoryBot.define do
   factory :employee do
-    date_of_joining { Faker::Date.between(from: '2014-09-23', to: '2023-01-29') }
+    date_of_joining { Faker::Date.between(from: '1999-01-11', to: Date.today) }
     designation { 'cashier' }
     education { Faker::Educator.degree }
     official_email { Faker::Internet.email }
     work_status { 0 }
+    salary_amount { Faker::Number.decimal(l_digits: 5) }
   end
 end

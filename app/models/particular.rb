@@ -31,14 +31,19 @@ class Particular < ApplicationRecord
 
   validates :amount, presence: true
 
-  validate :validate_amount
+  validate :validate_amount, :check_card_status
 
   def validate_amount
     sender = self.sender.accountable
     if sender.class.name == "Employee"
-      errors.add(:amount, "Insuficiant balance") if sender.customer.current_balance < amount 
+      errors.add(:amount, "Insuficiant balance") if sender.customer.current_balance < amount
     else
-      errors.add(:amount, "Insuficiant balance") if sender.current_balance < amount 
+      errors.add(:amount, "Insuficiant balance") if sender.current_balance < amount
     end
+  end
+
+  def check_card_status
+    card_status = self.card.status.capitalize
+    errors.add(:card_id, "Your card is #{card_status}") if self.card.status != 0
   end
 end

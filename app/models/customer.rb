@@ -54,14 +54,4 @@ class Customer < ApplicationRecord
       account_number
     end
   end
-
-  # def create_user
-  #   random_value = SecureRandom.alphanumeric(5)
-  #   User.create(
-  #     username: (id.to_s + '_' + random_value),
-  #     email: "#{random_value}@sample.com",
-  #     password: '123456',
-  #     status: 2
-  #   )
-  # end
 end

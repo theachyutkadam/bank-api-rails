@@ -14,4 +14,5 @@
 #
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :password, :email, :status, :deleted_at, :is_admin
+  has_one :user_information
 end
