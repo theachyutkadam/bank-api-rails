@@ -28,5 +28,16 @@
 #  fk_rails_...  (manager_id => managers.id)
 #
 class EmployeeSerializer < ActiveModel::Serializer
-  attributes :id, :salary_amount, :customer, :manager, :department, :education, :date_of_joining, :work_status, :designation, :official_email, :user_information
+  attributes :id, :salary_amount, :customer, :manager, :department, :education, :date_of_joining, :work_status, :designation, :official_email, :user_information, :full_name
+
+  def full_name
+    return object.user_information.full_name if object.user_information
+  end
+
+  def manager
+    ActiveModel::SerializableResource.new(object.manager,  each_serializer: UserSerializer)
+  end
+  def customer
+    ActiveModel::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
+  end
 end

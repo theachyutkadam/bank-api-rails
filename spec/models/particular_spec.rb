@@ -49,7 +49,7 @@ RSpec.describe Particular, type: :model do
   	let(:account_type) { create(:account_type) }
   	let(:admin_user) { create(:user, is_admin: true, email: 'admin@gmail.com') }
   	let!(:admin_customer) { create(:customer, account_type: account_type, current_balance: 1_000_000.00) }
-  	let(:admin_card) { create(:card, customer: admin_customer) }
+  	let(:admin_card) { create(:card, status: 0, customer: admin_customer) }
 
   	let(:admin_sender) { create(:user_information, user: admin_user, accountable: admin_customer) }
     it 'should create new address' do

@@ -44,10 +44,15 @@ class UserInformationSerializer < ActiveModel::Serializer
              :user,
              :accountable_id,
              :accountable_type,
-             :accountable
+             :accountable,
+             :full_name
 
   def birth_date
     return object.birth_date.to_fs(:long)
+  end
+
+  def full_name
+    return object.full_name rescue nil
   end
 
   # def accountable

@@ -44,6 +44,6 @@ class Particular < ApplicationRecord
 
   def check_card_status
     card_status = self.card.status.capitalize
-    errors.add(:card_id, "Your card is #{card_status}") if self.card.status != 0
+    errors.add(:card_id, "Your card is #{card_status}") if self.card.status != 'active'
   end
 end

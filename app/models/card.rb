@@ -26,7 +26,7 @@ class Card < ApplicationRecord
   belongs_to :customer
   has_many :transactions
 
-  enum status: { active: 0, inactive: 1, blocked: 2, closed: 3 }, _default: 'inactive'
+  enum status: { active: 0, inactive: 1, blocked: 2, closed: 3 }
   enum title: { debit: 'debit', credit: 'credit' }, _default: 'debit'
 
   validates :csv, :expire_date, :number, :pin, :title, presence: true
@@ -41,6 +41,7 @@ class Card < ApplicationRecord
   before_validation :set_card_details, on: :create
 
   def set_card_details
+    self.status ||= 1
     self.csv ||= rand(100..999)
     self.pin ||= rand(1000..9999)
     self.number ||= generate_number

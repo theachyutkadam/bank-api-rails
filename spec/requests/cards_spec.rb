@@ -17,7 +17,7 @@ RSpec.describe 'Card', type: :request do
   describe 'POST #create' do
     let(:account_type) { create(:account_type) }
     let(:customer) { create(:customer, account_type: account_type) }
-    let!(:card) { build(:card, customer: customer) }
+    let!(:card) { build(:card, status: 0, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
         post '/cards', params: card.attributes
@@ -30,7 +30,7 @@ RSpec.describe 'Card', type: :request do
     before { get "/cards/#{card.id}" }
     let(:account_type ) { create(:account_type) }
     let(:customer ) { create(:customer, account_type: account_type) }
-    let(:card) { create(:card, customer: customer) }
+    let(:card) { create(:card, status: 0, customer: customer) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)

@@ -34,7 +34,7 @@ FactoryBot.define do
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
     contact { Faker::Base.numerify('##########') }
-    gender { 0 }
+    gender { rand(0..2) }
     birth_date { 18.years.ago }
     maritial_status { 0 }
     pan_card_number { Faker::Base.bothify('?????####?') }
