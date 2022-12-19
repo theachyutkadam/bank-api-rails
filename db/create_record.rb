@@ -1,3 +1,4 @@
+@counter = 0
 def create_admin_user
 	unless User.where(email: "admin@gmail.com").any?
 	  ['Saving', 'Salary','Current'].each do |title|
@@ -84,6 +85,7 @@ def employee_salary_transaction
     salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
     puts "Salary created #{i}"
   end
+  puts "^^^^^^^^Total User creation field = #{@counter}^^^^^^^^"
 end
 
 def create_user
@@ -94,6 +96,7 @@ def create_user
 
 	user.save if user.valid?
 	return User.last if user.save
+	@counter += 1
 	create_user
 
 	# if user.valid?

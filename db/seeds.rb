@@ -11,8 +11,9 @@ require 'factory_bot'
 require_relative './create_record'
 
 puts "Seeding..."
-
+start_time = Time.now
 create_admin_user
-
-puts "Seeding done."
+end_time = Time.now
+puts "Seeding done from #{start_time} to #{end_time}."
+puts "Total Time = #{end_time - start_time}"
 ApplicationRecord.record_count
