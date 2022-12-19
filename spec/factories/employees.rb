@@ -3,7 +3,7 @@
 # Table name: employees
 #
 #  id              :bigint           not null, primary key
-#  date_of_joining :datetime         not null
+#  date_of_joining :date             not null
 #  designation     :string           not null
 #  education       :string           not null
 #  official_email  :string

@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :salary do
-    amount { Faker::Number.decimal }
+    amount { rand(12000..50000) }
     status { 0 }
   end
 end

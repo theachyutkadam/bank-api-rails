@@ -3,7 +3,7 @@
 # Table name: employees
 #
 #  id              :bigint           not null, primary key
-#  date_of_joining :datetime         not null
+#  date_of_joining :date             not null
 #  designation     :string           not null
 #  education       :string           not null
 #  official_email  :string
@@ -30,6 +30,10 @@
 class EmployeeSerializer < ActiveModel::Serializer
   attributes :id, :salary_amount, :customer, :manager, :department, :education, :date_of_joining, :work_status, :designation, :official_email, :user_information, :full_name
 
+  def date_of_joining
+    return object.date_of_joining.to_fs(:long)
+  end
+
   def full_name
     return object.user_information.full_name if object.user_information
   end
@@ -37,6 +41,7 @@ class EmployeeSerializer < ActiveModel::Serializer
   def manager
     ActiveModel::SerializableResource.new(object.manager,  each_serializer: UserSerializer)
   end
+
   def customer
     ActiveModel::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
   end
