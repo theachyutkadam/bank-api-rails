@@ -31,7 +31,7 @@ class Particular < ApplicationRecord
 
   validates :amount, presence: true
 
-  validate :validate_amount, :check_card_status
+  validate :validate_amount, :check_card_status, :check_limit
 
   def validate_amount
     sender = self.sender.accountable
@@ -45,5 +45,9 @@ class Particular < ApplicationRecord
   def check_card_status
     card_status = self.card.status.capitalize
     errors.add(:card_id, "Your card is #{card_status}") if self.card.status != 'active'
+  end
+
+  def check_limit
+    errors.add(:amount, "Maximum transaction limit is: #{Customer::AMOUNT_LIMIT}") if amount > Customer::AMOUNT_LIMIT
   end
 end
