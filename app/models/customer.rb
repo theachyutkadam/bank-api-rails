@@ -22,6 +22,7 @@ class Customer < ApplicationRecord
   belongs_to :account_type
 
   has_one :nominee
+  has_one :employee
   has_many :cards
   has_many :transactions
   has_many :transactions_details
@@ -53,14 +54,4 @@ class Customer < ApplicationRecord
       account_number
     end
   end
-
-  # def create_user
-  #   random_value = SecureRandom.alphanumeric(5)
-  #   User.create(
-  #     username: (id.to_s + '_' + random_value),
-  #     email: "#{random_value}@sample.com",
-  #     password: '123456',
-  #     status: 2
-  #   )
-  # end
 end

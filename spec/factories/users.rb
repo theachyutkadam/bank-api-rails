@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  deleted_at :datetime
 #  email      :string           not null
-#  is_admin   :boolean          not null
+#  is_admin   :boolean          default(FALSE), not null
 #  password   :string           not null
 #  status     :integer          not null
 #  username   :string           not null
@@ -14,7 +14,7 @@
 #
 FactoryBot.define do
   factory :user do
-    username { Faker::IDNumber.brazilian_id }
+    username { Faker::Alphanumeric.alphanumeric(number: 10)  }
     email { Faker::Internet.email }
     password { '123456' }
     is_admin { false }

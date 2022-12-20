@@ -15,7 +15,7 @@ class AccountTypesController < ApplicationController
   end
 
   def update
-    if @account_type.update_attributes(account_type_params)
+    if @account_type.update(account_type_params)
       render json: @account_type, status: :ok
     else
       render json: @account_type.errors, status: :unprocessable_entity

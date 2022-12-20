@@ -44,9 +44,26 @@ class UserInformationSerializer < ActiveModel::Serializer
              :user,
              :accountable_id,
              :accountable_type,
-             :accountable
+             :accountable,
+             :full_name
 
   def birth_date
     return object.birth_date.to_fs(:long)
   end
+
+  def full_name
+    return object.full_name rescue nil
+  end
+
+  # def accountable
+  #   if object.accountable.class.name == "Employee"
+  #     ActiveModel::SerializableResource.new(object.accountable, each_serializer: EmployeeSerializer)
+  #   else
+  #     ActiveModel::SerializableResource.new(object.accountable, each_serializer: CustomerSerializer)
+  #   end
+  # end
+
+  # def user
+  #   ActiveModel::SerializableResource.new(object.user, each_serializer: UserSerializer)
+  # end
 end

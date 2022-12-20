@@ -15,8 +15,8 @@ class AddressesController < ApplicationController
   end
 
   def update
-    if @address.update_attributes(address_params)
-      render json: @address, status: :updated
+    if @address.update(address_params)
+      render json: @address
     else
       render json: @address.errors, status: :unprocessable_entity
     end

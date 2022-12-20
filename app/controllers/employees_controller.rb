@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @employees = Employee.includes(:department, :manager).all
+    @employees = Employee.includes(:department, :manager, :customer).all.limit(10)
     render json: @employees
   end
 
@@ -15,8 +15,8 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    if @employee.update_attributes(employee_params)
-      render json: @employee, status: :updated
+    if @employee.update(employee_params)
+      render json: @employee
     else
       render json: @employee.errors, status: :unprocessable_entity
     end
@@ -43,8 +43,10 @@ class EmployeesController < ApplicationController
       :education,
       :official_email,
       :work_status,
-      :department_id,
-      :manager_id
+      :manager_id,
+      :customer_id,
+      :salary_amount,
+      :department_id
     )
   end
 
