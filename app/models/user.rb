@@ -8,7 +8,7 @@
 #  is_admin   :boolean          default(FALSE), not null
 #  password   :string           not null
 #  status     :integer          not null
-#  token      :string           not null
+#  token      :string
 #  username   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -19,11 +19,21 @@ class User < ApplicationRecord
   enum status: { active: 0, inactive: 1, pending: 2 }, _default: 'active'
 
   validates :email, :password, :username, presence: true
-  validates :email, :username, uniqueness: true
+  validates :email, :username, :token, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
 
+  after_create :set_token
+
   def generate_token
-    Faker::Internet.device_token
+    token = Faker::Internet.device_token
+    if User.where(token: token).any?
+      generate_token
+    end
+    token
+  end
+
+  def set_token
+    self.update(token: generate_token)
   end
 end

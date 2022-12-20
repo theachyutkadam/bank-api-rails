@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(email: params[:email])
     if @user.password == params[:password]
+      return render json: { message: "You already logged in", auth_token: @user.token } if @user.token.present?
       token = @user.generate_token
       @user.update(token: token)
       render json: { auth_token: token }
@@ -63,6 +64,7 @@ class UsersController < ApplicationController
       :password,
       :email,
       :status,
+      :token,
       :is_deleted,
       :is_admin
     )

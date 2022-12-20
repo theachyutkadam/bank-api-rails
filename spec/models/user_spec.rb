@@ -8,7 +8,7 @@
 #  is_admin   :boolean          default(FALSE), not null
 #  password   :string           not null
 #  status     :integer          not null
-#  token      :string           not null
+#  token      :string
 #  username   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
