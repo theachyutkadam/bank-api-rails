@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Customer', type: :request do
   describe 'GET #index' do
     let(:account_type) { create(:account_type) }
+    let(:user) { create(:user) }
     let!(:customers) { FactoryBot.create_list(:customer, 5, account_type: account_type) }
-    before { get '/customers' }
+    before { get '/customers', headers: {:Authorization => user.token} }
     it 'returns all customers' do
       expect(JSON.parse(response.body).size).to eq(5)
     end
@@ -15,19 +16,22 @@ RSpec.describe 'Customer', type: :request do
 
   describe 'POST #create' do
     let(:account_type ) { create(:account_type) }
+    let(:user ) { create(:user) }
     let(:customer ) { build(:customer, account_type: account_type) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
-        post '/customers', params: customer.attributes
+        post '/customers', params: customer.attributes, headers: {:Authorization => user.token}
         expect(response).to have_http_status(201)
       end
     end
   end
 
   describe 'GET #show' do
-    before { get "/customers/#{customer.id}" }
+    before { get "/customers/#{customer.id}", headers: {:Authorization => user.token} }
+    let(:user) { create(:user) }
     let(:account_type ) { create(:account_type) }
     let(:customer ) { build(:customer, account_type: account_type) }
+
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end

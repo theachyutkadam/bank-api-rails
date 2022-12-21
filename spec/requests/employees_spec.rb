@@ -10,7 +10,7 @@ RSpec.describe 'Employee', type: :request do
     let!(:employee) { create(:employee, department: department, manager: manager, customer: customer) }
     let!(:user_information) { create(:user_information, user: user, accountable: employee) }
 
-    before { get '/employees' }
+    before { get '/employees', headers: {:Authorization => user.token} }
     it 'returns all employees' do
       expect(JSON.parse(response.body).size).to eq(1)
     end
@@ -33,14 +33,14 @@ RSpec.describe 'Employee', type: :request do
     let(:employee ) { build(:employee, department: department, manager: manager, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
-        post '/employees', params: employee.attributes
+        post '/employees', params: employee.attributes, headers: {:Authorization => user.token}
         expect(response).to have_http_status(201)
       end
     end
   end
 
   describe 'GET #show' do
-    before { get "/employees/#{employee.id}" }
+    before { get "/employees/#{employee.id}", headers: {:Authorization => user.token} }
     let!(:user_information) { create(:user_information, user: user, accountable: employee) }
     after do
       user_information 

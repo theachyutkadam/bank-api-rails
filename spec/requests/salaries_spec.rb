@@ -32,7 +32,7 @@ RSpec.describe 'Salary', type: :request do
     # end
     let!(:salaries) { FactoryBot.create_list(:salary, 2, particular: particular, employee: employee) }
 
-    before { get '/salaries' }
+    before { get '/salaries', headers: {:Authorization => manager_user.token} }
     it 'returns all salaries' do
       expect(JSON.parse(response.body).size).to eq(2)
     end
@@ -76,14 +76,14 @@ RSpec.describe 'Salary', type: :request do
 
     context 'when request attributes are valid' do
       it 'returns status code 201' do
-        post '/salaries', params: salary.attributes
+        post '/salaries', params: salary.attributes, headers: {:Authorization => manager_user.token}
         expect(response).to have_http_status(201)
       end
     end
   end
 
   describe 'GET #show' do
-    before { get "/salaries/#{salary.id}" }
+    before { get "/salaries/#{salary.id}", headers: {:Authorization => manager_user.token} }
     # create create manager
     let(:manager_user) { create(:user) }
     let(:department) { create(:department, name: "Finance") }
