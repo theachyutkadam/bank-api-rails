@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
 	before_action :authenticate_user!
 
 	def current_user
-	  @@current_user ||= User.find_by(token: request.authorization)
+	  @@current_user = User.find_by(token: request.authorization)
 	end		
 
 	private

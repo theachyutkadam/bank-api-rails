@@ -44,13 +44,14 @@ class UsersController < ApplicationController
       @user.update(token: token)
       render json: { auth_token: token }
     else
-      render json: { errors: user.message }, status: :unauthorized
+      render json: { errors: "Invalid credentials" }, status: :unauthorized
     end
   end
 
   def logout
-    if @@current_user.update(token: "")
-      render json: { auth_token: "Logout successfully" }
+    if @@current_user.update(token: nil)
+      @@current_user = ""
+      render json: { auth_token: "Logout successfully!!!" }
     else
       render json: { errors: "Something went wrong" }, status: :unauthorized
     end
@@ -64,7 +65,6 @@ class UsersController < ApplicationController
       :password,
       :email,
       :status,
-      :token,
       :is_deleted,
       :is_admin
     )
