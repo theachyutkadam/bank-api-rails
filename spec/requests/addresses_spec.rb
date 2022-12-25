@@ -2,21 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'Addresses', type: :request do
   let(:account_type ) { create(:account_type) }
-  let!(:user ) { create(:user) }
-  let(:customer ) { build(:customer, account_type: account_type) }
-  let!(:addresses) { FactoryBot.create_list(:address, 5, addressable: customer) }
-  before { get '/addresses', headers: {:Authorization => user.token} }
-  it 'returns all addresses' do
-    expect(JSON.parse(response.body).size).to eq(5)
-  end
-  it 'returns status code 200' do
-    expect(response).to have_http_status(:success)
+  let(:user ) { create(:user) }
+  let(:customer ) { create(:customer, account_type: account_type) }
+  
+  describe 'GET #index' do
+    let!(:addresses) { FactoryBot.create_list(:address, 5, addressable: customer) }
+    before { get '/addresses', headers: {:Authorization => user.token} }
+    it 'returns all addresses' do
+      expect(JSON.parse(response.body).size).to eq(5)
+    end
+    it 'returns status code 200' do
+      expect(response).to have_http_status(:success)
+    end
   end
 
   describe 'POST #create' do
-    let(:account_type ) { create(:account_type) }
-    let!(:user ) { create(:user) }
-    let(:customer ) { build(:customer, account_type: account_type) }
     let(:address) { build(:address, addressable: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -28,9 +28,6 @@ RSpec.describe 'Addresses', type: :request do
 
   describe 'GET #show' do
     before { get "/addresses/#{address.id}", headers: {:Authorization => user.token} }
-    let(:account_type ) { create(:account_type) }
-    let!(:user ) { create(:user) }
-    let(:customer ) { build(:customer, account_type: account_type) }
     let(:address) { create(:address, addressable: customer) }
 
     it 'returns http success' do

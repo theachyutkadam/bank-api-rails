@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :cards, except: %i[new edit]
   resources :nominees, except: %i[new edit]
   resources :addresses, except: %i[new edit]
-  resources :particular_details, except: %i[new edit]
   resources :particulars, except: %i[new edit]
   resources :departments, except: %i[new edit]
   resources :managers, except: %i[new edit]

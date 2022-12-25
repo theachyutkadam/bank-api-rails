@@ -26,10 +26,10 @@ class ParticularSerializer < ActiveModel::Serializer
   attributes :id, :card, :sender, :receiver, :amount
 
   def sender
-    ActiveModel::SerializableResource.new(object.sender,  each_serializer: UserInformationSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.sender,  each_serializer: UserInformationSerializer)
   end
 
   def receiver
-    ActiveModel::SerializableResource.new(object.receiver,  each_serializer: UserInformationSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.receiver,  each_serializer: UserInformationSerializer)
   end
 end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Department', type: :request do
+  let(:user ) { create(:user) } 
   describe 'GET #index' do
     let!(:departments) { FactoryBot.create_list(:department, 5) }
     before { get '/departments', headers: {:Authorization => user.token} }
-    let!(:user ) { create(:user) } 
     it 'returns all departments' do
       expect(JSON.parse(response.body).size).to eq(5)
     end
@@ -14,7 +14,6 @@ RSpec.describe 'Department', type: :request do
   end
 
   describe 'POST #create' do
-    let!(:user ) { create(:user) }
     let(:department) { build(:department) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -26,7 +25,6 @@ RSpec.describe 'Department', type: :request do
 
   describe 'GET #show' do
     before { get "/departments/#{department.id}", headers: {:Authorization => user.token} }
-    let!(:user ) { create(:user) }
     let(:department) { create(:department) }
 
     it 'returns http success' do

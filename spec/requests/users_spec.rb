@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'User', type: :request do
-  # before(:each) do
-  #   { headers: {Authorization: User.last.token} }
-  # end
   describe 'GET #index' do
     let!(:users) { FactoryBot.create_list(:user, 5) }
     before { get '/users', headers: {:Authorization => User.last.token} }

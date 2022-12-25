@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Manager', type: :request do
+  let(:department ) { create(:department) }
+  let(:user ) { create(:user) }
+
   describe 'GET #index' do
-    let!(:department ) { create(:department) }
-    let!(:user ) { create(:user) }
     let!(:managers) { FactoryBot.create_list(:manager, 5, department: department, user:user) }
     before { get '/managers', headers: {:Authorization => user.token} }
     it 'returns all managers' do
@@ -15,8 +16,6 @@ RSpec.describe 'Manager', type: :request do
   end
 
   describe 'POST #create' do
-    let!(:department ) { create(:department) }
-    let!(:user ) { create(:user) }
     let(:manager ) { build(:manager, department: department, user:user) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -28,8 +27,6 @@ RSpec.describe 'Manager', type: :request do
 
   describe 'GET #show' do
     before { get "/managers/#{manager.id}", headers: {:Authorization => user.token} }
-    let!(:department ) { create(:department) }
-    let!(:user ) { create(:user) }
     let!(:manager ) { build(:manager, department: department, user:user) }
 
     it 'returns http success' do

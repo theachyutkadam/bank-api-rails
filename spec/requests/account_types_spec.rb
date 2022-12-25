@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'AccountType', type: :request do
+  let(:user ) { create(:user) }
   describe 'GET #index' do
-    let!(:user ) { create(:user) }
     let!(:account_types) { FactoryBot.create_list(:account_type, 5) }
     before { get '/account_types', headers: {:Authorization => user.token} }
     it 'returns all account_types' do
@@ -14,7 +14,6 @@ RSpec.describe 'AccountType', type: :request do
   end
 
   describe 'POST #create' do
-    let!(:user ) { create(:user) }
     let(:account_type) { build(:account_type) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
@@ -25,7 +24,6 @@ RSpec.describe 'AccountType', type: :request do
   end
 
   describe 'GET #show' do
-    let!(:user ) { create(:user) }
     before { get "/account_types/#{account_type.id}", headers: {:Authorization => user.token} }
     let(:account_type) { create(:account_type, title: "Saving") }
 

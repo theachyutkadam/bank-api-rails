@@ -39,10 +39,10 @@ class EmployeeSerializer < ActiveModel::Serializer
   end
 
   def manager
-    ActiveModel::SerializableResource.new(object.manager,  each_serializer: UserSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.manager,  each_serializer: UserSerializer)
   end
 
   def customer
-    ActiveModel::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
   end
 end
