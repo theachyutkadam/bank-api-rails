@@ -23,11 +23,6 @@ RSpec.describe 'Employee', type: :request do
     let(:employee ) { build(:employee, department: department, manager: manager, customer: customer) }
     context 'when request attributes are valid' do
       it 'returns status code 201' do
-        p "+++++++++"
-        p  employee
-        p "+++++++++"
-        p  employee.errors
-        p "+++++++++"
         post '/employees', params: employee.attributes, headers: {:Authorization => user.token}
         expect(response).to have_http_status(201)
       end

@@ -37,7 +37,7 @@ class Employee < ApplicationRecord
 
   has_many :salaries
 
-  enum work_status: { available: 0, on_leave: 1, resignate: 2}
+  enum work_status: { available: 'available', on_leave: 'on_leave', resignate: 'resignate'}
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
 
