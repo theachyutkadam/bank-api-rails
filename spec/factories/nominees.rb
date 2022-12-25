@@ -27,7 +27,7 @@ FactoryBot.define do
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
     contact { Faker::Number.number(digits: 10) }
-    gender { 0 }
-    relation { 1 }
+    gender { Nominee.genders.keys.sample }
+    relation { Nominee.relations.keys.sample }
   end
 end

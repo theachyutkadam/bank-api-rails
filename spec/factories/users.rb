@@ -20,6 +20,6 @@ FactoryBot.define do
     password { '123456' }
     token { Faker::Internet.device_token }
     is_admin { false }
-    status { 0 }
+    status {  User.statuses.keys.sample }
   end
 end
