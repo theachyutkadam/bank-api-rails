@@ -32,10 +32,10 @@ class Employee < ApplicationRecord
   belongs_to :customer
   belongs_to :department
 
-  has_one :address, as: :addressable
-  has_one :user_information, as: :accountable
+  has_one :address, as: :addressable, dependent: :destroy
+  has_one :user_information, as: :accountable, dependent: :destroy
 
-  has_many :salaries
+  has_many :salaries, dependent: :destroy
 
   enum work_status: { available: 'available', on_leave: 'on_leave', resignate: 'resignate' }
   validates :date_of_joining, :designation, presence: true

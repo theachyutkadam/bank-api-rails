@@ -25,6 +25,9 @@ module BankApiRails
     config.api_only = true
 
     # print the log on console
-    # config.logger = Logger.new(STDOUT)
+    config.logger = Logger.new(STDOUT)
+
+    # Sidekiq job for background job.
+    config.active_job.queue_adapter = :sidekiq
   end
 end

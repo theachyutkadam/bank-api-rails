@@ -9,8 +9,8 @@
 #  updated_at     :datetime         not null
 #
 class Department < ApplicationRecord
-  has_many :employees
-  has_one :manager
+  has_many :employees, dependent: :destroy
+  has_one :manager, dependent: :destroy
 
   validates :name, :employee_count, presence: true
 end

@@ -24,7 +24,7 @@
 #
 class Card < ApplicationRecord
   belongs_to :customer
-  has_many :transactions
+  has_many :transactions, dependent: :destroy
 
   enum status: { active: 0, inactive: 1, blocked: 2, closed: 3 }
   enum title: { debit: 'debit', credit: 'credit' }, _default: 'debit'

@@ -23,9 +23,8 @@ class Customer < ApplicationRecord
 
   has_one :nominee
   has_one :employee
-  has_many :cards
-  has_many :transactions
-  has_many :transactions_details
+  has_many :cards, dependent: :destroy
+  has_many :particular, dependent: :destroy
 
   has_one :address, as: :addressable
   has_one :user_information, as: :accountable
