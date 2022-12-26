@@ -55,7 +55,7 @@ jobs:
 
       - run:
           name: Setup DB
-          command: bundle exec rails db:drop db:create db:migrate
+          command: bundle exec rails db:drop db:create db:schema:load --trace
           # command: bundle exec rails db:drop db:create db:schema:load --trace
       - run:
           name: Run rspec
