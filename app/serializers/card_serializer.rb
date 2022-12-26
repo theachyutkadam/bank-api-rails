@@ -30,6 +30,6 @@ class CardSerializer < ActiveModel::Serializer
   end
 
   def customer
-    ActiveModel::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
   end
 end

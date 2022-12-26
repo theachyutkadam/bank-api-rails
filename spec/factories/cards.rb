@@ -24,8 +24,8 @@
 #
 FactoryBot.define do
   factory :card do
-    status { 1 }
-    title { 'debit' }
+    status { Card.statuses.keys.sample }
+    title { Card.titles.keys.sample }
     is_deleted { false }
   end
 end

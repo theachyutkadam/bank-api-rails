@@ -90,22 +90,12 @@ end
 
 def create_user
 	user = FactoryBot.build(:user)
-	p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each {|error| p error}}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" unless user.valid?
-	p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each {|error| p error}}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" unless user.valid?
-	p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each {|error| p error}}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" unless user.valid?
 
 	user.save if user.valid?
-	return User.last if user.save
+	return User.order(created_at: :asc).last if user.save
+	p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each {|error| p error}}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	@counter += 1
 	create_user
-
-	# if user.valid?
-  # 	user.save
-  # 	return User.last
-  # else 
-  # 	create_user
-  # end
-	# user.valid? ? user.save : create_user
 end
 
 def create_employee_information(user, department, manager)

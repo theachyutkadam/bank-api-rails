@@ -19,7 +19,7 @@ Added a command for Fastly create a controller and models.
 *Create Models using following commands*
 
 - rails g model address building street flat_number pin_code description:text addressable_id:integer addressable_type
-- rails g model user username password email status:integer deleted_at:datetime is_admin:boolean
+- rails g model user username password email status:integer deleted_at:datetime is_admin:boolean token
 - rails g model account_type title loan_intrest_rate:float saving_intrest_rate:float
 - rails g model department name employee_count:integer
 - rails g model customer account_type:references account_number:bigint amount_limit:integer current_balance:float

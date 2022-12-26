@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :manager do
-    designation { Manager.designations.values[rand(4)] }
-    status { 0 }
+    designation { Manager.designations.keys.sample }
+    status { Manager.statuses.keys.sample }
   end
 end

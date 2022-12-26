@@ -21,15 +21,8 @@
 class CustomerSerializer < ActiveModel::Serializer
   attributes :id, :account_type, :account_number, :amount_limit, :current_balance, :user_information
 
-  def full_name
-    if object.employee
-      p "++++++++++++++"
-      p(object.user_information)
-      p "++++++++++++++"
-      return object.employee.user_information.full_name 
-    else
-      p "@@@@@@@@@@@@@@@@"
-      return object.user_information.full_name
-    end
+  def user_information
+    return object.employee.user_information if object.employee 
+    return object.user_information
   end
 end

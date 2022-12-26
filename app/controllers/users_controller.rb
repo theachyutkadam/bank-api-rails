@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[login create]
   before_action :set_user, only: %i[destroy show update]
+
   def index
     @users = User.all
     render json: @users
@@ -31,6 +33,27 @@ class UsersController < ApplicationController
       head :no_content
     else
       render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def login
+    @user = User.find_by(email: params[:email])
+    if @user.password == params[:password]
+      return render json: { message: "You already logged in", auth_token: @user.token } if @user.token.present?
+      token = @user.generate_token
+      @user.update(token: token)
+      render json: { auth_token: token }
+    else
+      render json: { errors: "Invalid credentials" }, status: :unauthorized
+    end
+  end
+
+  def logout
+    if @@current_user.update(token: nil)
+      @@current_user = ""
+      render json: { auth_token: "Logout successfully!!!" }
+    else
+      render json: { errors: "Something went wrong" }, status: :unauthorized
     end
   end
 

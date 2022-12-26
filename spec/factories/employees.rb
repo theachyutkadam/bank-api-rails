@@ -33,7 +33,7 @@ FactoryBot.define do
     designation { 'cashier' }
     education { Faker::Educator.degree }
     official_email { Faker::Internet.email }
-    work_status { 0 }
+    work_status { Employee.work_statuses.keys.sample }
     salary_amount { Faker::Number.decimal(l_digits: 5) }
   end
 end

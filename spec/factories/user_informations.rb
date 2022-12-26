@@ -34,9 +34,9 @@ FactoryBot.define do
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
     contact { Faker::Base.numerify('##########') }
-    gender { rand(0..2) }
     birth_date { 18.years.ago }
-    maritial_status { 0 }
+    gender { UserInformation.genders.keys.sample }
+    maritial_status { UserInformation.maritial_statuses.keys.sample  }
     pan_card_number { Faker::Base.bothify('?????####?') }
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
