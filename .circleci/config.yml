@@ -52,7 +52,7 @@ jobs:
 
       - run:
           name: Restart Postgres
-          command: sudo systemctl restart postgresql
+          command: systemctl restart postgresql
 
       - run:
           name: Setup DB
