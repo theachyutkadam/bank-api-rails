@@ -14,11 +14,12 @@ executors:
           DB_HOST: 127.0.0.1
           PG_HOST: 127.0.0.1
           PGUSER: hixonrails
-      - image: circleci/postgres:12.0
-        environment:
-          POSTGRES_DB: bank_api_rails_test
-          POSTGRES_USER: hixonrails
-          PORTS: 5430
+        postgres:
+          image: postgres:12.0
+          environment:
+            POSTGRES_DB: bank_api_rails_test
+            POSTGRES_USER: hixonrails
+            PORTS: 5430
 
 
 commands:
@@ -49,14 +50,13 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
 
-      # - run:
-      #     name: Restart Postgres
-      #     command: sudo systemctl status postgresql
+      - run:
+          name: Restart Postgres
+          command: sudo systemctl restart postgresql
 
       - run:
           name: Setup DB
-          command: bundle exec rails db:drop db:create db:migrate
-          # command: bundle exec rails db:drop db:create db:schema:load --trace
+          command: bundle exec rails db:drop db:create db:schema:load --trace
       - run:
           name: Run rspec
           command: bundle exec rspec spec
@@ -71,6 +71,10 @@ jobs:
           root: ~/
           paths:
             - ./bank_api_rails
+
+      - run:
+          name: Restart Postgres
+          command: sudo systemctl start postgresql
 
 workflows:
   version: 2
