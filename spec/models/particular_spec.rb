@@ -26,34 +26,35 @@ require 'rails_helper'
 
 RSpec.describe Particular, type: :model do
   context '#create' do
-  	let(:manager_user) { create(:user) }
-  	let(:department) { create(:department, name: "Finance") }
-  	let(:account_type ) { create(:account_type) }
-  	let(:customer) { create(:customer, account_type: account_type) }
+    let(:manager_user) { create(:user) }
+    let(:department) { create(:department, name: 'Finance') }
+    let(:account_type) { create(:account_type) }
+    let(:customer) { create(:customer, account_type: account_type) }
 
-  	let(:manager) { create(:manager, user: manager_user, department: department) }
-  	let(:manager_employee) { create(:employee, manager: manager, department: department, customer: customer) }
-  	let!(:manager_user_information) { create(:user_information, user: manager_user, accountable: manager_employee) }
+    let(:manager) { create(:manager, user: manager_user, department: department) }
+    let(:manager_employee) { create(:employee, manager: manager, department: department, customer: customer) }
+    let!(:manager_user_information) { create(:user_information, user: manager_user, accountable: manager_employee) }
 
-  	# create employee
-  	let(:employee_user) { create(:user) }
-  	let(:department) { create(:department, name: "HR") }
-  	let(:account_type ) { create(:account_type) }
-  	let(:customer) { create(:customer, account_type: account_type) }
+    # create employee
+    let(:employee_user) { create(:user) }
+    let(:department) { create(:department, name: 'HR') }
+    let(:account_type) { create(:account_type) }
+    let(:customer) { create(:customer, account_type: account_type) }
 
-  	let(:manager) { create(:manager, user: employee_user, department: department) }
-  	let(:employee) { create(:employee, manager: manager, department: department, customer: customer) }
-  	let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
+    let(:manager) { create(:manager, user: employee_user, department: department) }
+    let(:employee) { create(:employee, manager: manager, department: department, customer: customer) }
+    let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
 
-  	# create admin customer
-  	let(:account_type) { create(:account_type) }
-  	let(:admin_user) { create(:user, is_admin: true, email: 'admin@gmail.com') }
-  	let!(:admin_customer) { create(:customer, account_type: account_type, current_balance: 1_000_000.00) }
-  	let(:admin_card) { create(:card, status: 0, customer: admin_customer) }
+    # create admin customer
+    let(:account_type) { create(:account_type) }
+    let(:admin_user) { create(:user, is_admin: true, email: 'admin@gmail.com') }
+    let!(:admin_customer) { create(:customer, account_type: account_type, current_balance: 1_000_000.00) }
+    let(:admin_card) { create(:card, status: 0, customer: admin_customer) }
 
-  	let(:admin_sender) { create(:user_information, user: admin_user, accountable: admin_customer) }
+    let(:admin_sender) { create(:user_information, user: admin_user, accountable: admin_customer) }
     it 'should create new address' do
-      FactoryBot.create_list(:particular, 5, card: admin_card, sender: admin_sender, receiver: employee_user_information)
+      FactoryBot.create_list(:particular, 5, card: admin_card, sender: admin_sender,
+                                             receiver: employee_user_information)
       expect(Particular.count).to eq(5)
     end
   end

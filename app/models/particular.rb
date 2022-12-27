@@ -35,16 +35,16 @@ class Particular < ApplicationRecord
 
   def validate_amount
     sender = self.sender.accountable
-    if sender.class.name == "Employee"
-      errors.add(:amount, "Insuficiant balance") if sender.customer.current_balance < amount
-    else
-      errors.add(:amount, "Insuficiant balance") if sender.current_balance < amount
+    if sender.instance_of?(::Employee)
+      errors.add(:amount, 'Insuficiant balance') if sender.customer.current_balance < amount
+    elsif sender.current_balance < amount
+      errors.add(:amount, 'Insuficiant balance')
     end
   end
 
   def check_card_status
-    card_status = self.card.status.capitalize
-    errors.add(:card_id, "Your card is #{card_status}") if self.card.status != 'active'
+    card_status = card.status.capitalize
+    errors.add(:card_id, "Your card is #{card_status}") if card.status != 'active'
   end
 
   def check_limit

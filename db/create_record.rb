@@ -1,28 +1,28 @@
 @counter = 0
 def create_admin_user
-	unless User.where(email: "admin@gmail.com").any?
-	  ['Saving', 'Salary','Current'].each do |title|
-	    AccountType.create(title: title)
-	  end
+  unless User.where(email: 'admin@gmail.com').any?
+    %w[Saving Salary Current].each do |title|
+      AccountType.create(title: title)
+    end
 
-	  Department.create([
-	    { name: "HR" },
-	    { name: "Finance" },
-	    { name: "Loan" },
-	    { name: "Insurance" },
-	    { name: "Marketing" }
-	  ])
+    Department.create([
+                        { name: 'HR' },
+                        { name: 'Finance' },
+                        { name: 'Loan' },
+                        { name: 'Insurance' },
+                        { name: 'Marketing' }
+                      ])
 
-	  admin_user = FactoryBot.create(:user, is_admin: true, username: "admin", email: "admin@gmail.com")
-	  account_type = AccountType.where(title: "Current").first
-	  admin_customer = FactoryBot.create(:customer, account_type: account_type, current_balance: 10000000.00)
-	  admin_nominee = FactoryBot.create(:nominee, customer:admin_customer)
+    admin_user = FactoryBot.create(:user, is_admin: true, username: 'admin', email: 'admin@gmail.com')
+    account_type = AccountType.where(title: 'Current').first
+    admin_customer = FactoryBot.create(:customer, account_type: account_type, current_balance: 10_000_000.00)
+    admin_nominee = FactoryBot.create(:nominee, customer: admin_customer)
 
-	  create_address(admin_customer)
-	  create_address(admin_nominee)
-	  create_user_information(admin_user, admin_customer, admin_customer)
-	end
-	create_manager #create manager
+    create_address(admin_customer)
+    create_address(admin_nominee)
+    create_user_information(admin_user, admin_customer, admin_customer)
+  end
+  create_manager # create manager
 end
 
 def create_manager
@@ -34,7 +34,7 @@ def create_manager
     create_employee_information(user, department, manager)
     p "manager created #{i}"
   end
-  create_employee #create employees
+  create_employee # create employees
 end
 
 def create_employee
@@ -46,7 +46,7 @@ def create_employee
     create_employee_information(user, department, manager)
     p "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
   end
-  create_customer #create customers
+  create_customer # create customers
 end
 
 def create_customer
@@ -55,33 +55,34 @@ def create_customer
     account_type = AccountType.take
     customer = FactoryBot.create(:customer, account_type: account_type)
 
-    nominee = FactoryBot.create(:nominee, customer:customer)
+    nominee = FactoryBot.create(:nominee, customer: customer)
     customer_address = create_address(customer)
     nominee_address = create_address(nominee)
     create_user_information(user, customer, customer)
     puts "customer created #{i} customer card: #{customer.cards.first.status}"
   end
-  customer_transactions #create customer transactions
+  customer_transactions # create customer transactions
 end
 
 def customer_transactions
-  15000.times do |i|
+  15_000.times do |i|
     check_amount
     card = Card.take
     sender = card.customer.user_information
     receiver = UserInformation.take
-    particular = FactoryBot.create(:particular, card: card, sender:sender, receiver:receiver)
+    particular = FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
     puts "customer particular #{i}"
   end
-  employee_salary_transaction #create employee salary transactions
+  employee_salary_transaction # create employee salary transactions
 end
 
 def employee_salary_transaction
-  10000.times do |i|
+  10_000.times do |i|
     check_amount
     employee_user_information = Employee.take.user_information
 
-    particular = FactoryBot.create(:particular, card: Card.first, sender: admin_user_information, receiver: employee_user_information)
+    particular = FactoryBot.create(:particular, card: Card.first, sender: admin_user_information,
+                                                receiver: employee_user_information)
     salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
     puts "Salary created #{i}"
   end
@@ -89,38 +90,39 @@ def employee_salary_transaction
 end
 
 def create_user
-	user = FactoryBot.build(:user)
+  user = FactoryBot.build(:user)
 
-	user.save if user.valid?
-	return User.order(created_at: :asc).last if user.save
-	p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each {|error| p error}}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-	@counter += 1
-	create_user
+  user.save if user.valid?
+  return User.order(created_at: :asc).last if user.save
+
+  p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each { |error| p error }}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  @counter += 1
+  create_user
 end
 
 def create_employee_information(user, department, manager)
-	account_type = AccountType.where(title: "Salary").first
-	customer = FactoryBot.create(:customer, account_type: account_type)
-	employee = FactoryBot.create(:employee, manager: manager, department:department, customer: customer)
+  account_type = AccountType.where(title: 'Salary').first
+  customer = FactoryBot.create(:customer, account_type: account_type)
+  employee = FactoryBot.create(:employee, manager: manager, department: department, customer: customer)
 
-	create_address(employee)
-	create_user_information(user, employee, customer)
+  create_address(employee)
+  create_user_information(user, employee, customer)
 end
 
 def create_user_information(user, accountable, customer)
-	FactoryBot.create(:user_information, user: user, accountable: accountable)
-	FactoryBot.create(:card, customer: customer, status: 'active')
+  FactoryBot.create(:user_information, user: user, accountable: accountable)
+  FactoryBot.create(:card, customer: customer, status: 'active')
 end
 
 def create_address(addressable)
-	FactoryBot.create(:address, addressable:addressable)
+  FactoryBot.create(:address, addressable: addressable)
 end
 
 def check_amount
-	admin_customer = admin_user_information.accountable
-	admin_customer.udpate(current_balance: 10000000) if admin_customer.current_balance <= 100000
+  admin_customer = admin_user_information.accountable
+  admin_customer.udpate(current_balance: 10_000_000) if admin_customer.current_balance <= 100_000
 end
 
 def admin_user_information
-	User.find_by(email: "admin@gmail.com").user_information
+  User.find_by(email: 'admin@gmail.com').user_information
 end

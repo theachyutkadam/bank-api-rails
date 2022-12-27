@@ -10,10 +10,10 @@ require 'factory_bot'
 
 require_relative './create_record'
 
-puts "Seeding..."
+puts 'Seeding...'
 start_time = Time.now
 
-create_admin_user #create data from another file.
+create_admin_user # create data from another file.
 
 end_time = Time.now
 puts "Seeding done from #{start_time} to #{end_time}."

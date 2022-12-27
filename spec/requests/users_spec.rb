@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User', type: :request do
   describe 'GET #index' do
     let!(:users) { FactoryBot.create_list(:user, 5) }
-    before { get '/users', headers: {:Authorization => User.last.token} }
+    before { get '/users', headers: { Authorization: User.last.token } }
     it 'returns all users' do
       expect(JSON.parse(response.body).size).to eq(5)
     end
@@ -23,7 +23,7 @@ RSpec.describe 'User', type: :request do
   end
 
   describe 'GET #show' do
-    before { get "/users/#{user.id}", headers: {:Authorization => user.token} }
+    before { get "/users/#{user.id}", headers: { Authorization: user.token } }
     let(:user) { create(:user) }
 
     it 'returns http success' do

@@ -26,10 +26,10 @@ class CardSerializer < ActiveModel::Serializer
   attributes :id, :title, :number, :expire_date, :csv, :customer, :status, :is_deleted, :pin
 
   def expire_date
-    return object.expire_date.to_fs(:long)
+    object.expire_date.to_fs(:long)
   end
 
   def customer
-    ActiveModelSerializers::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.customer, each_serializer: CustomerSerializer)
   end
 end

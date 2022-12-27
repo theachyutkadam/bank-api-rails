@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :salary do
-    amount { rand(12000..50000) }
-    status {  Salary.statuses.keys.sample }
+    amount { rand(12_000..50_000) }
+    status { Salary.statuses.keys.sample }
   end
 end

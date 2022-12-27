@@ -27,13 +27,11 @@ class User < ApplicationRecord
 
   def generate_token
     token = Faker::Internet.device_token
-    if User.where(token: token).any?
-      generate_token
-    end
+    generate_token if User.where(token: token).any?
     token
   end
 
   def set_token
-    self.update(token: generate_token)
+    update(token: generate_token)
   end
 end

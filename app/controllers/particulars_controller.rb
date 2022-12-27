@@ -1,6 +1,6 @@
 class ParticularsController < ApplicationController
-
   attr_accessor :amount, :sender_id, :receiver_id
+
   before_action :set_particular, only: %i[destroy show update]
 
   def index
@@ -47,8 +47,8 @@ class ParticularsController < ApplicationController
     sender_accountable = UserInformation.find(params[:sender_id]).accountable
     receiver_accountable = UserInformation.find(params[:receiver_id]).accountable
 
-    sender_accountable = sender_accountable.customer if sender_accountable.class.name == "Employee"
-    receiver_accountable = receiver_accountable.customer if receiver_accountable.class.name == "Employee"
+    sender_accountable = sender_accountable.customer if sender_accountable.instance_of?(::Employee)
+    receiver_accountable = receiver_accountable.customer if receiver_accountable.instance_of?(::Employee)
 
     sender_accountable.update(current_balance: sender_accountable.current_balance - params[:amount].to_f)
     receiver_accountable.update(current_balance: receiver_accountable.current_balance + params[:amount].to_f)

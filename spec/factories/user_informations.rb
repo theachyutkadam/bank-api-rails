@@ -36,7 +36,7 @@ FactoryBot.define do
     contact { Faker::Base.numerify('##########') }
     birth_date { 18.years.ago }
     gender { UserInformation.genders.keys.sample }
-    maritial_status { UserInformation.maritial_statuses.keys.sample  }
+    maritial_status { UserInformation.maritial_statuses.keys.sample }
     pan_card_number { Faker::Base.bothify('?????####?') }
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }

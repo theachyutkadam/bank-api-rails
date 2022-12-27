@@ -37,7 +37,6 @@ class Card < ApplicationRecord
   validates :csv, length: { is: 3 }
   validates :pin, length: { is: 4 }
 
-
   before_validation :set_card_details, on: :create
 
   def set_card_details
@@ -49,11 +48,11 @@ class Card < ApplicationRecord
   end
 
   def generate_number
-    card_number = rand(100000000000..999999999999)
+    card_number = rand(100_000_000_000..999_999_999_999)
     is_exits(card_number)
   end
 
-  def is_exits card_number
+  def is_exits(card_number)
     if Card.where(number: card_number).any?
       generate_number
     else

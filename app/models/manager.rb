@@ -26,10 +26,10 @@ class Manager < ApplicationRecord
 
   has_many :employee
   enum status: { active: 0, inactive: 1, pending: 2 }
-  enum designation: { 
+  enum designation: {
     ceo: 'ceo',
-    team_leader: 'team_leader', 
-    desk_manager: 'desk_manager', 
+    team_leader: 'team_leader',
+    desk_manager: 'desk_manager',
     senior_manager: 'senior_manager'
   }, _default: 'debit'
 

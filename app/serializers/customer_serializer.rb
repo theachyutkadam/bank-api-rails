@@ -22,7 +22,8 @@ class CustomerSerializer < ActiveModel::Serializer
   attributes :id, :account_type, :account_number, :amount_limit, :current_balance, :user_information
 
   def user_information
-    return object.employee.user_information if object.employee 
-    return object.user_information
+    return object.employee.user_information if object.employee
+
+    object.user_information
   end
 end

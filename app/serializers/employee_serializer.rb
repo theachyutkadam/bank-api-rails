@@ -28,10 +28,11 @@
 #  fk_rails_...  (manager_id => managers.id)
 #
 class EmployeeSerializer < ActiveModel::Serializer
-  attributes :id, :salary_amount, :customer, :manager, :department, :education, :date_of_joining, :work_status, :designation, :official_email, :user_information, :full_name
+  attributes :id, :salary_amount, :customer, :manager, :department, :education, :date_of_joining, :work_status,
+             :designation, :official_email, :user_information, :full_name
 
   def date_of_joining
-    return object.date_of_joining.to_fs(:long)
+    object.date_of_joining.to_fs(:long)
   end
 
   def full_name
@@ -39,10 +40,10 @@ class EmployeeSerializer < ActiveModel::Serializer
   end
 
   def manager
-    ActiveModelSerializers::SerializableResource.new(object.manager,  each_serializer: UserSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.manager, each_serializer: UserSerializer)
   end
 
   def customer
-    ActiveModelSerializers::SerializableResource.new(object.customer,  each_serializer: CustomerSerializer)
+    ActiveModelSerializers::SerializableResource.new(object.customer, each_serializer: CustomerSerializer)
   end
 end

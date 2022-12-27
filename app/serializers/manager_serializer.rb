@@ -25,6 +25,10 @@ class ManagerSerializer < ActiveModel::Serializer
 
   def full_name
     user_infomation = User.find(object.user.id).user_information
-    return user_infomation.full_name rescue nil
+    begin
+      user_infomation.full_name
+    rescue StandardError
+      nil
+    end
   end
 end

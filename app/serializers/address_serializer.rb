@@ -18,13 +18,12 @@ class AddressSerializer < ActiveModel::Serializer
              :addressable
 
   def addressable
-    if object.addressable.class.name == "Employee"
+    if object.addressable.instance_of?(::Employee)
       ActiveModelSerializers::SerializableResource.new(object.addressable,  each_serializer: EmployeeSerializer)
-    elsif object.addressable.class.name == "Customer"
+    elsif object.addressable.instance_of?(::Customer)
       ActiveModelSerializers::SerializableResource.new(object.addressable,  each_serializer: CustomerSerializer)
     else
       ActiveModelSerializers::SerializableResource.new(object.addressable,  each_serializer: NomineeSerializer)
     end
   end
-
 end

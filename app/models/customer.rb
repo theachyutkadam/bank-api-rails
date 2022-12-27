@@ -43,11 +43,11 @@ class Customer < ApplicationRecord
   end
 
   def generate_account_number
-    account_number = rand(1000000000..9999999999)
+    account_number = rand(1_000_000_000..9_999_999_999)
     check_account_number(account_number)
   end
 
-  def check_account_number account_number
+  def check_account_number(account_number)
     if Customer.where(account_number: account_number).any?
       generate_account_number
     else

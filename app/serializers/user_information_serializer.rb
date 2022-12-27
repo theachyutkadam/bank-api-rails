@@ -48,10 +48,12 @@ class UserInformationSerializer < ActiveModel::Serializer
              :full_name
 
   def birth_date
-    return object.birth_date.to_fs(:long)
+    object.birth_date.to_fs(:long)
   end
 
   def full_name
-    return object.full_name rescue nil
+    object.full_name
+  rescue StandardError
+    nil
   end
 end
