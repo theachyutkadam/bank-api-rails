@@ -3,9 +3,9 @@
 # Table name: account_types
 #
 #  id                  :bigint           not null, primary key
-#  loan_intrest_rate   :float
-#  saving_intrest_rate :float
-#  title               :string
+#  loan_intrest_rate   :float            not null
+#  saving_intrest_rate :float            not null
+#  title               :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #

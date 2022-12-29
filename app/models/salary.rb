@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  amount        :float            not null
+#  description   :text
 #  status        :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,7 +25,7 @@ class Salary < ApplicationRecord
   belongs_to :employee
   belongs_to :particular
 
-  enum status: { paid: 0, unpaid: 1, pending: 2 }
+  enum status: { paid: 0, unpaid: 1, pending: 2 }, _default: 'pending'
 
   validates :status, inclusion: { in: statuses.keys }
   validates :amount, length: { in: 1..200_000 }

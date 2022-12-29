@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  amount        :float            not null
+#  description   :text
 #  status        :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

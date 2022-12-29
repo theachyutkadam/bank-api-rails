@@ -26,11 +26,11 @@ Added a command for Fastly create a controller and models.
 - rails g model nominee first_name middle_name last_name contact gender:integer relation:integer customer:references
 - rails g model card title number:bigint expire_date:datetime csv:integer customer:references status:integer is_deleted:boolean pin:integer
 - rails g model manager user_information:references department:references designation status:integer
-- rails g model employee department:references customer:references manager:references salary_amount:float education date_of_joining:datetime work_status designation official_email
+- rails g model employee department:references customer:references manager:references salary_amount:float education date_of_joining:datetime work_status:integer designation official_email
 
 - rails g model user_information first_name middle_name last_name contact gender:integer birth_date:datetime pan_card_number adhaar_card_number is_handicap:boolean handicap_details:text maritial_status:integer user:references accountable_id:integer accountable_type
-- rails g model particular card:references sender:references receiver:references amount:float
-- rails g model salary employee:references amount:float status:integer particular:references
+- rails g model particular card:references sender:references receiver:references amount:float description:text
+- rails g model salary employee:references amount:float status:integer particular:references description:text
 
 *Create a specs files using following commands*
 - touch spec/requests/account_types_spec.rb

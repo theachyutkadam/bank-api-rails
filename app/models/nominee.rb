@@ -24,7 +24,7 @@
 class Nominee < ApplicationRecord
   belongs_to :customer
 
-  has_one :address, as: :addressable
+  has_one :address, as: :addressable, dependent: :destroy
 
   enum gender: { male: 0, female: 1, transgender: 2 }
   enum relation: { mother: 0, father: 1, wife: 2, child: 3 }

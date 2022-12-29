@@ -3,7 +3,7 @@
 # Table name: addresses
 #
 #  id               :bigint           not null, primary key
-#  addressable_type :string
+#  addressable_type :string           not null
 #  building         :string
 #  description      :text
 #  flat_number      :string
@@ -11,7 +11,7 @@
 #  street           :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  addressable_id   :integer
+#  addressable_id   :integer          not null
 #
 FactoryBot.define do
   factory :address do
