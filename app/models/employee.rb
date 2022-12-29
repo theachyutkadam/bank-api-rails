@@ -8,7 +8,7 @@
 #  education       :string           not null
 #  official_email  :string
 #  salary_amount   :float            default(0.0), not null
-#  work_status     :string           not null
+#  work_status     :string           default("available"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  customer_id     :bigint           not null
@@ -37,7 +37,7 @@ class Employee < ApplicationRecord
 
   has_many :salaries, dependent: :destroy
 
-  enum work_status: { available: 'available', on_leave: 'on_leave', resignate: 'resignate' }
+  enum work_status: { available: 0, on_leave: 1, resignate: 2 }, _default: 'available'
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
 

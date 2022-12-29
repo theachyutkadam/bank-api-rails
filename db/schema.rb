@@ -15,9 +15,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
   enable_extension "plpgsql"
 
   create_table "account_types", force: :cascade do |t|
-    t.string "title"
-    t.float "loan_intrest_rate"
-    t.float "saving_intrest_rate"
+    t.string "title", null: false
+    t.float "loan_intrest_rate", null: false
+    t.float "saving_intrest_rate", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,19 +28,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.string "street"
     t.string "pin_code"
     t.text "description"
-    t.integer "addressable_id"
-    t.string "addressable_type"
+    t.integer "addressable_id", null: false
+    t.string "addressable_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "cards", force: :cascade do |t|
-    t.string "title", null: false
+    t.integer "title", null: false
     t.bigint "number", null: false
     t.datetime "expire_date", null: false
     t.integer "csv", null: false
     t.bigint "customer_id", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 1, null: false
     t.boolean "is_deleted"
     t.integer "pin", null: false
     t.datetime "created_at", null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.bigint "account_type_id", null: false
     t.bigint "account_number", null: false
     t.integer "amount_limit", null: false
+    t.integer "status", default: 1, null: false
     t.float "current_balance", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.bigint "department_id", null: false
     t.string "official_email"
     t.string "education", null: false
-    t.string "work_status", null: false
+    t.string "work_status", default: "available", null: false
     t.string "designation", null: false
     t.float "salary_amount", default: 0.0, null: false
     t.date "date_of_joining", null: false
@@ -85,8 +86,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
   create_table "managers", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "department_id", null: false
-    t.string "designation", null: false
-    t.integer "status"
+    t.integer "designation", null: false
+    t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_managers_on_department_id"
@@ -109,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
   create_table "particulars", force: :cascade do |t|
     t.bigint "card_id", null: false
     t.float "amount", null: false
+    t.text "description"
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
@@ -122,6 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.bigint "employee_id", null: false
     t.float "amount", null: false
     t.integer "status", null: false
+    t.text "description"
     t.bigint "particular_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -154,7 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.string "password", null: false
     t.string "email", null: false
     t.string "token"
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.boolean "is_admin", default: false, null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false

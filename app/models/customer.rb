@@ -6,6 +6,7 @@
 #  account_number  :bigint           not null
 #  amount_limit    :integer          not null
 #  current_balance :float            default(0.0), not null
+#  status          :integer          default("inactive"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  account_type_id :bigint           not null
@@ -30,6 +31,8 @@ class Customer < ApplicationRecord
   has_one :user_information, as: :accountable
 
   AMOUNT_LIMIT = 20_000
+
+  enum status: { active: 0, inactive: 1, blocked: 2}, _default: 'inactive'
 
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }

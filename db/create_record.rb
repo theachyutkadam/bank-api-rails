@@ -9,18 +9,20 @@ def create_admin_user
                         { name: 'HR' },
                         { name: 'Finance' },
                         { name: 'Loan' },
-                        { name: 'Insurance' },
-                        { name: 'Marketing' }
+                        { name: 'Finance' },
+                        { name: 'Marketing' },
+                        { name: 'Services' }
                       ])
 
     admin_user = FactoryBot.create(:user, is_admin: true, username: 'admin', email: 'admin@gmail.com')
     account_type = AccountType.where(title: 'Current').first
-    admin_customer = FactoryBot.create(:customer, account_type: account_type, current_balance: 10_000_000.00)
-    admin_nominee = FactoryBot.create(:nominee, customer: admin_customer)
+    admin_customer = create_customer_with_nominee(account_type)
+    admin_nominee = admin_customer.nominee
 
     create_address(admin_customer)
     create_address(admin_nominee)
     create_user_information(admin_user, admin_customer, admin_customer)
+    Card.first.update(status: 0)
   end
   create_manager # create manager
 end
@@ -28,7 +30,7 @@ end
 def create_manager
   10.times do |i|
     user = create_user
-    department = Department.take
+    department = Department.all.shuffle.sample
     manager = FactoryBot.create(:manager, user: user, department: department)
 
     create_employee_information(user, department, manager)
@@ -39,9 +41,9 @@ end
 
 def create_employee
   90.times do |i|
+    department = Department.all.shuffle.sample
+    manager = Manager.all.shuffle.sample
     user = create_user
-    department = Department.take
-    manager = Manager.take
 
     create_employee_information(user, department, manager)
     p "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
@@ -50,14 +52,13 @@ def create_employee
 end
 
 def create_customer
-  3999.times do |i|
-    user = create_user
-    account_type = AccountType.take
-    customer = FactoryBot.create(:customer, account_type: account_type)
+  999.times do |i|
+    customer = create_customer_with_nominee(nil)
+    nominee = customer.nominee
 
-    nominee = FactoryBot.create(:nominee, customer: customer)
-    customer_address = create_address(customer)
-    nominee_address = create_address(nominee)
+    user = create_user
+    create_address(customer)
+    create_address(nominee)
     create_user_information(user, customer, customer)
     puts "customer created #{i} customer card: #{customer.cards.first.status}"
   end
@@ -65,11 +66,11 @@ def create_customer
 end
 
 def customer_transactions
-  15_000.times do |i|
+  2000.times do |i|
     check_amount
     card = Card.take
     sender = card.customer.user_information
-    receiver = UserInformation.take
+    receiver = UserInformation.all.shuffle.sample
     particular = FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
     puts "customer particular #{i}"
   end
@@ -77,9 +78,9 @@ def customer_transactions
 end
 
 def employee_salary_transaction
-  10_000.times do |i|
+  1000.times do |i|
     check_amount
-    employee_user_information = Employee.take.user_information
+    employee_user_information = Employee.all.shuffle.sample.user_information
 
     particular = FactoryBot.create(:particular, card: Card.first, sender: admin_user_information,
                                                 receiver: employee_user_information)
@@ -91,18 +92,24 @@ end
 
 def create_user
   user = FactoryBot.build(:user)
-
   user.save if user.valid?
   return User.order(created_at: :asc).last if user.save
-
   p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each { |error| p error }}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   @counter += 1
   create_user
 end
 
+def create_customer_with_nominee(account_type)
+  account_type = AccountType.all.shuffle.sample
+  account_type = account_type if account_type
+  customer = FactoryBot.create(:customer, account_type: account_type)
+  FactoryBot.create(:nominee, customer: customer)
+  customer
+end
+
 def create_employee_information(user, department, manager)
   account_type = AccountType.where(title: 'Salary').first
-  customer = FactoryBot.create(:customer, account_type: account_type)
+  customer = create_customer_with_nominee(account_type)
   employee = FactoryBot.create(:employee, manager: manager, department: department, customer: customer)
 
   create_address(employee)
@@ -111,7 +118,7 @@ end
 
 def create_user_information(user, accountable, customer)
   FactoryBot.create(:user_information, user: user, accountable: accountable)
-  FactoryBot.create(:card, customer: customer, status: 'active')
+  FactoryBot.create(:card, customer: customer)
 end
 
 def create_address(addressable)
@@ -120,7 +127,7 @@ end
 
 def check_amount
   admin_customer = admin_user_information.accountable
-  admin_customer.update(current_balance: 10_000_000) if admin_customer.current_balance <= 100_000
+  admin_customer.update(current_balance: 10_000_000, status: 0) if admin_customer.current_balance <= 100_000
   admin_customer.reload
 end
 
