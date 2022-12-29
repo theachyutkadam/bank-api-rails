@@ -6,6 +6,7 @@
 #  account_number  :bigint           not null
 #  amount_limit    :integer          not null
 #  current_balance :float            default(0.0), not null
+#  status          :integer          default("inactive"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  account_type_id :bigint           not null
@@ -21,5 +22,6 @@
 FactoryBot.define do
   factory :customer do
     current_balance { Faker::Number.decimal(l_digits: 5) }
+    status { Customer.statuses.keys.sample }
   end
 end

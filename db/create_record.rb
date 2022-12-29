@@ -120,7 +120,8 @@ end
 
 def check_amount
   admin_customer = admin_user_information.accountable
-  admin_customer.udpate(current_balance: 10_000_000) if admin_customer.current_balance <= 100_000
+  admin_customer.update(current_balance: 10_000_000) if admin_customer.current_balance <= 100_000
+  admin_customer.reload
 end
 
 def admin_user_information

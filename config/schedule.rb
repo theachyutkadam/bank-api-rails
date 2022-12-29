@@ -18,9 +18,9 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.minute do
-  runner 'SomeJob.perform_later'
-end
-# every 1.day, at: '11:00 am' do
+# every 1.minute do
 #   runner 'SomeJob.perform_later'
 # end
+every 3.minutes do
+  rake 'employee_salary:start_process'
+end

@@ -8,8 +8,8 @@
 #  is_deleted  :boolean
 #  number      :bigint           not null
 #  pin         :integer          not null
-#  status      :integer          not null
-#  title       :string           not null
+#  status      :integer          default("inactive"), not null
+#  title       :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :bigint           not null
