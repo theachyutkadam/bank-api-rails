@@ -8,6 +8,7 @@ class EmployeeSalaryWorker
     employees.each do |employee|
       check_amount
       create_particular(employee)
+      update_description_salary
     end
   end
 
@@ -31,5 +32,18 @@ class EmployeeSalaryWorker
     admin_customer = @sender.accountable
     admin_customer.update(current_balance: 10_000_000, status: 0) if admin_customer.current_balance <= 100_000
     @sender.reload
+  end
+
+  def update_description_salary
+    Salary.all.each do |salary|
+      salary.update(description: Faker::Lorem.sentence(word_count: 300))
+    end
+    update_description_particular
+  end
+
+  def update_description_particular
+    Particular.all.each do |particular|
+      particular.update(description: Faker::Lorem.sentence(word_count: 300))
+    end
   end
 end

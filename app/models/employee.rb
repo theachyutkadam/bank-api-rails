@@ -8,7 +8,7 @@
 #  education       :string           not null
 #  official_email  :string
 #  salary_amount   :float            default(0.0), not null
-#  work_status     :string           default("available"), not null
+#  work_status     :integer          default("available"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  customer_id     :bigint           not null

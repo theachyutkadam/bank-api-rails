@@ -1,7 +1,9 @@
 # == Route Map
 #
-
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/admin/sidekiq'
   resources :salaries, except: %i[new edit]
   resources :account_types, except: %i[new edit]
   resources :cards, except: %i[new edit]

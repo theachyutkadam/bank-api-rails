@@ -1,4 +1,3 @@
 salary_process:
-  cron: "*/2 * * * *" #it will retrieve data every 2 minute
-  cron: "0 17 29 */1 *" #it will retrieve every month 30th date at 5pm.
+  cron: "*/1 * * * *" #it will retrieve data every 2 minute
   class: "EmployeeSalaryWorker"
