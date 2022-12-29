@@ -1,4 +1,4 @@
-# class EmployeeSalaryJob < ApplicationJob
+class EmployeeSalaryJob < ApplicationJob
 #   queue_as :default
 #   RUN_EVERY = 1.minute
 
@@ -32,4 +32,4 @@
 #     admin_customer.update(current_balance: 10_000_000) if admin_customer.current_balance <= 100_000
 #     @sender.reload
 #   end
-# end
+end

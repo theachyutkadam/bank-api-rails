@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_061830) do
     t.bigint "department_id", null: false
     t.string "official_email"
     t.string "education", null: false
-    t.string "work_status", default: "available", null: false
+    t.integer "work_status", default: 0, null: false
     t.string "designation", null: false
     t.float "salary_amount", default: 0.0, null: false
     t.date "date_of_joining", null: false
