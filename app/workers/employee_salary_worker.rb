@@ -8,8 +8,9 @@ class EmployeeSalaryWorker
     employees.each do |employee|
       check_amount
       create_particular(employee)
-      update_description_salary
+      puts "employee salary #{employee.id}"
     end
+    update_description_salary
   end
 
   def create_particular(employee)
@@ -19,7 +20,6 @@ class EmployeeSalaryWorker
 
     particular.update_current_balance(particular.sender_id, particular.receiver_id, particular.amount)
     create_salary(particular, employee)
-    puts "@@@ salary done of #{employee.id} @@@"
   end
 
   def create_salary(particular, employee)
@@ -37,6 +37,7 @@ class EmployeeSalaryWorker
   def update_description_salary
     Salary.all.each do |salary|
       salary.update(description: Faker::Lorem.sentence(word_count: 300))
+      puts "salary update #{salary.id}"
     end
     update_description_particular
   end
@@ -44,6 +45,7 @@ class EmployeeSalaryWorker
   def update_description_particular
     Particular.all.each do |particular|
       particular.update(description: Faker::Lorem.sentence(word_count: 300))
+      puts "particular update #{particular.id}"
     end
   end
 end
