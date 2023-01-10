@@ -44,7 +44,6 @@ class Employee < ApplicationRecord
   after_create :update_employee_count
 
   def update_employee_count
-    old_count = department.employee_count
-    department.update(employee_count: old_count + 1)
+    department.update(employee_count: department.employee_count + 1)
   end
 end

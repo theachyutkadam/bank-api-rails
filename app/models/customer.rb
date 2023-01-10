@@ -56,4 +56,9 @@ class Customer < ApplicationRecord
       account_number
     end
   end
+
+  def user_information
+    return self.employee.user_information if self.employee.present? # employee login
+    UserInformation.find_by(accountable_id: id) # customer login
+  end
 end

@@ -4,13 +4,13 @@ class EmployeeSalaryWorker
   def perform(*_args)
     p 'start salary process'
     @sender = User.where(is_admin: true).first.user_information
-    employees = Employee.where.not(work_status: 'resignate')
+    employees =  Employee.not_resignate
     employees.each do |employee|
       check_amount
-      create_particular(employee)
-      puts "employee salary #{employee.id}"
+      unless Salary.where('extract(month from created_at) = ?', Date.today.month).where(employee_id: employee.id).any?
+        create_particular(employee)
+      end
     end
-    update_description_salary
   end
 
   def create_particular(employee)
@@ -20,6 +20,7 @@ class EmployeeSalaryWorker
 
     particular.update_current_balance(particular.sender_id, particular.receiver_id, particular.amount)
     create_salary(particular, employee)
+    puts "employee salary #{employee.id}"
   end
 
   def create_salary(particular, employee)
@@ -32,20 +33,5 @@ class EmployeeSalaryWorker
     admin_customer = @sender.accountable
     admin_customer.update(current_balance: 10_000_000, status: 0) if admin_customer.current_balance <= 100_000
     @sender.reload
-  end
-
-  def update_description_salary
-    Salary.all.each do |salary|
-      salary.update(description: Faker::Lorem.sentence(word_count: 300))
-      puts "salary update #{salary.id}"
-    end
-    update_description_particular
-  end
-
-  def update_description_particular
-    Particular.all.each do |particular|
-      particular.update(description: Faker::Lorem.sentence(word_count: 300))
-      puts "particular update #{particular.id}"
-    end
   end
 end

@@ -1,7 +1,7 @@
 class UserInformationsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @user_informations = UserInformation.includes(:user, :accountable).last(1000)
+    @user_informations = UserInformation.includes(:user, :accountable).all
     render json: @user_informations
   end
 
