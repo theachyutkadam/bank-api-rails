@@ -1,5 +1,8 @@
 class SalariesController < ApplicationController
+  include Rails.application.routes.url_helpers
+
   before_action :set_user, only: %i[destroy show update]
+
   def index
     @salaries = Salary.includes(:employee, :particular).all
     render json: @salaries

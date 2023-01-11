@@ -8,8 +8,8 @@
 #  is_deleted  :boolean
 #  number      :bigint           not null
 #  pin         :integer          not null
-#  status      :integer          not null
-#  title       :string           not null
+#  status      :integer          default("inactive"), not null
+#  title       :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :bigint           not null
@@ -24,10 +24,10 @@
 #
 class Card < ApplicationRecord
   belongs_to :customer
-  has_many :transactions
+  has_many :transactions, dependent: :destroy
 
-  enum status: { active: 0, inactive: 1, blocked: 2, closed: 3 }
-  enum title: { debit: 'debit', credit: 'credit' }, _default: 'debit'
+  enum status: { active: 0, inactive: 1, blocked: 2, closed: 3 }, _default: 'inactive'
+  enum title: { debit: 0, credit: 1 }, _default: 'debit'
 
   validates :csv, :expire_date, :number, :pin, :title, presence: true
   validates :status, inclusion: { in: statuses.keys }
@@ -38,7 +38,7 @@ class Card < ApplicationRecord
   validates :pin, length: { is: 4 }
 
   before_validation :set_card_details, on: :create
-
+  
   def set_card_details
     self.status ||= 1
     self.csv ||= rand(100..999)

@@ -8,7 +8,7 @@
 #  education       :string           not null
 #  official_email  :string
 #  salary_amount   :float            default(0.0), not null
-#  work_status     :string           not null
+#  work_status     :integer          default("available"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  customer_id     :bigint           not null
@@ -32,19 +32,18 @@ class Employee < ApplicationRecord
   belongs_to :customer
   belongs_to :department
 
-  has_one :address, as: :addressable
-  has_one :user_information, as: :accountable
+  has_one :address, as: :addressable, dependent: :destroy
+  has_one :user_information, as: :accountable, dependent: :destroy
 
-  has_many :salaries
+  has_many :salaries, dependent: :destroy
 
-  enum work_status: { available: 'available', on_leave: 'on_leave', resignate: 'resignate' }
+  enum work_status: { available: 0, on_leave: 1, resignate: 2 }, _default: 'available'
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
 
   after_create :update_employee_count
 
   def update_employee_count
-    old_count = department.employee_count
-    department.update(employee_count: old_count + 1)
+    department.update(employee_count: department.employee_count + 1)
   end
 end

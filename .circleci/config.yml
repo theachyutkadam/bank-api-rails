@@ -45,17 +45,18 @@ jobs:
       - run:
           name: Install bundle
           command: bundle install
+
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 300m
 
       - run:
           name: Restart Postgres
-          command: sudo systemctl status postgresql
+          command: systemctl restart postgresql
 
       - run:
           name: Setup DB
-          command: bundle exec rails db:drop db:create db:schema:load --trace
+          command: bin/rails db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |

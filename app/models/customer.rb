@@ -6,6 +6,7 @@
 #  account_number  :bigint           not null
 #  amount_limit    :integer          not null
 #  current_balance :float            default(0.0), not null
+#  status          :integer          default("inactive"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  account_type_id :bigint           not null
@@ -23,14 +24,15 @@ class Customer < ApplicationRecord
 
   has_one :nominee
   has_one :employee
-  has_many :cards
-  has_many :transactions
-  has_many :transactions_details
+  has_many :cards, dependent: :destroy
+  has_many :particular, dependent: :destroy
 
   has_one :address, as: :addressable
   has_one :user_information, as: :accountable
 
   AMOUNT_LIMIT = 20_000
+
+  enum status: { active: 0, inactive: 1, blocked: 2}, _default: 'inactive'
 
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
@@ -53,5 +55,10 @@ class Customer < ApplicationRecord
     else
       account_number
     end
+  end
+
+  def user_information
+    return self.employee.user_information if self.employee.present? # employee login
+    UserInformation.find_by(accountable_id: id) # customer login
   end
 end

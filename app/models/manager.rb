@@ -3,8 +3,8 @@
 # Table name: managers
 #
 #  id            :bigint           not null, primary key
-#  designation   :string           not null
-#  status        :integer
+#  designation   :integer          not null
+#  status        :integer          default("inactive")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  department_id :bigint           not null
@@ -24,14 +24,14 @@ class Manager < ApplicationRecord
   belongs_to :user
   belongs_to :department
 
-  has_many :employee
+  has_many :employee, dependent: :destroy
   enum status: { active: 0, inactive: 1, pending: 2 }
   enum designation: {
-    ceo: 'ceo',
-    team_leader: 'team_leader',
-    desk_manager: 'desk_manager',
-    senior_manager: 'senior_manager'
-  }, _default: 'debit'
+                      ceo: 0,
+                      team_leader: 1,
+                      desk_manager: 2,
+                      senior_manager:3
+                    }, _default: 'senior_manager'
 
   validates :designation, presence: true
   validates :status, inclusion: { in: statuses.keys }
