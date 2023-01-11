@@ -14,8 +14,12 @@ class EmployeeSalaryWorker
   end
 
   def create_particular(employee)
-    particular = Particular.new(amount: employee.salary_amount, card_id: @sender.accountable.cards.first.id,
-                                sender_id: @sender.id, receiver_id: employee.user_information.id)
+    particular = Particular.new(amount: employee.salary_amount,
+                                sender_id: @sender.id,
+                                receiver_id: employee.user_information.id,
+                                card_id: @sender.accountable.cards.first.id
+    )
+
     return particular.errors unless particular.save
 
     particular.update_current_balance(particular.sender_id, particular.receiver_id, particular.amount)
@@ -24,9 +28,12 @@ class EmployeeSalaryWorker
   end
 
   def create_salary(particular, employee)
-    salary = Salary.new(status: 'paid', employee_id: employee.id, particular_id: particular.id,
-                        amount: particular.amount)
-    salary.save
+    Salary.create(status: 'paid',
+                  employee_id: employee.id,
+                  particular_id: particular.id,
+                  amount: particular.amount,
+                  description: Date.today.strftime("%B")
+    )
   end
 
   def check_amount
