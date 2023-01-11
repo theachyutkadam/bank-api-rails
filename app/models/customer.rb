@@ -30,7 +30,7 @@ class Customer < ApplicationRecord
   has_one :address, as: :addressable
   has_one :user_information, as: :accountable
 
-  AMOUNT_LIMIT = 20_000
+  AMOUNT_LIMIT = 20_000 # contant variable
 
   enum status: { active: 0, inactive: 1, blocked: 2}, _default: 'inactive'
 
