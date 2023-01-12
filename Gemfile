@@ -61,3 +61,5 @@ group :development do
   gem 'rubocop-rails', '~> 2.17', '>= 2.17.3'
   gem 'rubocop-rspec', require: false
 end
+
+gem 'motor-admin', '~> 0.4.4'
