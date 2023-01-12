@@ -1,0 +1,39 @@
+---
+engine_version: 0.4.4
+file_version: 2023-01-12 12:03:59.744769000 Z
+resources: []
+configs:
+- key: header.links
+  value:
+  - conditions:
+    - field: email
+      value:
+      - admin@gmail.com
+    type: header
+    name: Reports
+    link_type: reports
+  - name: Forms
+    link_type: forms
+  - name: "⭐ Star on GitHub"
+    path: https://github.com/motor-admin/motor-admin-rails
+  updated_at: 2023-01-12 12:02:41.018717000 +00:00
+queries: []
+dashboards:
+- id: 1
+  title: Emplolyee
+  description: 
+  preferences:
+    layout: []
+    variables: []
+    autorefresh_interval: 300000
+  tags: []
+  updated_at: 2023-01-12 12:03:59.744769000 +00:00
+forms: []
+alerts: []
+api_configs:
+- id: 1
+  name: origin
+  url: "/"
+  preferences: {}
+  description: 
+  updated_at: 2023-01-12 11:54:11.005870000 +00:00

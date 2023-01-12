@@ -82,10 +82,15 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    ar_lazy_preload (1.1.2)
+      rails (>= 5.2)
     ast (2.4.2)
+    audited (5.1.0)
+      activerecord (>= 5.0, < 7.1)
     bootsnap (1.14.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.4.0)
     case_transform (0.2)
       activesupport
     childprocess (4.1.0)
@@ -133,6 +138,12 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.16.3)
+    motor-admin (0.4.4)
+      ar_lazy_preload (~> 1.0)
+      audited (~> 5.0)
+      cancancan (~> 3.0)
+      fugit (~> 1.0)
+      rails (>= 5.2)
     msgpack (1.6.0)
     net-imap (0.3.1)
       net-protocol
@@ -266,6 +277,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker!
+  motor-admin (~> 0.4.4)
   overcommit
   pg (~> 1.1)
   puma (~> 5.0)
