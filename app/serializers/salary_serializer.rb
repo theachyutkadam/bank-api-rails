@@ -22,5 +22,5 @@
 #  fk_rails_...  (particular_id => particulars.id)
 #
 class SalarySerializer < ActiveModel::Serializer
-  attributes :id, :employee, :amount, :status, :particular
+  attributes :id, :employee_id, :amount, :status, :particular_id
 end

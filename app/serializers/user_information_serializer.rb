@@ -42,7 +42,7 @@ class UserInformationSerializer < ActiveModel::Serializer
              :is_handicap,
              :handicap_details,
              :maritial_status,
-             :user,
+             :user_id,
              :accountable_id,
              :accountable_type,
              :full_name
