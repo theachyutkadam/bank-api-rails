@@ -2,8 +2,9 @@
 #
 # Table name: nominees
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  contact     :string           not null
+#  deleted_at  :datetime
 #  first_name  :string           not null
 #  gender      :integer          not null
 #  last_name   :string           not null
@@ -11,17 +12,19 @@
 #  relation    :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  customer_id :bigint           not null
+#  customer_id :uuid             not null
 #
 # Indexes
 #
 #  index_nominees_on_customer_id  (customer_id)
+#  index_nominees_on_deleted_at   (deleted_at)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (customer_id => customers.id)
 #
 class Nominee < ApplicationRecord
+  acts_as_paranoid
   belongs_to :customer
 
   has_one :address, as: :addressable, dependent: :destroy

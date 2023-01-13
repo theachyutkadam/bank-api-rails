@@ -2,18 +2,20 @@
 #
 # Table name: particulars
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  amount      :float            not null
+#  deleted_at  :datetime
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  card_id     :bigint           not null
-#  receiver_id :bigint           not null
-#  sender_id   :bigint           not null
+#  card_id     :uuid             not null
+#  receiver_id :uuid             not null
+#  sender_id   :uuid             not null
 #
 # Indexes
 #
 #  index_particulars_on_card_id      (card_id)
+#  index_particulars_on_deleted_at   (deleted_at)
 #  index_particulars_on_receiver_id  (receiver_id)
 #  index_particulars_on_sender_id    (sender_id)
 #

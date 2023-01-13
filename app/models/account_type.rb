@@ -2,14 +2,20 @@
 #
 # Table name: account_types
 #
-#  id                  :bigint           not null, primary key
+#  id                  :uuid             not null, primary key
+#  deleted_at          :datetime
 #  loan_intrest_rate   :float            not null
 #  saving_intrest_rate :float            not null
 #  title               :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
+# Indexes
+#
+#  index_account_types_on_deleted_at  (deleted_at)
+#
 class AccountType < ApplicationRecord
+  acts_as_paranoid
   has_many :customer, dependent: :destroy
 
   before_validation :set_intrest_rate

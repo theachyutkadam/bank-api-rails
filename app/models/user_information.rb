@@ -2,11 +2,12 @@
 #
 # Table name: user_informations
 #
-#  id                 :bigint           not null, primary key
+#  id                 :uuid             not null, primary key
 #  accountable_type   :string
 #  adhaar_card_number :string           not null
 #  birth_date         :date             not null
 #  contact            :string           not null
+#  deleted_at         :datetime
 #  first_name         :string           not null
 #  gender             :integer          not null
 #  handicap_details   :text
@@ -17,18 +18,21 @@
 #  pan_card_number    :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  accountable_id     :integer
-#  user_id            :bigint           not null
+#  accountable_id     :uuid
+#  user_id            :uuid             not null
 #
 # Indexes
 #
-#  index_user_informations_on_user_id  (user_id)
+#  index_user_informations_on_accountable  (accountable_type,accountable_id)
+#  index_user_informations_on_deleted_at   (deleted_at)
+#  index_user_informations_on_user_id      (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
 #
 class UserInformation < ApplicationRecord
+  acts_as_paranoid
   belongs_to :user
   belongs_to :accountable, polymorphic: true
 

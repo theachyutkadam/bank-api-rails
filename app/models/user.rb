@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  deleted_at :datetime
 #  email      :string           not null
 #  is_admin   :boolean          default(FALSE), not null
@@ -13,7 +13,12 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
+#
 class User < ApplicationRecord
+  acts_as_paranoid
   has_one :user_information
 
   enum status: { active: 0, inactive: 1, pending: 2 }, _default: 'active'

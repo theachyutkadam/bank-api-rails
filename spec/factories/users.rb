@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  deleted_at :datetime
 #  email      :string           not null
 #  is_admin   :boolean          default(FALSE), not null
@@ -12,6 +12,10 @@
 #  username   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
 #
 FactoryBot.define do
   factory :user do
