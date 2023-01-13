@@ -44,8 +44,7 @@ class Particular < ApplicationRecord
   end
 
   def check_card_status
-    card_status = card.status.capitalize
-    errors.add(:card_id, "Your card is #{card_status}") if card.status != 'active'
+    errors.add(:card_id, "is #{card.status.capitalize}") if card.status != 'active'
   end
 
   def check_limit

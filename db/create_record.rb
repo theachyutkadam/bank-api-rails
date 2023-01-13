@@ -67,7 +67,6 @@ end
 
 def customer_transactions
   2000.times do |i|
-    check_amount
     card = Card.take
     sender = card.customer.user_information
     receiver = UserInformation.all.shuffle.sample
@@ -78,11 +77,11 @@ def customer_transactions
 end
 
 def employee_salary_transaction
+  activate_admin_card
   1000.times do |i|
-    check_amount
     employee_user_information = Employee.all.shuffle.sample.user_information
 
-    particular = FactoryBot.create(:particular, card: Card.first, sender: admin_user_information,
+    particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
                                                 receiver: employee_user_information)
     salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
     puts "Salary created #{i}"
@@ -125,14 +124,29 @@ def create_address(addressable)
   FactoryBot.create(:address, addressable: addressable)
 end
 
-def check_amount
-  admin_customer = admin_user_information.accountable
-  admin_card = admin_customer.cards.first
-  admin_card.active! unless admin_card.active?
-  admin_customer.update(current_balance: 10_000_000, status: 0) if admin_customer.current_balance <= 100_000
+def set_admin_current_balance
+  admin_customer = admin_accountable
+  admin_customer.update(current_balance: Employee.sum(:salary_amount), status: 0) if admin_customer.current_balance <= 100_000
   admin_customer.reload
 end
 
 def admin_user_information
   User.find_by(email: 'admin@gmail.com').user_information
+end
+
+def admin_accountable
+  admin_user_information.accountable
+end
+
+def activate_admin_card
+  set_admin_current_balance
+  card = admin_card
+  unless card.active?
+    card.active!
+    card.reload
+  end
+end
+
+def admin_card
+  admin_accountable.cards.first
 end

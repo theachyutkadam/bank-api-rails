@@ -3,7 +3,7 @@
 # Table name: addresses
 #
 #  id               :uuid             not null, primary key
-#  addressable_type :string           not null
+#  addressable_type :string
 #  building         :string
 #  description      :text
 #  flat_number      :string
@@ -11,7 +11,11 @@
 #  street           :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  addressable_id   :integer          not null
+#  addressable_id   :uuid
+#
+# Indexes
+#
+#  index_addresses_on_addressable  (addressable_type,addressable_id)
 #
 require 'rails_helper'
 
