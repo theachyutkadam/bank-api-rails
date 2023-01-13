@@ -21,7 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ManagerSerializer < ActiveModel::Serializer
-  attributes :id, :user, :department, :designation, :status, :full_name
+  attributes :id, :user_id, :department_id, :designation, :status, :full_name
 
   def full_name
     user_infomation = User.find(object.user.id).user_information

@@ -22,5 +22,5 @@
 #  fk_rails_...  (customer_id => customers.id)
 #
 class NomineeSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :relation, :customer
+  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :relation, :customer_id
 end

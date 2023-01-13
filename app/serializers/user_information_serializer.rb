@@ -44,7 +44,6 @@ class UserInformationSerializer < ActiveModel::Serializer
              :user,
              :accountable_id,
              :accountable_type,
-             :accountable,
              :full_name
 
   def birth_date

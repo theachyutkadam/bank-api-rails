@@ -24,13 +24,13 @@
 #  fk_rails_...  (sender_id => user_informations.id)
 #
 class ParticularSerializer < ActiveModel::Serializer
-  attributes :id, :card, :sender, :receiver, :amount
+  attributes :id, :card_id, :sender_id, :receiver_id, :amount
 
-  def sender
-    ActiveModelSerializers::SerializableResource.new(object.sender, each_serializer: UserInformationSerializer)
-  end
+  # def sender
+  #   ActiveModelSerializers::SerializableResource.new(object.sender, each_serializer: UserInformationSerializer)
+  # end
 
-  def receiver
-    ActiveModelSerializers::SerializableResource.new(object.receiver, each_serializer: UserInformationSerializer)
-  end
+  # def receiver
+  #   ActiveModelSerializers::SerializableResource.new(object.receiver, each_serializer: UserInformationSerializer)
+  # end
 end

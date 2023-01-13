@@ -28,15 +28,11 @@
 #  fk_rails_...  (manager_id => managers.id)
 #
 class EmployeeSerializer < ActiveModel::Serializer
-  attributes :id, :salary_amount, :customer, :manager, :department, :education, :date_of_joining, :work_status,
-             :designation, :official_email, :user_information, :full_name
+  attributes :id, :salary_amount, :customer_id, :manager_id, :department_id, :education, :date_of_joining, :work_status,
+             :designation, :official_email, :user_information
 
   def date_of_joining
     object.date_of_joining.to_fs(:long)
-  end
-
-  def full_name
-    return object.user_information.full_name if object.user_information
   end
 
   def manager
