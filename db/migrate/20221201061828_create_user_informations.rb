@@ -13,8 +13,9 @@ class CreateUserInformations < ActiveRecord::Migration[7.0]
       t.text :handicap_details
       t.integer :maritial_status, null: false
       t.references :user, type: :uuid, null: false, foreign_key: true
-      t.integer :accountable_id
-      t.string :accountable_type
+      t.references :accountable, type: :uuid, polymorphic: true
+      # t.integer :accountable_id, type: :uuid
+      # t.string :accountable_type
 
       t.timestamps
     end

@@ -6,8 +6,9 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.string :street
       t.string :pin_code
       t.text :description
-      t.integer :addressable_id, null: false
-      t.string :addressable_type, null: false
+      t.references :addressable, type: :uuid, polymorphic: true
+      # t.integer :addressable_id, type: :uuid, null: false
+      # t.string :addressable_type, null: false
 
       t.timestamps
     end

@@ -29,10 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_115358) do
     t.string "street"
     t.string "pin_code"
     t.text "description"
-    t.integer "addressable_id", null: false
-    t.string "addressable_type", null: false
+    t.string "addressable_type"
+    t.uuid "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
   end
 
   create_table "cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -338,10 +339,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_115358) do
     t.text "handicap_details"
     t.integer "maritial_status", null: false
     t.uuid "user_id", null: false
-    t.integer "accountable_id"
     t.string "accountable_type"
+    t.uuid "accountable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["accountable_type", "accountable_id"], name: "index_user_informations_on_accountable"
     t.index ["user_id"], name: "index_user_informations_on_user_id"
   end
 

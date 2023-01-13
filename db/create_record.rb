@@ -14,7 +14,7 @@ def create_admin_user
                         { name: 'Services' }
                       ])
 
-    admin_user = FactoryBot.create(:user, is_admin: true, username: 'admin', email: 'admin@gmail.com')
+    admin_user = FactoryBot.create(:user, is_admin: true, username: 'admin', email: 'admin@gmail.com', status: :active)
     account_type = AccountType.where(title: 'Current').first
     admin_customer = create_customer_with_nominee(account_type)
     admin_nominee = admin_customer.nominee
@@ -127,6 +127,8 @@ end
 
 def check_amount
   admin_customer = admin_user_information.accountable
+  admin_card = admin_customer.cards.first
+  admin_card.active! unless admin_card.active?
   admin_customer.update(current_balance: 10_000_000, status: 0) if admin_customer.current_balance <= 100_000
   admin_customer.reload
 end
