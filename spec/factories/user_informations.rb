@@ -2,7 +2,7 @@
 #
 # Table name: user_informations
 #
-#  id                 :bigint           not null, primary key
+#  id                 :uuid             not null, primary key
 #  accountable_type   :string
 #  adhaar_card_number :string           not null
 #  birth_date         :date             not null
@@ -18,7 +18,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  accountable_id     :integer
-#  user_id            :bigint           not null
+#  user_id            :uuid             not null
 #
 # Indexes
 #

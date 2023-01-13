@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  deleted_at :datetime
 #  email      :string           not null
 #  is_admin   :boolean          default(FALSE), not null

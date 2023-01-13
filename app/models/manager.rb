@@ -2,13 +2,13 @@
 #
 # Table name: managers
 #
-#  id            :bigint           not null, primary key
+#  id            :uuid             not null, primary key
 #  designation   :integer          not null
 #  status        :integer          default("inactive")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  department_id :bigint           not null
-#  user_id       :bigint           not null
+#  department_id :uuid             not null
+#  user_id       :uuid             not null
 #
 # Indexes
 #

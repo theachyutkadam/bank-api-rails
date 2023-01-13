@@ -2,7 +2,7 @@
 #
 # Table name: employees
 #
-#  id              :bigint           not null, primary key
+#  id              :uuid             not null, primary key
 #  date_of_joining :date             not null
 #  designation     :string           not null
 #  education       :string           not null
@@ -11,9 +11,9 @@
 #  work_status     :integer          default("available"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  customer_id     :bigint           not null
-#  department_id   :bigint           not null
-#  manager_id      :bigint           not null
+#  customer_id     :uuid             not null
+#  department_id   :uuid             not null
+#  manager_id      :uuid             not null
 #
 # Indexes
 #

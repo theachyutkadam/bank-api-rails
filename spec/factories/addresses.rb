@@ -2,7 +2,7 @@
 #
 # Table name: addresses
 #
-#  id               :bigint           not null, primary key
+#  id               :uuid             not null, primary key
 #  addressable_type :string           not null
 #  building         :string
 #  description      :text

@@ -2,14 +2,14 @@
 #
 # Table name: customers
 #
-#  id              :bigint           not null, primary key
+#  id              :uuid             not null, primary key
 #  account_number  :bigint           not null
 #  amount_limit    :integer          not null
 #  current_balance :float            default(0.0), not null
 #  status          :integer          default("inactive"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  account_type_id :bigint           not null
+#  account_type_id :uuid             not null
 #
 # Indexes
 #

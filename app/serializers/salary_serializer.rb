@@ -2,14 +2,14 @@
 #
 # Table name: salaries
 #
-#  id            :bigint           not null, primary key
+#  id            :uuid             not null, primary key
 #  amount        :float            not null
 #  description   :text
 #  status        :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  employee_id   :bigint           not null
-#  particular_id :bigint           not null
+#  employee_id   :uuid             not null
+#  particular_id :uuid             not null
 #
 # Indexes
 #

@@ -2,7 +2,7 @@
 #
 # Table name: nominees
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  contact     :string           not null
 #  first_name  :string           not null
 #  gender      :integer          not null
@@ -11,7 +11,7 @@
 #  relation    :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  customer_id :bigint           not null
+#  customer_id :uuid             not null
 #
 # Indexes
 #

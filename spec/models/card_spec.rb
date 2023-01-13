@@ -2,7 +2,7 @@
 #
 # Table name: cards
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  csv         :integer          not null
 #  expire_date :datetime         not null
 #  is_deleted  :boolean
@@ -12,7 +12,7 @@
 #  title       :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  customer_id :bigint           not null
+#  customer_id :uuid             not null
 #
 # Indexes
 #
