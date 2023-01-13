@@ -4,6 +4,7 @@
 #
 #  id          :uuid             not null, primary key
 #  amount      :float            not null
+#  deleted_at  :datetime
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -14,6 +15,7 @@
 # Indexes
 #
 #  index_particulars_on_card_id      (card_id)
+#  index_particulars_on_deleted_at   (deleted_at)
 #  index_particulars_on_receiver_id  (receiver_id)
 #  index_particulars_on_sender_id    (sender_id)
 #

@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  amount        :float            not null
+#  deleted_at    :datetime
 #  description   :text
 #  status        :integer          not null
 #  created_at    :datetime         not null
@@ -13,6 +14,7 @@
 #
 # Indexes
 #
+#  index_salaries_on_deleted_at     (deleted_at)
 #  index_salaries_on_employee_id    (employee_id)
 #  index_salaries_on_particular_id  (particular_id)
 #
@@ -22,6 +24,7 @@
 #  fk_rails_...  (particular_id => particulars.id)
 #
 class Salary < ApplicationRecord
+  acts_as_paranoid
   belongs_to :employee
   belongs_to :particular
 

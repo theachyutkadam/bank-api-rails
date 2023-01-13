@@ -4,6 +4,7 @@
 #
 #  id          :uuid             not null, primary key
 #  csv         :integer          not null
+#  deleted_at  :datetime
 #  expire_date :datetime         not null
 #  is_deleted  :boolean
 #  number      :bigint           not null
@@ -17,6 +18,7 @@
 # Indexes
 #
 #  index_cards_on_customer_id  (customer_id)
+#  index_cards_on_deleted_at   (deleted_at)
 #
 # Foreign Keys
 #

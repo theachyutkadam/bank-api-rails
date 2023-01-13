@@ -7,6 +7,7 @@
 #  adhaar_card_number :string           not null
 #  birth_date         :date             not null
 #  contact            :string           not null
+#  deleted_at         :datetime
 #  first_name         :string           not null
 #  gender             :integer          not null
 #  handicap_details   :text
@@ -23,6 +24,7 @@
 # Indexes
 #
 #  index_user_informations_on_accountable  (accountable_type,accountable_id)
+#  index_user_informations_on_deleted_at   (deleted_at)
 #  index_user_informations_on_user_id      (user_id)
 #
 # Foreign Keys

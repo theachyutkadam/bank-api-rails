@@ -6,6 +6,7 @@
 #  account_number  :bigint           not null
 #  amount_limit    :integer          not null
 #  current_balance :float            default(0.0), not null
+#  deleted_at      :datetime
 #  status          :integer          default("inactive"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -14,6 +15,7 @@
 # Indexes
 #
 #  index_customers_on_account_type_id  (account_type_id)
+#  index_customers_on_deleted_at       (deleted_at)
 #
 # Foreign Keys
 #

@@ -13,6 +13,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
+#
 FactoryBot.define do
   factory :user do
     username { Faker::Alphanumeric.alphanumeric(number: 10) }

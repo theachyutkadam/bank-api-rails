@@ -3,6 +3,7 @@
 # Table name: managers
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  designation   :integer          not null
 #  status        :integer          default("inactive")
 #  created_at    :datetime         not null
@@ -12,6 +13,7 @@
 #
 # Indexes
 #
+#  index_managers_on_deleted_at     (deleted_at)
 #  index_managers_on_department_id  (department_id)
 #  index_managers_on_user_id        (user_id)
 #
@@ -21,6 +23,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Manager < ApplicationRecord
+  acts_as_paranoid
   belongs_to :user
   belongs_to :department
 
