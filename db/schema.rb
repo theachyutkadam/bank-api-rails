@@ -47,6 +47,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.integer "csv", null: false
     t.uuid "customer_id", null: false
     t.integer "status", default: 1, null: false
+    t.datetime "active_at", precision: nil
+    t.datetime "inactive_at", precision: nil
+    t.datetime "blocked_at", precision: nil
+    t.datetime "closed_at", precision: nil
     t.boolean "is_deleted"
     t.integer "pin", null: false
     t.datetime "created_at", null: false
@@ -62,6 +66,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.integer "amount_limit", null: false
     t.integer "status", default: 1, null: false
     t.float "current_balance", default: 0.0, null: false
+    t.datetime "active_at", precision: nil
+    t.datetime "inactive_at", precision: nil
+    t.datetime "blocked_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -88,6 +95,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.string "designation", null: false
     t.float "salary_amount", default: 0.0, null: false
     t.date "date_of_joining", null: false
+    t.datetime "active_at"
+    t.datetime "available_at"
+    t.datetime "resignate_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -376,6 +386,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.string "token"
     t.integer "status", default: 0, null: false
     t.boolean "is_admin", default: false, null: false
+    t.datetime "active_at", precision: nil
+    t.datetime "inactive_at", precision: nil
+    t.datetime "blocked_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"

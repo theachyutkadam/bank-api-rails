@@ -3,9 +3,13 @@
 # Table name: cards
 #
 #  id          :uuid             not null, primary key
+#  active_at   :datetime
+#  blocked_at  :datetime
+#  closed_at   :datetime
 #  csv         :integer          not null
 #  deleted_at  :datetime
 #  expire_date :datetime         not null
+#  inactive_at :datetime
 #  is_deleted  :boolean
 #  number      :bigint           not null
 #  pin         :integer          not null
