@@ -41,15 +41,13 @@ RSpec.describe Particular, type: :model do
     # create employee
     let(:employee_user) { create(:user) }
     let(:department) { create(:department, name: 'HR') }
-    let(:account_type) { create(:account_type) }
     let(:customer) { create(:customer, account_type: account_type) }
 
-    let(:manager) { create(:manager, user: employee_user, department: department) }
+    # let(:manager) { create(:manager, user: employee_user, department: department) }
     let(:employee) { create(:employee, manager: manager, department: department, customer: customer) }
     let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
 
     # create admin customer
-    let(:account_type) { create(:account_type) }
     let(:admin_user) { create(:user, is_admin: true, email: 'admin@gmail.com') }
     let!(:admin_customer) { create(:customer, account_type: account_type, current_balance: 1_000_000.00) }
     let(:admin_card) { create(:card, status: 0, customer: admin_customer) }
