@@ -4,9 +4,12 @@
 #
 #  id              :uuid             not null, primary key
 #  account_number  :bigint           not null
+#  active_at       :datetime
 #  amount_limit    :integer          not null
+#  blocked_at      :datetime
 #  current_balance :float            default(0.0), not null
 #  deleted_at      :datetime
+#  inactive_at     :datetime
 #  status          :integer          default("inactive"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -22,6 +25,7 @@
 #  fk_rails_...  (account_type_id => account_types.id)
 #
 class Customer < ApplicationRecord
+  include AASM
   acts_as_paranoid
   belongs_to :account_type
 
@@ -41,6 +45,19 @@ class Customer < ApplicationRecord
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
 
   before_validation :set_customer_details
+
+  aasm :status, timestamps: true do
+    state :inactive, initial: true
+    state :active, :blocked
+
+    event :activate do
+      transitions from: :inactive, to: :active
+    end
+
+    event :block do
+      transitions from: [:active, :inactive], to: :blocked
+    end
+  end
 
   def set_customer_details
     self.account_number ||= generate_account_number

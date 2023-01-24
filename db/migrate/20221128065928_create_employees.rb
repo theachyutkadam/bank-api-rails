@@ -10,6 +10,9 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.string :designation, null: false
       t.float :salary_amount, default: 0, null: false
       t.date :date_of_joining, null: false
+      t.datetime :active_at
+      t.datetime :available_at
+      t.datetime :resignate_at
 
       t.timestamps
     end

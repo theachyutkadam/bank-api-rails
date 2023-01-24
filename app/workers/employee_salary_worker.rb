@@ -31,7 +31,8 @@ class EmployeeSalaryWorker
 
   def check_amount
     admin_customer = @sender.accountable
-    admin_customer.update(current_balance: 10_000_000, status: 0) if admin_customer.current_balance <= 100_000
+    admin_customer.activate! unless admin_customer.active?
+    admin_customer.update(current_balance: 10_000_000) if admin_customer.current_balance <= 100_000
     @sender.reload
   end
 end

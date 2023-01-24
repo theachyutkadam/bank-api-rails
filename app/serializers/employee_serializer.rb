@@ -3,11 +3,14 @@
 # Table name: employees
 #
 #  id              :uuid             not null, primary key
+#  active_at       :datetime
+#  available_at    :datetime
 #  date_of_joining :date             not null
 #  deleted_at      :datetime
 #  designation     :string           not null
 #  education       :string           not null
 #  official_email  :string
+#  resignate_at    :datetime
 #  salary_amount   :float            default(0.0), not null
 #  work_status     :integer          default("available"), not null
 #  created_at      :datetime         not null

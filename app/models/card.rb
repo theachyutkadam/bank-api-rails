@@ -3,9 +3,13 @@
 # Table name: cards
 #
 #  id          :uuid             not null, primary key
+#  active_at   :datetime
+#  blocked_at  :datetime
+#  closed_at   :datetime
 #  csv         :integer          not null
 #  deleted_at  :datetime
 #  expire_date :datetime         not null
+#  inactive_at :datetime
 #  is_deleted  :boolean
 #  number      :bigint           not null
 #  pin         :integer          not null
@@ -25,6 +29,7 @@
 #  fk_rails_...  (customer_id => customers.id)
 #
 class Card < ApplicationRecord
+  include AASM
   acts_as_paranoid
   belongs_to :customer
   has_many :transactions, dependent: :destroy
@@ -42,8 +47,24 @@ class Card < ApplicationRecord
 
   before_validation :set_card_details, on: :create
   
+  aasm :status, timestamps: true do
+    state :inactive, initial: true
+    state :active, :blocked, :closed
+
+    event :activate do
+      transitions from: [:closed, :inactive], to: :active
+    end
+
+    event :block do
+      transitions from: :active, to: :blocked
+    end
+
+    event :close do
+      transitions from: [:active, :inactive, :blocked], to: :closed
+    end
+  end
+
   def set_card_details
-    self.status ||= 1
     self.csv ||= rand(100..999)
     self.pin ||= rand(1000..9999)
     self.number ||= generate_number

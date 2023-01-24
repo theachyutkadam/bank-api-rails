@@ -6,6 +6,9 @@ class CreateCustomers < ActiveRecord::Migration[7.0]
       t.integer :amount_limit, null: false
       t.integer :status, null: false, default: 1
       t.float :current_balance, default: 0, null: false
+      t.timestamp :active_at
+      t.timestamp :inactive_at
+      t.timestamp :blocked_at
 
       t.timestamps
     end

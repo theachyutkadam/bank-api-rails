@@ -126,7 +126,8 @@ end
 
 def set_admin_current_balance
   admin_customer = admin_accountable
-  admin_customer.update(current_balance: Employee.sum(:salary_amount), status: 0) if admin_customer.current_balance <= 100_000
+  admin_customer.activate! unless admin_customer.active?
+  admin_customer.update(current_balance: Employee.sum(:salary_amount)) if admin_customer.current_balance <= 100_000
   admin_customer.reload
 end
 

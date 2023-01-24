@@ -3,11 +3,14 @@
 # Table name: employees
 #
 #  id              :uuid             not null, primary key
+#  active_at       :datetime
+#  available_at    :datetime
 #  date_of_joining :date             not null
 #  deleted_at      :datetime
 #  designation     :string           not null
 #  education       :string           not null
 #  official_email  :string
+#  resignate_at    :datetime
 #  salary_amount   :float            default(0.0), not null
 #  work_status     :integer          default("available"), not null
 #  created_at      :datetime         not null
@@ -30,6 +33,7 @@
 #  fk_rails_...  (manager_id => managers.id)
 #
 class Employee < ApplicationRecord
+  include AASM
   acts_as_paranoid
   belongs_to :manager
   belongs_to :customer
@@ -45,6 +49,23 @@ class Employee < ApplicationRecord
   validates :work_status, inclusion: { in: work_statuses.keys }
 
   after_create :update_employee_count
+
+  aasm :work_status, timestamps: true do
+    state :available, initial: true
+    state :resignate, :on_leave
+
+    event :present do
+      transitions from: :on_leave, to: :available
+    end
+
+    event :leave do
+      transitions from: :available, to: :on_leave
+    end
+
+    event :resign do
+      transitions from: [:available, :on_leave], to: :resignate
+    end
+  end
 
   def update_employee_count
     department.update(employee_count: department.employee_count + 1)

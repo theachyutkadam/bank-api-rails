@@ -7,6 +7,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :token, default: nil
       t.integer :status, null: false, default: 0
       t.boolean :is_admin, null: false, default: false
+      t.timestamp :active_at
+      t.timestamp :inactive_at
+      t.timestamp :blocked_at
 
       t.timestamps
     end
