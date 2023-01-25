@@ -1,7 +1,7 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  def self.record_count #class method
+  def self.record_count # class method
     # puts '***************************************'
     # puts "   #{Card.count}            = Card             ="
     # puts "   #{User.count}            = User             ="

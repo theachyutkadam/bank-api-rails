@@ -93,6 +93,7 @@ def create_user
   user = FactoryBot.build(:user)
   user.save if user.valid?
   return User.order(created_at: :asc).last if user.save
+
   p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each { |error| p error }}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   @counter += 1
   create_user
@@ -142,10 +143,10 @@ end
 def activate_admin_card
   set_admin_current_balance
   card = admin_card
-  unless card.active?
-    card.active!
-    card.reload
-  end
+  return if card.active?
+
+  card.active!
+  card.reload
 end
 
 def admin_card

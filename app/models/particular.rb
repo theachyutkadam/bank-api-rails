@@ -51,17 +51,17 @@ class Particular < ApplicationRecord
   end
 
   def check_limit
-    unless sender.user.is_admin?
-      errors.add(:amount, "Maximum transaction limit is: #{Customer::AMOUNT_LIMIT}") if amount > Customer::AMOUNT_LIMIT
-    end
+    return if sender.user.is_admin?
+
+    errors.add(:amount, "Maximum transaction limit is: #{Customer::AMOUNT_LIMIT}") if amount > Customer::AMOUNT_LIMIT
   end
 
   def update_current_balance(sender_id, receiver_id, amount)
     sender_accountable = UserInformation.find(sender_id).accountable
     receiver_accountable = UserInformation.find(receiver_id).accountable
 
-    sender_accountable = sender_accountable.customer if sender_accountable.class.name == "Employee"
-    receiver_accountable = receiver_accountable.customer if receiver_accountable.class.name == "Employee"
+    sender_accountable = sender_accountable.customer if sender_accountable.instance_of?(::Employee)
+    receiver_accountable = receiver_accountable.customer if receiver_accountable.instance_of?(::Employee)
 
     sender_accountable.update(current_balance: sender_accountable.current_balance - amount.to_f)
     receiver_accountable.update(current_balance: receiver_accountable.current_balance + amount.to_f)

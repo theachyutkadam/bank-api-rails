@@ -62,6 +62,6 @@ group :development do
   gem 'rubocop-rspec', require: false
 end
 
-gem 'motor-admin', '~> 0.4.4'
-gem 'acts_as_paranoid'
 gem 'aasm'
+gem 'acts_as_paranoid'
+gem 'motor-admin', '~> 0.4.4'

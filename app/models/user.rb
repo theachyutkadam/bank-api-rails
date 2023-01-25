@@ -39,11 +39,11 @@ class User < ApplicationRecord
     state :inactive, :blocked
 
     event :activate do
-      transitions from: [:inactive, :blocked], to: :active
+      transitions from: %i[inactive blocked], to: :active
     end
 
     event :block do
-      transitions from: [:active, :inactive], to: :blocked
+      transitions from: %i[active inactive], to: :blocked
     end
   end
 

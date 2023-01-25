@@ -150,9 +150,9 @@ class InstallMotorAdmin < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.index 'name',
-        name: 'motor_api_configs_name_unique_index',
-        unique: true,
-        where: 'deleted_at IS NULL'
+              name: 'motor_api_configs_name_unique_index',
+              unique: true,
+              where: 'deleted_at IS NULL'
     end
 
     create_table :motor_notes do |t|

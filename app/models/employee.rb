@@ -63,7 +63,7 @@ class Employee < ApplicationRecord
     end
 
     event :resign do
-      transitions from: [:available, :on_leave], to: :resignate
+      transitions from: %i[available on_leave], to: :resignate
     end
   end
 

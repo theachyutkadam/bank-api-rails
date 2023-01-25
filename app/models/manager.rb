@@ -30,11 +30,11 @@ class Manager < ApplicationRecord
   has_many :employee, dependent: :destroy
   enum status: { active: 0, inactive: 1, pending: 2 }
   enum designation: {
-                      ceo: 0,
-                      team_leader: 1,
-                      desk_manager: 2,
-                      senior_manager:3
-                    }, _default: 'senior_manager'
+    ceo: 0,
+    team_leader: 1,
+    desk_manager: 2,
+    senior_manager: 3
+  }, _default: 'senior_manager'
 
   validates :designation, presence: true
   validates :status, inclusion: { in: statuses.keys }

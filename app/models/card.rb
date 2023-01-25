@@ -46,13 +46,13 @@ class Card < ApplicationRecord
   validates :pin, length: { is: 4 }
 
   before_validation :set_card_details, on: :create
-  
+
   aasm :status, timestamps: true do
     state :inactive, initial: true
     state :active, :blocked, :closed
 
     event :activate do
-      transitions from: [:closed, :inactive], to: :active
+      transitions from: %i[closed inactive], to: :active
     end
 
     event :block do
@@ -60,7 +60,7 @@ class Card < ApplicationRecord
     end
 
     event :close do
-      transitions from: [:active, :inactive, :blocked], to: :closed
+      transitions from: %i[active inactive blocked], to: :closed
     end
   end
 

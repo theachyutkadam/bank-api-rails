@@ -4,7 +4,7 @@ class EmployeeSalaryWorker
   def perform(*_args)
     p 'start salary process'
     @sender = User.where(is_admin: true).first.user_information
-    employees =  Employee.not_resignate
+    employees = Employee.not_resignate
     employees.each do |employee|
       check_amount
       unless Salary.where('extract(month from created_at) = ?', Date.today.month).where(employee_id: employee.id).any?

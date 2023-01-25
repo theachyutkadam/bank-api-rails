@@ -39,7 +39,7 @@ class Customer < ApplicationRecord
 
   AMOUNT_LIMIT = 20_000
 
-  enum status: { active: 0, inactive: 1, blocked: 2}, _default: 'inactive'
+  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: 'inactive'
 
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
@@ -55,7 +55,7 @@ class Customer < ApplicationRecord
     end
 
     event :block do
-      transitions from: [:active, :inactive], to: :blocked
+      transitions from: %i[active inactive], to: :blocked
     end
   end
 
@@ -78,7 +78,8 @@ class Customer < ApplicationRecord
   end
 
   def user_information
-    return self.employee.user_information if self.employee.present? # employee login
+    return employee.user_information if employee.present? # employee login
+
     UserInformation.find_by(accountable_id: id) # customer login
   end
 end
