@@ -80,6 +80,6 @@ class Customer < ApplicationRecord
   def user_information
     return employee.user_information if employee.present? # employee login
 
-    UserInformation.find_by(accountable_id: id) # customer login
+    UserInformation.find_by(accountable_id: id, accountable_type: 'Customer') # customer login
   end
 end

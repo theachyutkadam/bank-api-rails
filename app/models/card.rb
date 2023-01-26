@@ -84,7 +84,5 @@ class Card < ApplicationRecord
     end
   end
 
-  def user_information
-    customer.user_information
-  end
+  delegate :user_information, to: :customer
 end
