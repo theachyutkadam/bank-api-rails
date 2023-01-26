@@ -52,7 +52,7 @@ class Card < ApplicationRecord
     state :active, :blocked, :closed
 
     event :activate do
-      transitions from: %i[closed inactive], to: :active
+      transitions from: %i[inactive], to: :active
     end
 
     event :block do
@@ -82,5 +82,9 @@ class Card < ApplicationRecord
     else
       card_number
     end
+  end
+
+  def user_information
+    customer.user_information
   end
 end

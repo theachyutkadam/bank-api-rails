@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @cards = Card.includes(:customer).all
+    @cards = Card.order(title: :asc, status: :asc)
     render json: @cards
   end
 
