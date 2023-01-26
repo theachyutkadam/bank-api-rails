@@ -3,18 +3,18 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.record_count # added for learn rebase main branch
     puts '***************************************'
-    puts "   #{Card.count}            = Card             ="
-    puts "   #{User.count}            = User             ="
-    puts "   #{Salary.count}          = Salary           ="
-    puts "   #{Manager.count}         = Manager          ="
-    puts "   #{Nominee.count}         = Nominee          ="
-    puts "   #{Address.count}         = Address          ="
-    puts "   #{Employee.count}        = Employee         ="
-    puts "   #{Customer.count}        = Customer         ="
-    puts "   #{Department.count}      = Department       ="
-    puts "   #{Particular.count}      = Particular       ="
-    puts "   #{AccountType.count}     = Account_type     ="
-    puts "   #{UserInformation.count} = User_information ="
+    puts "---Card             = #{Card.count}            "
+    puts "---User             = #{User.count}            "
+    puts "---Salary           = #{Salary.count}          "
+    puts "---Manager          = #{Manager.count}         "
+    puts "---Nominee          = #{Nominee.count}         "
+    puts "---Address          = #{Address.count}         "
+    puts "---Employee         = #{Employee.count}        "
+    puts "---Customer         = #{Customer.count}        "
+    puts "---Department       = #{Department.count}      "
+    puts "---Particular       = #{Particular.count}      "
+    puts "---Account_type     = #{AccountType.count}     "
+    puts "---User_information = #{UserInformation.count} "
     puts '***************************************'
   end
 end
