@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DepartmentsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -39,7 +41,7 @@ class DepartmentsController < ApplicationController
   def department_params
     params.permit(
       :name,
-      :employee_count
+      :employee_count,
     )
   end
 

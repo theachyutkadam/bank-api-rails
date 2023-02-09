@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmployeesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -46,7 +48,7 @@ class EmployeesController < ApplicationController
       :manager_id,
       :customer_id,
       :salary_amount,
-      :department_id
+      :department_id,
     )
   end
 

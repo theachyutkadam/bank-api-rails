@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CardsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -45,7 +47,7 @@ class CardsController < ApplicationController
       :pin,
       :status,
       :title,
-      :customer_id
+      :customer_id,
     )
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -41,7 +43,7 @@ class CustomersController < ApplicationController
       :account_number,
       :amount_limit,
       :current_balance,
-      :account_type_id
+      :account_type_id,
     )
   end
 

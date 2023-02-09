@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SalariesController < ApplicationController
   include Rails.application.routes.url_helpers
 
@@ -44,7 +46,7 @@ class SalariesController < ApplicationController
       :status,
       :amount,
       :employee_id,
-      :particular_id
+      :particular_id,
     )
   end
 

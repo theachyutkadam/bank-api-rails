@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: managers
@@ -33,8 +35,8 @@ class Manager < ApplicationRecord
     ceo: 0,
     team_leader: 1,
     desk_manager: 2,
-    senior_manager: 3
-  }, _default: 'senior_manager'
+    senior_manager: 3,
+  }, _default: "senior_manager"
 
   validates :designation, presence: true
   validates :status, inclusion: { in: statuses.keys }

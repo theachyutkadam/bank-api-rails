@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmployeeSalaryJob < ApplicationJob
   #   queue_as :default
   #   RUN_EVERY = 1.minute

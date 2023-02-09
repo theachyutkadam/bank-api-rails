@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: customers
@@ -29,6 +31,7 @@ class CustomerSerializer < ActiveModel::Serializer
 
   def user_information
     return object.employee.user_information if object.employee
+
     object.user_information
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: salaries
@@ -28,7 +30,7 @@ class Salary < ApplicationRecord
   belongs_to :employee
   belongs_to :particular
 
-  enum status: { paid: 0, unpaid: 1, pending: 2 }, _default: 'pending'
+  enum status: { paid: 0, unpaid: 1, pending: 2 }, _default: "pending"
 
   validates :status, inclusion: { in: statuses.keys }
   validates :amount, length: { in: 1..200_000 }

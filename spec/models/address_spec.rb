@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: addresses
@@ -19,11 +21,11 @@
 #  index_addresses_on_addressable  (addressable_type,addressable_id)
 #  index_addresses_on_deleted_at   (deleted_at)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Address, type: :model do
-  context '#create' do
-    it 'should create new address' do
+  context "#create" do
+    it "should create new address" do
       account_type = FactoryBot.create(:account_type)
       customer = FactoryBot.create(:customer, account_type: account_type)
       FactoryBot.create_list(:address, 5, addressable: customer)
@@ -31,8 +33,8 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  context '#ActiveRecord associations' do
-    it 'should belongs_to addressable' do
+  context "#ActiveRecord associations" do
+    it "should belongs_to addressable" do
       expect(Address.reflect_on_association(:addressable).macro).to eq(:belongs_to)
     end
   end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # == Route Map
 #
-require 'sidekiq/web'
-require 'sidekiq/cron/web'
+require "sidekiq/web"
+require "sidekiq/cron/web"
 Rails.application.routes.draw do
-  mount Motor::Admin => '/motor_admin'
-  mount Sidekiq::Web => '/admin/sidekiq'
+  mount Motor::Admin => "/motor_admin"
+  mount Sidekiq::Web => "/admin/sidekiq"
   resources :salaries, except: %i[new edit]
   resources :account_types, except: %i[new edit]
   resources :cards, except: %i[new edit]
@@ -17,8 +19,8 @@ Rails.application.routes.draw do
   resources :employees, except: %i[new edit]
   resources :user_informations, except: %i[new edit]
   resources :users, except: %i[new edit] do
-    post 'login', on: :collection
-    get 'logout', on: :collection
+    post "login", on: :collection
+    get "logout", on: :collection
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

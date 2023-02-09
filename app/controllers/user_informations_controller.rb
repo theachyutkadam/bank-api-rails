@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserInformationsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -16,7 +18,7 @@ class UserInformationsController < ApplicationController
         render json: @user_information.errors, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
-      puts 'Oops. We tried to do an invalid operation!'
+      Rails.logger.debug "Oops. We tried to do an invalid operation!"
     end
   end
 
@@ -57,7 +59,7 @@ class UserInformationsController < ApplicationController
       :pan_card_number,
       :accountable_type,
       :handicap_details,
-      :adhaar_card_number
+      :adhaar_card_number,
     )
   end
 

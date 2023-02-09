@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: departments
@@ -15,7 +17,7 @@
 #
 FactoryBot.define do
   factory :department do
-    name { 'Finance' }
+    name { "Finance" }
     employee_count { Faker::Number.number(digits: 2) }
   end
 end

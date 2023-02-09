@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: particulars
@@ -25,12 +27,12 @@
 #  fk_rails_...  (receiver_id => user_informations.id)
 #  fk_rails_...  (sender_id => user_informations.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Particular, type: :model do
-  context '#create' do
+  context "#create" do
     let(:manager_user) { create(:user) }
-    let(:department) { create(:department, name: 'Finance') }
+    let(:department) { create(:department, name: "Finance") }
     let(:account_type) { create(:account_type) }
     let(:customer) { create(:customer, account_type: account_type) }
 
@@ -40,7 +42,7 @@ RSpec.describe Particular, type: :model do
 
     # create employee
     let(:employee_user) { create(:user) }
-    let(:department) { create(:department, name: 'HR') }
+    let(:department) { create(:department, name: "HR") }
     let(:customer) { create(:customer, account_type: account_type) }
 
     # let(:manager) { create(:manager, user: employee_user, department: department) }
@@ -48,23 +50,23 @@ RSpec.describe Particular, type: :model do
     let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
 
     # create admin customer
-    let(:admin_user) { create(:user, is_admin: true, email: 'admin@gmail.com') }
+    let(:admin_user) { create(:user, is_admin: true, email: "admin@gmail.com") }
     let!(:admin_customer) { create(:customer, account_type: account_type, current_balance: 1_000_000.00) }
     let(:admin_card) { create(:card, status: 0, customer: admin_customer) }
 
     let(:admin_sender) { create(:user_information, user: admin_user, accountable: admin_customer) }
-    it 'should create new address' do
+    it "should create new address" do
       FactoryBot.create_list(:particular, 5, card: admin_card, sender: admin_sender,
                                              receiver: employee_user_information)
       expect(Particular.count).to eq(5)
     end
   end
 
-  context '#ActiveRecord associations' do
-    it 'should belongs_to sender' do
+  context "#ActiveRecord associations" do
+    it "should belongs_to sender" do
       expect(Particular.reflect_on_association(:sender).macro).to eq(:belongs_to)
     end
-    it 'should belongs_to receiver' do
+    it "should belongs_to receiver" do
       expect(Particular.reflect_on_association(:receiver).macro).to eq(:belongs_to)
     end
   end

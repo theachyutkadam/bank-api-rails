@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddressesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -44,7 +46,7 @@ class AddressesController < ApplicationController
       :flat_number,
       :pin_code,
       :street,
-      :addressable_id
+      :addressable_id,
     )
   end
 

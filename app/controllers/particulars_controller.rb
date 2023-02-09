@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ParticularsController < ApplicationController
   include Rails.application.routes.url_helpers
 
@@ -19,7 +21,7 @@ class ParticularsController < ApplicationController
         render json: @particular.errors, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
-      puts 'Oops. We tried to do an invalid operation!'
+      Rails.logger.debug "Oops. We tried to do an invalid operation!"
     end
   end
 
@@ -50,7 +52,7 @@ class ParticularsController < ApplicationController
       :amount,
       :card_id,
       :sender_id,
-      :receiver_id
+      :receiver_id,
     )
   end
 

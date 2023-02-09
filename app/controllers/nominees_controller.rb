@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NomineesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -44,7 +46,7 @@ class NomineesController < ApplicationController
       :last_name,
       :middle_name,
       :relation,
-      :customer_id
+      :customer_id,
     )
   end
 

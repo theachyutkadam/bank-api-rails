@@ -1,20 +1,23 @@
+# frozen_string_literal: true
+
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  def self.record_count # added for learn rebase main branch
-    puts '***************************************'
-    puts "---Card             = #{Card.count}            "
-    puts "---User             = #{User.count}            "
-    puts "---Salary           = #{Salary.count}          "
-    puts "---Manager          = #{Manager.count}         "
-    puts "---Nominee          = #{Nominee.count}         "
-    puts "---Address          = #{Address.count}         "
-    puts "---Employee         = #{Employee.count}        "
-    puts "---Customer         = #{Customer.count}        "
-    puts "---Department       = #{Department.count}      "
-    puts "---Particular       = #{Particular.count}      "
-    puts "---Account_type     = #{AccountType.count}     "
-    puts "---User_information = #{UserInformation.count} "
-    puts '***************************************'
+  # added for learn rebase main branch
+  def self.record_count
+    Rails.logger.debug "***************************************"
+    Rails.logger.debug "---Card             = #{Card.count}            "
+    Rails.logger.debug "---User             = #{User.count}            "
+    Rails.logger.debug "---Salary           = #{Salary.count}          "
+    Rails.logger.debug "---Manager          = #{Manager.count}         "
+    Rails.logger.debug "---Nominee          = #{Nominee.count}         "
+    Rails.logger.debug "---Address          = #{Address.count}         "
+    Rails.logger.debug "---Employee         = #{Employee.count}        "
+    Rails.logger.debug "---Customer         = #{Customer.count}        "
+    Rails.logger.debug "---Department       = #{Department.count}      "
+    Rails.logger.debug "---Particular       = #{Particular.count}      "
+    Rails.logger.debug "---Account_type     = #{AccountType.count}     "
+    Rails.logger.debug "---User_information = #{UserInformation.count} "
+    Rails.logger.debug "***************************************"
   end
 end

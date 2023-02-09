@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ManagersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
@@ -41,7 +43,7 @@ class ManagersController < ApplicationController
       :designation,
       :status,
       :department_id,
-      :user_id
+      :user_id,
     )
   end
 

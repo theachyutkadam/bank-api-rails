@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: customers
@@ -39,7 +41,7 @@ class Customer < ApplicationRecord
 
   AMOUNT_LIMIT = 20_000 # contant variable
 
-  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: 'inactive'
+  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: "inactive"
 
   validates :account_number, :amount_limit, presence: true
   validates :account_number, uniqueness: true, numericality: true, length: { is: 10 }
@@ -80,6 +82,6 @@ class Customer < ApplicationRecord
   def user_information
     return employee.user_information if employee.present? # employee login
 
-    UserInformation.find_by(accountable_id: id, accountable_type: 'Customer') # customer login
+    UserInformation.find_by(accountable_id: id, accountable_type: "Customer") # customer login
   end
 end

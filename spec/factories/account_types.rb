@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: account_types
@@ -16,6 +18,6 @@
 #
 FactoryBot.define do
   factory :account_type do
-    title { 'Saving' }
+    title { "Saving" }
   end
 end

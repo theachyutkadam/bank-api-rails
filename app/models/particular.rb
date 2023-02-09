@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: particulars
@@ -28,8 +30,8 @@
 class Particular < ApplicationRecord
   acts_as_paranoid
   belongs_to :card
-  belongs_to :sender, class_name: 'UserInformation'
-  belongs_to :receiver, class_name: 'UserInformation'
+  belongs_to :sender, class_name: "UserInformation"
+  belongs_to :receiver, class_name: "UserInformation"
 
   has_many :salaries, dependent: :destroy
 
@@ -40,9 +42,9 @@ class Particular < ApplicationRecord
   def validate_amount
     sender = self.sender.accountable
     if sender.instance_of?(::Employee)
-      errors.add(:amount, 'Insuficiant balance') if sender.customer.current_balance < amount
+      errors.add(:amount, "Insuficiant balance") if sender.customer.current_balance < amount
     elsif sender.current_balance < amount
-      errors.add(:amount, 'Insuficiant balance')
+      errors.add(:amount, "Insuficiant balance")
     end
   end
 
