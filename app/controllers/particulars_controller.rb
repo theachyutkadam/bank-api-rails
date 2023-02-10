@@ -37,7 +37,7 @@ class ParticularsController < ApplicationController
     render json: @particular
   end
 
-  def delete
+  def destroy
     if @particular.destroy
       head :no_content
     else

@@ -28,7 +28,7 @@ class AccountTypesController < ApplicationController
     render json: @account_type, status: :ok
   end
 
-  def delete
+  def destroy
     if @account_type.destroy
       head :no_content
     else

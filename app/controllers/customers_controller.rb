@@ -28,7 +28,7 @@ class CustomersController < ApplicationController
     render json: @customer
   end
 
-  def delete
+  def destroy
     if @customer.destroy
       head :no_content
     else

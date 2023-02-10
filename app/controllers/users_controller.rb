@@ -30,8 +30,8 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  def delete
-    if @user.destroy
+  def destroy
+    if @user.destroy!
       head :no_content
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -40,6 +40,8 @@ class UsersController < ApplicationController
 
   def login
     @user = User.find_by(email: params[:email])
+    return render json: { errors: "Email not found" }, status: :unauthorized unless @user
+
     if @user.password == params[:password]
       return render json: { message: "You already logged in", auth_token: @user.token } if @user.token.present?
 

@@ -28,7 +28,7 @@ class EmployeesController < ApplicationController
     render json: @employee
   end
 
-  def delete
+  def destroy
     if @employee.destroy
       head :no_content
     else

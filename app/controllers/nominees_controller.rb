@@ -28,7 +28,7 @@ class NomineesController < ApplicationController
     render json: @nominee
   end
 
-  def delete
+  def destroy
     if @nominee.destroy
       head :no_content
     else

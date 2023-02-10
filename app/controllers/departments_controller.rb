@@ -28,7 +28,7 @@ class DepartmentsController < ApplicationController
     render json: @department
   end
 
-  def delete
+  def destroy
     if @department.destroy
       head :no_content
     else

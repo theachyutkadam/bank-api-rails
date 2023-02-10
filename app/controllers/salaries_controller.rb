@@ -31,7 +31,7 @@ class SalariesController < ApplicationController
     render json: @salary
   end
 
-  def delete
+  def destroy
     if @salary.destroy
       head :no_content
     else

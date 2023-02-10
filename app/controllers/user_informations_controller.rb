@@ -34,7 +34,7 @@ class UserInformationsController < ApplicationController
     render json: @user_information
   end
 
-  def delete
+  def destroy
     if @user_information.destroy
       head :no_content
     else

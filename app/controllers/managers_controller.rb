@@ -28,7 +28,7 @@ class ManagersController < ApplicationController
     render json: @manager
   end
 
-  def delete
+  def destroy
     if @manager.destroy
       head :no_content
     else

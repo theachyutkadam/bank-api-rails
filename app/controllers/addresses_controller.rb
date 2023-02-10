@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
     render json: @address
   end
 
-  def delete
+  def destroy
     if @address.destroy
       head :no_content
     else

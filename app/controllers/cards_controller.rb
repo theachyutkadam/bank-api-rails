@@ -28,7 +28,7 @@ class CardsController < ApplicationController
     render json: @card
   end
 
-  def delete
+  def destroy
     if @card.destroy
       head :no_content
     else
