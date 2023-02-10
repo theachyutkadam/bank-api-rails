@@ -74,7 +74,7 @@ RSpec.describe "User", type: :request do
       it "returns status code 401" do
         post "/users/login", params: user_attributes
         error = JSON.parse(response.body)["errors"]
-        expect(error).to eq("Email not found")
+        expect(error).to eq("User does not found")
       end
     end
   end

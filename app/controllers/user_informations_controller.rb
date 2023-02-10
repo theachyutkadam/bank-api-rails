@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserInformationsController < ApplicationController
-  before_action :set_user, only: %i[destroy show update]
+  before_action :set_user_information, only: %i[destroy show update]
   def index
     @user_informations = UserInformation.includes(:user, :accountable).first(1000)
     render json: @user_informations
@@ -63,7 +63,7 @@ class UserInformationsController < ApplicationController
     )
   end
 
-  def set_user
+  def set_user_information
     @user_information = UserInformation.find(params[:id])
   end
 end
