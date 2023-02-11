@@ -2,7 +2,7 @@
 #
 # Table name: employees
 #
-#  id              :uuid             not null, primary key
+#  id              :integer          not null, primary key
 #  active_at       :datetime
 #  available_at    :datetime
 #  date_of_joining :date             not null
@@ -28,7 +28,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (customer_id => customers.id)
-#  fk_rails_...  (department_id => departments.id)
-#  fk_rails_...  (manager_id => managers.id)
+#  customer_id    (customer_id => customers.id)
+#  department_id  (department_id => departments.id)
+#  manager_id     (manager_id => managers.id)
 #

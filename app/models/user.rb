@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id          :uuid             not null, primary key
+#  id          :integer          not null, primary key
 #  active_at   :datetime
 #  blocked_at  :datetime
 #  deleted_at  :datetime

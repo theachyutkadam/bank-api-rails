@@ -2,7 +2,7 @@
 #
 # Table name: managers
 #
-#  id            :uuid             not null, primary key
+#  id            :integer          not null, primary key
 #  deleted_at    :datetime
 #  designation   :integer          not null
 #  status        :integer          default("inactive")
@@ -19,8 +19,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (department_id => departments.id)
-#  fk_rails_...  (user_id => users.id)
+#  department_id  (department_id => departments.id)
+#  user_id        (user_id => users.id)
 #
 class Manager < ApplicationRecord
   acts_as_paranoid

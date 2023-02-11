@@ -2,7 +2,7 @@
 #
 # Table name: salaries
 #
-#  id            :uuid             not null, primary key
+#  id            :integer          not null, primary key
 #  amount        :float            not null
 #  deleted_at    :datetime
 #  description   :text
@@ -20,6 +20,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (employee_id => employees.id)
-#  fk_rails_...  (particular_id => particulars.id)
+#  employee_id    (employee_id => employees.id)
+#  particular_id  (particular_id => particulars.id)
 #

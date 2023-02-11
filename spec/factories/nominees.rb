@@ -2,7 +2,7 @@
 #
 # Table name: nominees
 #
-#  id          :uuid             not null, primary key
+#  id          :integer          not null, primary key
 #  contact     :string           not null
 #  deleted_at  :datetime
 #  first_name  :string           not null
@@ -21,7 +21,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (customer_id => customers.id)
+#  customer_id  (customer_id => customers.id)
 #
 FactoryBot.define do
   factory :nominee do

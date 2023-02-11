@@ -2,7 +2,7 @@
 #
 # Table name: nominees
 #
-#  id          :uuid             not null, primary key
+#  id          :integer          not null, primary key
 #  contact     :string           not null
 #  deleted_at  :datetime
 #  first_name  :string           not null
@@ -21,12 +21,13 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (customer_id => customers.id)
+#  customer_id  (customer_id => customers.id)
 #
 class Nominee < ApplicationRecord
   acts_as_paranoid
   belongs_to :customer
 
+  delegate :user_information, to: :customer
   has_one :address, as: :addressable, dependent: :destroy
 
   enum gender: { male: 0, female: 1, transgender: 2 }

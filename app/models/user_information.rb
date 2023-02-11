@@ -2,7 +2,7 @@
 #
 # Table name: user_informations
 #
-#  id                 :uuid             not null, primary key
+#  id                 :integer          not null, primary key
 #  accountable_type   :string
 #  adhaar_card_number :string           not null
 #  birth_date         :date             not null
@@ -29,7 +29,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  user_id  (user_id => users.id)
 #
 class UserInformation < ApplicationRecord
   acts_as_paranoid

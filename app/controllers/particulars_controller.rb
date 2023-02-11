@@ -4,6 +4,7 @@ class ParticularsController < ApplicationController
   before_action :set_particular, only: %i[destroy show update]
 
   def index
+    # @particulars = Particular.all
     @particulars = Particular.includes(:sender, :receiver, :card).all
     render json: @particulars
   end
