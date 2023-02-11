@@ -2,7 +2,7 @@
 #
 # Table name: customers
 #
-#  id              :uuid             not null, primary key
+#  id              :integer          not null, primary key
 #  account_number  :bigint           not null
 #  active_at       :datetime
 #  amount_limit    :integer          not null
@@ -22,5 +22,5 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (account_type_id => account_types.id)
+#  account_type_id  (account_type_id => account_types.id)
 #

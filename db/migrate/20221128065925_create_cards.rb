@@ -1,6 +1,6 @@
 class CreateCards < ActiveRecord::Migration[7.0]
   def change
-    create_table :cards, id: :uuid do |t|
+    create_table :cards do |t|
       t.integer :title, null: false
       t.bigint :number, null: false
       t.datetime :expire_date, null: false

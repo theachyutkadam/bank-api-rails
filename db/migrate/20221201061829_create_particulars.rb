@@ -1,6 +1,6 @@
 class CreateParticulars < ActiveRecord::Migration[7.0]
   def change
-    create_table :particulars, id: :uuid do |t|
+    create_table :particulars do |t|
       t.references :card, type: :uuid, null: false, foreign_key: true
       t.float :amount, null: false
       t.text :description, null: true

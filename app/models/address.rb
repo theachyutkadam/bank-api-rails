@@ -2,7 +2,7 @@
 #
 # Table name: addresses
 #
-#  id               :uuid             not null, primary key
+#  id               :integer          not null, primary key
 #  addressable_type :string
 #  building         :string
 #  deleted_at       :datetime

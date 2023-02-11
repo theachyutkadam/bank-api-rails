@@ -22,7 +22,6 @@ def create_admin_user
     create_address(admin_customer)
     create_address(admin_nominee)
     create_user_information(admin_user, admin_customer, admin_customer)
-    Card.first.update(status: 0)
   end
   create_manager # create manager
 end
@@ -145,7 +144,7 @@ def activate_admin_card
   card = admin_card
   return if card.active?
 
-  card.active!
+  card.update(status: 0)
   card.reload
 end
 

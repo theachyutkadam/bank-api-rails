@@ -2,7 +2,7 @@
 #
 # Table name: account_types
 #
-#  id                  :uuid             not null, primary key
+#  id                  :integer          not null, primary key
 #  deleted_at          :datetime
 #  loan_intrest_rate   :float            not null
 #  saving_intrest_rate :float            not null

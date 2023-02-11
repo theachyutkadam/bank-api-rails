@@ -2,7 +2,7 @@
 #
 # Table name: cards
 #
-#  id          :uuid             not null, primary key
+#  id          :integer          not null, primary key
 #  active_at   :datetime
 #  blocked_at  :datetime
 #  closed_at   :datetime
@@ -26,7 +26,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (customer_id => customers.id)
+#  customer_id  (customer_id => customers.id)
 #
 class Card < ApplicationRecord
   include AASM

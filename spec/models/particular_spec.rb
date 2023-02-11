@@ -2,7 +2,7 @@
 #
 # Table name: particulars
 #
-#  id          :uuid             not null, primary key
+#  id          :integer          not null, primary key
 #  amount      :float            not null
 #  deleted_at  :datetime
 #  description :text
@@ -21,9 +21,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (card_id => cards.id)
-#  fk_rails_...  (receiver_id => user_informations.id)
-#  fk_rails_...  (sender_id => user_informations.id)
+#  card_id      (card_id => cards.id)
+#  receiver_id  (receiver_id => user_informations.id)
+#  sender_id    (sender_id => user_informations.id)
 #
 require 'rails_helper'
 

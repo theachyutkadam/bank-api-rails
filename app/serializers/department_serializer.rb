@@ -2,7 +2,7 @@
 #
 # Table name: departments
 #
-#  id             :uuid             not null, primary key
+#  id             :integer          not null, primary key
 #  deleted_at     :datetime
 #  employee_count :integer          default(0)
 #  name           :string           not null

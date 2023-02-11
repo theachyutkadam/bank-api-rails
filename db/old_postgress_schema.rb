@@ -11,39 +11,26 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
-  create_table "account_types", force: :cascade do |t|
-    t.string "title", null: false
-    t.float "loan_intrest_rate", null: false
-    t.float "saving_intrest_rate", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_account_types_on_deleted_at"
-  end
+# Could not dump table "account_types" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "addresses" because of following StandardError
-#   Unknown type 'uuid' for column 'addressable_id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "cards" because of following StandardError
-#   Unknown type 'uuid' for column 'customer_id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "customers" because of following StandardError
-#   Unknown type 'uuid' for column 'account_type_id'
+#   Unknown type 'uuid' for column 'id'
 
-  create_table "departments", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "employee_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_departments_on_deleted_at"
-  end
+# Could not dump table "departments" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "employees" because of following StandardError
-#   Unknown type 'uuid' for column 'manager_id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "managers" because of following StandardError
-#   Unknown type 'uuid' for column 'user_id'
+#   Unknown type 'uuid' for column 'id'
 
   create_table "motor_alert_locks", force: :cascade do |t|
     t.integer "alert_id", null: false
@@ -238,32 +225,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
   end
 
 # Could not dump table "nominees" because of following StandardError
-#   Unknown type 'uuid' for column 'customer_id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "particulars" because of following StandardError
-#   Unknown type 'uuid' for column 'card_id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "salaries" because of following StandardError
-#   Unknown type 'uuid' for column 'employee_id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "user_informations" because of following StandardError
-#   Unknown type 'uuid' for column 'user_id'
+#   Unknown type 'uuid' for column 'id'
 
-  create_table "users", force: :cascade do |t|
-    t.string "username", null: false
-    t.string "password", null: false
-    t.string "email", null: false
-    t.string "token"
-    t.integer "status", default: 0, null: false
-    t.boolean "is_admin", default: false, null: false
-    t.datetime "active_at", precision: nil
-    t.datetime "inactive_at", precision: nil
-    t.datetime "blocked_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_users_on_deleted_at"
-  end
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
   add_foreign_key "cards", "customers"
   add_foreign_key "customers", "account_types"
