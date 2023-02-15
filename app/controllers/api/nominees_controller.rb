@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NomineesController < ApplicationController
+class Api::NomineesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @nominees = Nominee.includes(:customer).all

@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class UserInformationsController < ApplicationController
+class Api::UserInformationsController < ApplicationController
   before_action :set_user_information, only: %i[destroy show update]
+
   def index
-    @user_informations = UserInformation.includes(:user, :accountable).first(1000)
+    @user_informations = UserInformation.order(first_name: :asc).all
     render json: @user_informations
   end
 

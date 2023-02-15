@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ParticularsController < ApplicationController
+class Api::ParticularsController < ApplicationController
   include Rails.application.routes.url_helpers
 
   before_action :set_particular, only: %i[destroy show update]

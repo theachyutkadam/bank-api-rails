@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SalariesController < ApplicationController
+class Api::SalariesController < ApplicationController
   include Rails.application.routes.url_helpers
 
   before_action :set_user, only: %i[destroy show update]

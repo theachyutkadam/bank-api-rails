@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CardsController < ApplicationController
+class Api::CardsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @cards = Card.order(title: :asc, status: :asc)

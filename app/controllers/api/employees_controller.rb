@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmployeesController < ApplicationController
+class Api::EmployeesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @employees = Employee.includes(:department, :manager, :customer).all

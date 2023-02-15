@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CustomersController < ApplicationController
+class Api::CustomersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @customers = Customer.includes(:account_type).all

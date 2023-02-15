@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
+class Api::UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[login create]
   before_action :set_user, only: %i[destroy show update]
 

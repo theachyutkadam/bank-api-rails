@@ -34,7 +34,7 @@ RSpec.describe "Particular", type: :request do
       FactoryBot.create_list(:particular, 5, card: admin_card, sender: admin_sender,
                                              receiver: employee_user_information)
     end
-    before { get "/particulars", headers: { Authorization: manager_user.token } }
+    before { get "/api/particulars", headers: { Authorization: manager_user.token } }
     it "returns all particulars" do
       expect(JSON.parse(response.body).size).to eq(5)
     end
@@ -50,14 +50,14 @@ RSpec.describe "Particular", type: :request do
 
     context "when request attributes are valid" do
       it "returns status code 201" do
-        post "/particulars", params: particular.attributes, headers: { Authorization: manager_user.token }
+        post "/api/particulars", params: particular.attributes, headers: { Authorization: manager_user.token }
         expect(response).to have_http_status(201)
       end
     end
   end
 
   context "GET #show" do
-    before { get "/particulars/#{particular.id}", headers: { Authorization: admin_user.token } }
+    before { get "/api/particulars/#{particular.id}", headers: { Authorization: admin_user.token } }
     let!(:particular) do
       create(:particular, card: admin_card, sender: admin_sender, receiver: employee_user_information)
     end

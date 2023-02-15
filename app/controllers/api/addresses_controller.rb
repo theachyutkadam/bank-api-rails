@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddressesController < ApplicationController
+class Api::AddressesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @addresss = Address.includes(:addressable).all

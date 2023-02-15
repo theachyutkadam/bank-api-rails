@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DepartmentsController < ApplicationController
+class Api::DepartmentsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @departments = Department.all

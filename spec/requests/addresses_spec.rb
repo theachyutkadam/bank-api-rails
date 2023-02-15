@@ -9,7 +9,7 @@ RSpec.describe "Addresses", type: :request do
 
   describe "GET #index" do
     let!(:addresses) { FactoryBot.create_list(:address, 5, addressable: customer) }
-    before { get "/addresses", headers: { Authorization: user.token } }
+    before { get "/api/addresses", headers: { Authorization: user.token } }
     it "returns all addresses" do
       expect(JSON.parse(response.body).size).to eq(5)
     end
@@ -22,14 +22,14 @@ RSpec.describe "Addresses", type: :request do
     let(:address) { build(:address, addressable: customer) }
     context "when request attributes are valid" do
       it "returns status code 201" do
-        post "/addresses", params: address.attributes, headers: { Authorization: user.token }
+        post "/api/addresses", params: address.attributes, headers: { Authorization: user.token }
         expect(response).to have_http_status(201)
       end
     end
   end
 
   describe "GET #show" do
-    before { get "/addresses/#{address.id}", headers: { Authorization: user.token } }
+    before { get "/api/addresses/#{address.id}", headers: { Authorization: user.token } }
     let(:address) { create(:address, addressable: customer) }
 
     it "returns http success" do

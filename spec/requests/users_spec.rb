@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "User", type: :request do
   describe "GET #index" do
     let!(:users) { FactoryBot.create_list(:user, 5) }
-    before { get "/users", headers: { Authorization: User.last.token } }
+    before { get "/api/users", headers: { Authorization: User.last.token } }
     it "returns all users" do
       expect(JSON.parse(response.body).size).to eq(5)
     end
@@ -18,7 +18,7 @@ RSpec.describe "User", type: :request do
     let(:user) { build(:user) }
     context "when request attributes are valid" do
       it "returns status code 201" do
-        post "/users", params: user.attributes
+        post "/api/users", params: user.attributes
         expect(response).to have_http_status(201)
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe "User", type: :request do
 
   describe "GET #show" do
     let(:user) { create(:user) }
-    before { get "/users/#{user.id}", headers: { Authorization: user.token } }
+    before { get "/api/users/#{user.id}", headers: { Authorization: user.token } }
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end
@@ -34,7 +34,7 @@ RSpec.describe "User", type: :request do
 
   describe "GET #delete" do
     let(:user) { create(:user) }
-    before { delete "/users/#{user.id}", headers: { Authorization: user.token } }
+    before { delete "/api/users/#{user.id}", headers: { Authorization: user.token } }
 
     it "returns http success" do
       expect(response).to have_http_status(:success)
@@ -46,7 +46,7 @@ RSpec.describe "User", type: :request do
     let(:user_attributes) { {email: user.email, password: user.password } }
     context "when request for login" do
       it "returns status code 201" do
-        post "/users/login", params: user_attributes
+        post "/api/users/login", params: user_attributes
         expect(response).to have_http_status(200)
         message = JSON.parse(response.body)["message"]
         expect(message).to eq("You already logged in")
@@ -59,7 +59,7 @@ RSpec.describe "User", type: :request do
     let(:user_attributes) { {email: user.email, password: user.password } }
     context "when request for login" do
       it "returns status code 201 and token" do
-        post "/users/login", params: user_attributes
+        post "/api/users/login", params: user_attributes
         expect(response).to have_http_status(200)
         user.reload
         token = JSON.parse(response.body)["auth_token"]
@@ -72,7 +72,7 @@ RSpec.describe "User", type: :request do
     let(:user_attributes) { {email: "sample@gmail.com", password: "654321" } }
     context "when request for login" do
       it "returns status code 401" do
-        post "/users/login", params: user_attributes
+        post "/api/users/login", params: user_attributes
         error = JSON.parse(response.body)["errors"]
         expect(error).to eq("User does not found")
       end
