@@ -6,7 +6,7 @@ class Api::ParticularsController < ApplicationController
   before_action :set_particular, only: %i[destroy show update]
 
   def index
-    @particulars = Particular.includes(:sender, :receiver, :card).all
+    @particulars = Particular.order(created_at: :desc)
     render json: @particulars
   end
 
