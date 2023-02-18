@@ -43,13 +43,12 @@ class Api::UsersController < ApplicationController
     return render json: { errors: "User does not found" }, status: :unauthorized unless @user
 
     if @user.password == params[:password]
-      return render json: { message: "You already logged in", auth_token: @user.token } if @user.token.present?
-
+      return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token
       token = @user.generate_token
       @user.update(token: token)
-      render json: { auth_token: token }
+      render json: { user_information_id: @user.user_information.id, auth_token: token, status: 200 }
     else
-      render json: { errors: "Invalid credentials" }, status: :unauthorized
+      render json: { errors: "Invalid credentials", status: 400 }, status: :unauthorized
     end
   end
 

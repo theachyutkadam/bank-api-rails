@@ -3,7 +3,8 @@
 class Api::CardsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @cards = Card.order(title: :asc, status: :asc)
+    # debugger
+    @cards = Card.active.order(title: :asc, status: :asc)
     render json: @cards
   end
 
