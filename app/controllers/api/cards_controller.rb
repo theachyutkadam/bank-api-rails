@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class Api::CardsController < ApplicationController
-  before_action :set_user, only: %i[destroy show update]
+  before_action :set_card, only: %i[destroy show update]
   def index
-    # debugger
-    @cards = Card.active.order(title: :asc, status: :asc)
+    accountable = current_user_information.accountable
+    if accountable.instance_of?(::Customer)
+      @cards = accountable.cards.active.order(title: :asc, status: :asc)
+    else
+      @cards = Card.active.order(title: :asc, status: :asc)
+    end
     render json: @cards
   end
 
@@ -52,7 +56,7 @@ class Api::CardsController < ApplicationController
     )
   end
 
-  def set_user
+  def set_card
     @card = Card.find(params[:id])
   end
 end

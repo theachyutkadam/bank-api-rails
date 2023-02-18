@@ -4,9 +4,8 @@ class Api::UserInformationsController < ApplicationController
   before_action :set_user_information, only: %i[destroy show update]
 
   def index
-    @user_ids = User.active.ids
-    @user_informations = UserInformation.where(user_id: @user_ids) # return only active users
-    # @user_informations = UserInformation.order(first_name: :asc).all
+    #return only active users
+    @user_informations = UserInformation.where(user_id: User.active.ids).where.not(id: current_user_information.id)
     render json: @user_informations
   end
 
