@@ -4,17 +4,17 @@ class ApplicationController < ActionController::API
   before_action :authenticate_user!
 
   def current_user
-    @@current_user = set_user
+    find_user
   end
   def current_user_information
-    @@current_user_information = @@current_user.user_information
+    find_user.user_information
   end
 
   private
 
   def authenticate_user!
     if request.authorization
-      user = set_user
+      user = find_user
       return render json: { errors: "Invalid token" }, status: :unauthorized unless user
       user
     else
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def set_user
+  def find_user
     User.find_by(token: request.authorization)
   end
 end

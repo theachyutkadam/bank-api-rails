@@ -6,8 +6,11 @@ class Api::CardsController < ApplicationController
     accountable = current_user_information.accountable
     if accountable.instance_of?(::Customer)
       @cards = accountable.cards.active.order(title: :asc, status: :asc)
+    # elsif accountable.instance_of?(::Employee)
+    #   @cards = accountable.customer.cards.active.order(title: :asc, status: :asc)
     else
-      @cards = Card.active.order(title: :asc, status: :asc)
+      @cards = accountable.customer.cards.active.order(title: :asc, status: :asc)
+      # @cards = Card.active.order(title: :asc, status: :asc)
     end
     render json: @cards
   end
