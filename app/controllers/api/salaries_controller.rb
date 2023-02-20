@@ -6,7 +6,12 @@ class Api::SalariesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
 
   def index
-    @salaries = Salary.includes(:employee, :particular).all
+    accountable = current_user_information.accountable
+    @salaries = if accountable.instance_of?(::Employee)
+      accountable.salaries
+    else
+      Salary.includes(:employee, :particular).all
+    end
     render json: @salaries
   end
 

@@ -4,13 +4,10 @@ class Api::CardsController < ApplicationController
   before_action :set_card, only: %i[destroy show update]
   def index
     accountable = current_user_information.accountable
-    if accountable.instance_of?(::Customer)
-      @cards = accountable.cards.active.order(title: :asc, status: :asc)
-    # elsif accountable.instance_of?(::Employee)
-    #   @cards = accountable.customer.cards.active.order(title: :asc, status: :asc)
+    @cards = if accountable.instance_of?(::Customer)
+      accountable.cards.active.order(title: :asc, status: :asc)
     else
-      @cards = accountable.customer.cards.active.order(title: :asc, status: :asc)
-      # @cards = Card.active.order(title: :asc, status: :asc)
+      accountable.customer.cards.active.order(title: :asc, status: :asc)
     end
     render json: @cards
   end

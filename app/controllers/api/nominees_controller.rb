@@ -3,7 +3,12 @@
 class Api::NomineesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @nominees = Nominee.includes(:customer).all
+    accountable = current_user_information.accountable
+    @nominees = if accountable.instance_of?(::Customer)
+      accountable.nominee
+    else
+      Nominee.includes(:customer).all
+    end
     render json: @nominees
   end
 
