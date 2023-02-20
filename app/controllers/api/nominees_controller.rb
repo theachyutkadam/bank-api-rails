@@ -7,7 +7,7 @@ class Api::NomineesController < ApplicationController
     @nominees = if accountable.instance_of?(::Customer)
       accountable.nominee
     else
-      Nominee.includes(:customer).all
+      accountable.customer.nominee
     end
     render json: @nominees
   end

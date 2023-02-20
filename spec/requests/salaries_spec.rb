@@ -33,7 +33,7 @@ RSpec.describe "Salary", type: :request do
   describe "GET #index" do
     let!(:salaries) { FactoryBot.create_list(:salary, 2, particular: particular, employee: employee) }
 
-    before { get "/api/salaries", headers: { Authorization: manager_user.token } }
+    before { get "/api/salaries", headers: { Authorization: employee_user.token } }
     it "returns all salaries" do
       expect(JSON.parse(response.body).size).to eq(2)
     end

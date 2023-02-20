@@ -34,7 +34,7 @@ class User < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
 
-  # after_create :set_token
+  after_create :set_token
 
   aasm :status, timestamps: true do
     state :active, initial: true

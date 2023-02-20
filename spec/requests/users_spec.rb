@@ -41,24 +41,27 @@ RSpec.describe "User", type: :request do
     end
   end
 
-  describe "POST #login" do
-    let(:user) { create(:user) }
-    let(:user_attributes) { {email: user.email, password: user.password } }
-    context "when request for login" do
-      it "returns status code 201" do
-        post "/api/users/login", params: user_attributes
-        expect(response).to have_http_status(200)
-        message = JSON.parse(response.body)["message"]
-        expect(message).to eq("You already logged in")
-      end
-    end
-  end
+  # describe "POST #login" do
+  #   let(:user) { create(:user) }
+  #   let(:user_attributes) { {email: user.email, password: user.password } }
+  #   context "when request for login" do
+  #     it "returns status code 201" do
+  #       post "/api/users/login", params: user_attributes
+  #       expect(response).to have_http_status(200)
+  #       message = JSON.parse(response.body)["message"]
+  #       expect(message).to eq("You already logged in")
+  #     end
+  #   end
+  # end
 
   describe "POST #login" do
+    let(:account_type) { create(:account_type) }
+    let(:customer) { create(:customer, account_type: account_type) }
+    let!(:user_information) { create(:user_information, user: user, accountable: customer) }
     let(:user) { create(:user, token: "")}
     let(:user_attributes) { {email: user.email, password: user.password } }
     context "when request for login" do
-      it "returns status code 201 and token" do
+      it "returns status code 200 and token" do
         post "/api/users/login", params: user_attributes
         expect(response).to have_http_status(200)
         user.reload

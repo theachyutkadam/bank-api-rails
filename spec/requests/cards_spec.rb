@@ -3,11 +3,15 @@
 require "rails_helper"
 
 RSpec.describe "Card", type: :request do
-  let(:account_type) { create(:account_type) }
   let(:user) { create(:user) }
+  let(:department) { create(:department) }
+  let!(:manager) { create(:manager, user: user, department: department) }
+  let(:account_type) { create(:account_type) }
   let(:customer) { create(:customer, account_type: account_type) }
+  let!(:user_information) { create(:user_information, user: user, accountable: customer) }
+
   describe "GET #index" do
-    let!(:cards) { create_list(:card, 2, customer: customer) }
+    let!(:cards) { create_list(:card, 2, customer: customer, status: 0) }
     before { get "/api/cards", headers: { Authorization: user.token } }
     it "returns all cards" do
       expect(JSON.parse(response.body).size).to eq(2)
