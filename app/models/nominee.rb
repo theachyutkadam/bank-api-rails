@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: nominees
@@ -26,6 +28,7 @@
 class Nominee < ApplicationRecord
   acts_as_paranoid
   belongs_to :customer
+  delegate :user_information, to: :customer
 
   has_one :address, as: :addressable, dependent: :destroy
 

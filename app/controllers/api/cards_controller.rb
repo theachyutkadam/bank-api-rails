@@ -1,7 +1,14 @@
-class CardsController < ApplicationController
-  before_action :set_user, only: %i[destroy show update]
+# frozen_string_literal: true
+
+class Api::CardsController < ApplicationController
+  before_action :set_card, only: %i[destroy show update]
   def index
-    @cards = Card.order(title: :asc, status: :asc)
+    accountable = current_user_information.accountable
+    @cards = if accountable.instance_of?(::Customer)
+      accountable.cards.active.order(title: :asc, status: :asc)
+    else
+      accountable.customer.cards.active.order(title: :asc, status: :asc)
+    end
     render json: @cards
   end
 
@@ -26,7 +33,7 @@ class CardsController < ApplicationController
     render json: @card
   end
 
-  def delete
+  def destroy
     if @card.destroy
       head :no_content
     else
@@ -45,11 +52,11 @@ class CardsController < ApplicationController
       :pin,
       :status,
       :title,
-      :customer_id
+      :customer_id,
     )
   end
 
-  def set_user
+  def set_card
     @card = Card.find(params[:id])
   end
 end

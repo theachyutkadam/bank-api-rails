@@ -1,7 +1,14 @@
-class NomineesController < ApplicationController
+# frozen_string_literal: true
+
+class Api::NomineesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
-    @nominees = Nominee.includes(:customer).all
+    accountable = current_user_information.accountable
+    @nominees = if accountable.instance_of?(::Customer)
+      accountable.nominee
+    else
+      accountable.customer.nominee
+    end
     render json: @nominees
   end
 
@@ -26,7 +33,7 @@ class NomineesController < ApplicationController
     render json: @nominee
   end
 
-  def delete
+  def destroy
     if @nominee.destroy
       head :no_content
     else
@@ -44,7 +51,7 @@ class NomineesController < ApplicationController
       :last_name,
       :middle_name,
       :relation,
-      :customer_id
+      :customer_id,
     )
   end
 

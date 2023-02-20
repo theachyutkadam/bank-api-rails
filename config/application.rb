@@ -1,6 +1,8 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails/all'
+require_relative "boot"
+
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,7 +27,7 @@ module BankApiRails
     config.api_only = true
 
     # print the log on console
-    # config.logger = Logger.new(STDOUT)
+    config.logger = Logger.new(STDOUT)
 
     # Sidekiq job for background job.
     config.active_job.queue_adapter = :sidekiq

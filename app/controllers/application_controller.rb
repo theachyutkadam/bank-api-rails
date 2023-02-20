@@ -1,22 +1,27 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
   before_action :authenticate_user!
 
   def current_user
-    @@current_user = User.find_by(token: request.authorization)
+    find_user
+  end
+  def current_user_information
+    find_user.user_information
   end
 
   private
 
   def authenticate_user!
-    token = request.authorization
-    # if token
-    #   user = User.find_by(token: token)
-    #   current_user
-    #   unless user
-    #     render json: { errors: "Invalid token" }, status: :unauthorized
-    #   end
-    # else
-    #   render json: { message: "No authorization Header sent" }, status: :forbidden
-    # end
+    if request.authorization
+      return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
+      find_user
+    else
+      render json: { message: "No authorization Header sent" }, status: :forbidden
+    end
+  end
+
+  def find_user
+    User.find_by(token: request.authorization)
   end
 end

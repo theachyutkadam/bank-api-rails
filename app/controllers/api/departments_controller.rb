@@ -1,4 +1,6 @@
-class DepartmentsController < ApplicationController
+# frozen_string_literal: true
+
+class Api::DepartmentsController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @departments = Department.all
@@ -26,7 +28,7 @@ class DepartmentsController < ApplicationController
     render json: @department
   end
 
-  def delete
+  def destroy
     if @department.destroy
       head :no_content
     else
@@ -39,7 +41,7 @@ class DepartmentsController < ApplicationController
   def department_params
     params.permit(
       :name,
-      :employee_count
+      :employee_count,
     )
   end
 

@@ -56,7 +56,7 @@ jobs:
 
       - run:
           name: Setup DB
-          command: bin/rails db:create db:schema:load --trace
+          command: bin/rails rails db:drop db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |

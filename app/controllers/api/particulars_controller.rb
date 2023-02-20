@@ -1,10 +1,12 @@
-class ParticularsController < ApplicationController
+# frozen_string_literal: true
+
+class Api::ParticularsController < ApplicationController
   include Rails.application.routes.url_helpers
 
   before_action :set_particular, only: %i[destroy show update]
 
   def index
-    @particulars = Particular.includes(:sender, :receiver, :card).all
+    @particulars = Particular.where("receiver_id = ?  OR sender_id = ?", current_user_information.id, current_user_information.id)
     render json: @particulars
   end
 
@@ -19,7 +21,7 @@ class ParticularsController < ApplicationController
         render json: @particular.errors, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
-      puts 'Oops. We tried to do an invalid operation!'
+      Rails.logger.debug "Oops. We tried to do an invalid operation!"
     end
   end
 
@@ -35,7 +37,7 @@ class ParticularsController < ApplicationController
     render json: @particular
   end
 
-  def delete
+  def destroy
     if @particular.destroy
       head :no_content
     else
@@ -50,7 +52,7 @@ class ParticularsController < ApplicationController
       :amount,
       :card_id,
       :sender_id,
-      :receiver_id
+      :receiver_id,
     )
   end
 

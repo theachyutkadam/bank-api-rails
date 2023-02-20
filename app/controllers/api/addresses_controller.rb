@@ -1,4 +1,6 @@
-class AddressesController < ApplicationController
+# frozen_string_literal: true
+
+class Api::AddressesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @addresss = Address.includes(:addressable).all
@@ -26,7 +28,7 @@ class AddressesController < ApplicationController
     render json: @address
   end
 
-  def delete
+  def destroy
     if @address.destroy
       head :no_content
     else
@@ -44,7 +46,7 @@ class AddressesController < ApplicationController
       :flat_number,
       :pin_code,
       :street,
-      :addressable_id
+      :addressable_id,
     )
   end
 

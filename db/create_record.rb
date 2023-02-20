@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 @counter = 0
 def create_admin_user
-  unless User.where(email: 'admin@gmail.com').any?
+  unless User.where(email: "admin@gmail.com").any?
     %w[Saving Salary Current].each do |title|
       AccountType.create(title: title)
     end
 
     Department.create([
-                        { name: 'HR' },
-                        { name: 'Finance' },
-                        { name: 'Loan' },
-                        { name: 'Finance' },
-                        { name: 'Marketing' },
-                        { name: 'Services' }
+                        { name: "HR" },
+                        { name: "Finance" },
+                        { name: "Loan" },
+                        { name: "Finance" },
+                        { name: "Marketing" },
+                        { name: "Services" }
                       ])
 
-    admin_user = FactoryBot.create(:user, is_admin: true, username: 'admin', email: 'admin@gmail.com', status: :active)
-    account_type = AccountType.where(title: 'Current').first
+    admin_user = FactoryBot.create(:user, is_admin: true, username: "admin", email: "admin@gmail.com", status: :active)
+    account_type = AccountType.where(title: "Current").first
     admin_customer = create_customer_with_nominee(account_type)
     admin_nominee = admin_customer.nominee
 
@@ -34,7 +36,7 @@ def create_manager
     manager = FactoryBot.create(:manager, user: user, department: department)
 
     create_employee_information(user, department, manager)
-    p "manager created #{i}"
+    Rails.logger.debug "manager created #{i}"
   end
   create_employee # create employees
 end
@@ -46,7 +48,7 @@ def create_employee
     user = create_user
 
     create_employee_information(user, department, manager)
-    p "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
+    Rails.logger.debug "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
   end
   create_customer # create customers
 end
@@ -60,7 +62,7 @@ def create_customer
     create_address(customer)
     create_address(nominee)
     create_user_information(user, customer, customer)
-    puts "customer created #{i} customer card: #{customer.cards.first.status}"
+    Rails.logger.debug "customer created #{i} customer card: #{customer.cards.first.status}"
   end
   customer_transactions # create customer transactions
 end
@@ -71,7 +73,7 @@ def customer_transactions
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
     particular = FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
-    puts "customer particular #{i}"
+    Rails.logger.debug "customer particular #{i}"
   end
   employee_salary_transaction # create employee salary transactions
 end
@@ -84,9 +86,9 @@ def employee_salary_transaction
     particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
                                                 receiver: employee_user_information)
     salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
-    puts "Salary created #{i}"
+    Rails.logger.debug "Salary created #{i}"
   end
-  puts "^^^^^^^^Total User creation field = #{@counter}^^^^^^^^"
+  Rails.logger.debug "^^^^^^^^Total User creation field = #{@counter}^^^^^^^^"
 end
 
 def create_user
@@ -94,7 +96,9 @@ def create_user
   user.save if user.valid?
   return User.order(created_at: :asc).last if user.save
 
-  p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each { |error| p error }}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  Rails.logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each do |error|
+                                                        Rails.logger.debug error
+                                                      end}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   @counter += 1
   create_user
 end
@@ -108,7 +112,7 @@ def create_customer_with_nominee(account_type)
 end
 
 def create_employee_information(user, department, manager)
-  account_type = AccountType.where(title: 'Salary').first
+  account_type = AccountType.where(title: "Salary").first
   customer = create_customer_with_nominee(account_type)
   employee = FactoryBot.create(:employee, manager: manager, department: department, customer: customer)
 
@@ -133,7 +137,7 @@ def set_admin_current_balance
 end
 
 def admin_user_information
-  User.find_by(email: 'admin@gmail.com').user_information
+  User.find_by(email: "admin@gmail.com").user_information
 end
 
 def admin_accountable

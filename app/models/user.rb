@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -25,7 +27,7 @@ class User < ApplicationRecord
   acts_as_paranoid
   has_one :user_information
 
-  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: 'active'
+  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: "active"
 
   validates :email, :password, :username, presence: true
   validates :email, :username, :token, uniqueness: true

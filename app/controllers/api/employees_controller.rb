@@ -1,4 +1,6 @@
-class EmployeesController < ApplicationController
+# frozen_string_literal: true
+
+class Api::EmployeesController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @employees = Employee.includes(:department, :manager, :customer).all
@@ -26,7 +28,7 @@ class EmployeesController < ApplicationController
     render json: @employee
   end
 
-  def delete
+  def destroy
     if @employee.destroy
       head :no_content
     else
@@ -46,7 +48,7 @@ class EmployeesController < ApplicationController
       :manager_id,
       :customer_id,
       :salary_amount,
-      :department_id
+      :department_id,
     )
   end
 

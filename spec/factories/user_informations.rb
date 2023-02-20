@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_informations
@@ -36,13 +38,13 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
-    contact { Faker::Base.numerify('##########') }
+    contact { Faker::Base.numerify("##########") }
     birth_date { 18.years.ago }
     gender { UserInformation.genders.keys.sample }
     maritial_status { UserInformation.maritial_statuses.keys.sample }
-    pan_card_number { Faker::Base.bothify('?????####?') }
+    pan_card_number { Faker::Base.bothify("?????####?") }
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
-    handicap_details { 'MyText' }
+    handicap_details { "MyText" }
   end
 end

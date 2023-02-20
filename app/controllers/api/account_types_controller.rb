@@ -1,4 +1,6 @@
-class AccountTypesController < ApplicationController
+# frozen_string_literal: true
+
+class Api::AccountTypesController < ApplicationController
   before_action :set_account_type, only: %i[destroy show update]
   def index
     @account_types = AccountType.all
@@ -26,7 +28,7 @@ class AccountTypesController < ApplicationController
     render json: @account_type, status: :ok
   end
 
-  def delete
+  def destroy
     if @account_type.destroy
       head :no_content
     else

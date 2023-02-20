@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class EmployeeSalaryWorker
   include Sidekiq::Worker
 
   def perform(*_args)
-    p 'start salary process'
+    Rails.logger.debug "start salary process"
     @sender = User.where(is_admin: true).first.user_information
     employees = Employee.not_resignate
     employees.each do |employee|
       check_amount
-      unless Salary.where('extract(month from created_at) = ?', Date.today.month).where(employee_id: employee.id).any?
+      unless Salary.where("extract(month from created_at) = ?", Date.today.month).where(employee_id: employee.id).any?
         create_particular(employee)
       end
     end
@@ -20,11 +22,11 @@ class EmployeeSalaryWorker
 
     particular.update_current_balance(particular.sender_id, particular.receiver_id, particular.amount)
     create_salary(particular, employee)
-    puts "employee salary #{employee.id}"
+    Rails.logger.debug "employee salary #{employee.id}"
   end
 
   def create_salary(particular, employee)
-    salary = Salary.new(status: 'paid', employee_id: employee.id, particular_id: particular.id,
+    salary = Salary.new(status: "paid", employee_id: employee.id, particular_id: particular.id,
                         amount: particular.amount)
     salary.save
   end

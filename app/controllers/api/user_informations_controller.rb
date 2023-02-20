@@ -1,7 +1,11 @@
-class UserInformationsController < ApplicationController
-  before_action :set_user, only: %i[destroy show update]
+# frozen_string_literal: true
+
+class Api::UserInformationsController < ApplicationController
+  before_action :set_user_information, only: %i[destroy show update]
+
   def index
-    @user_informations = UserInformation.includes(:user, :accountable).all
+    #return only active users
+    @user_informations = UserInformation.where(user_id: User.active.ids).where.not(id: current_user_information.id)
     render json: @user_informations
   end
 
@@ -16,7 +20,7 @@ class UserInformationsController < ApplicationController
         render json: @user_information.errors, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
-      puts 'Oops. We tried to do an invalid operation!'
+      Rails.logger.debug "Oops. We tried to do an invalid operation!"
     end
   end
 
@@ -32,7 +36,7 @@ class UserInformationsController < ApplicationController
     render json: @user_information
   end
 
-  def delete
+  def destroy
     if @user_information.destroy
       head :no_content
     else
@@ -57,11 +61,11 @@ class UserInformationsController < ApplicationController
       :pan_card_number,
       :accountable_type,
       :handicap_details,
-      :adhaar_card_number
+      :adhaar_card_number,
     )
   end
 
-  def set_user
+  def set_user_information
     @user_information = UserInformation.find(params[:id])
   end
 end

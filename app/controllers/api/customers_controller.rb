@@ -1,4 +1,6 @@
-class CustomersController < ApplicationController
+# frozen_string_literal: true
+
+class Api::CustomersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @customers = Customer.includes(:account_type).all
@@ -26,7 +28,7 @@ class CustomersController < ApplicationController
     render json: @customer
   end
 
-  def delete
+  def destroy
     if @customer.destroy
       head :no_content
     else
@@ -41,7 +43,7 @@ class CustomersController < ApplicationController
       :account_number,
       :amount_limit,
       :current_balance,
-      :account_type_id
+      :account_type_id,
     )
   end
 

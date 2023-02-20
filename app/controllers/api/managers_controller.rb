@@ -1,4 +1,6 @@
-class ManagersController < ApplicationController
+# frozen_string_literal: true
+
+class Api::ManagersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
   def index
     @managers = Manager.includes(:user, :department).all
@@ -26,7 +28,7 @@ class ManagersController < ApplicationController
     render json: @manager
   end
 
-  def delete
+  def destroy
     if @manager.destroy
       head :no_content
     else
@@ -41,7 +43,7 @@ class ManagersController < ApplicationController
       :designation,
       :status,
       :department_id,
-      :user_id
+      :user_id,
     )
   end
 

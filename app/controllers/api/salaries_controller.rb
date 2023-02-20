@@ -1,10 +1,17 @@
-class SalariesController < ApplicationController
+# frozen_string_literal: true
+
+class Api::SalariesController < ApplicationController
   include Rails.application.routes.url_helpers
 
   before_action :set_user, only: %i[destroy show update]
 
   def index
-    @salaries = Salary.includes(:employee, :particular).all
+    accountable = current_user_information.accountable
+    @salaries = if accountable.instance_of?(::Employee)
+      accountable.salaries
+    else
+      Salary.includes(:employee, :particular).all
+    end
     render json: @salaries
   end
 
@@ -29,7 +36,7 @@ class SalariesController < ApplicationController
     render json: @salary
   end
 
-  def delete
+  def destroy
     if @salary.destroy
       head :no_content
     else
@@ -44,7 +51,7 @@ class SalariesController < ApplicationController
       :status,
       :amount,
       :employee_id,
-      :particular_id
+      :particular_id,
     )
   end
 
