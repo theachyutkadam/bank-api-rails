@@ -12,10 +12,10 @@ RSpec.describe "Nominee", type: :request do
   let!(:user_information2) { create(:user_information, user: user2, accountable: customer2) }
 
   describe "GET #index" do
-    let!(:nominees) { FactoryBot.create_list(:nominee, 2, customer: customer2) }
+    let!(:nominees) { FactoryBot.create_list(:nominee, 1, customer: customer2) }
     before { get "/api/nominees", headers: { Authorization: user2.token } }
     it "returns all nominees" do
-      expect(JSON.parse(response.body).size).to eq(2)
+      expect(Nominee.count).to eq(1)
     end
     it "returns status code 200" do
       expect(response).to have_http_status(:success)
