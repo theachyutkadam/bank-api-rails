@@ -12,12 +12,11 @@ class Api::UserInformationsController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @user_information = UserInformation.new(user_information_params)
-      customer = Customer.create
-      @user_information.update(accountable: customer)
+      @user_information.accountable = Customer.create
       if @user_information.save
-        render json: @user_information, status: :created
+        render json: {errors: @user_information, status: 200}
       else
-        render json: @user_information.errors, status: :unprocessable_entity
+        render json: {errors: @user_information.errors, status: :unprocessable_entity}
       end
     rescue ActiveRecord::RecordInvalid
       Rails.logger.debug "Oops. We tried to do an invalid operation!"
