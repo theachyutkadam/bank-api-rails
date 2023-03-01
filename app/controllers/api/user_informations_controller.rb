@@ -5,19 +5,18 @@ class Api::UserInformationsController < ApplicationController
 
   def index
     #return only active users
-    @user_informations = UserInformation.where(user_id: User.active.ids).where.not(id: current_user_information.id)
+    @user_informations = UserInformation.where(user_id: User.active.ids).where.not(id: current_user_information.id).order(created_at: :desc)
     render json: @user_informations
   end
 
   def create
     ActiveRecord::Base.transaction do
       @user_information = UserInformation.new(user_information_params)
-      customer = Customer.create
-      @user_information.update(accountable: customer)
+      @user_information.accountable = Customer.create
       if @user_information.save
-        render json: @user_information, status: :created
+        render json: {errors: @user_information, status: 200}
       else
-        render json: @user_information.errors, status: :unprocessable_entity
+        render json: { errors: @user_information.errors.full_messages, status: 422 }
       end
     rescue ActiveRecord::RecordInvalid
       Rails.logger.debug "Oops. We tried to do an invalid operation!"

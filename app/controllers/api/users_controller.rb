@@ -5,7 +5,11 @@ class Api::UsersController < ApplicationController
   before_action :set_user, only: %i[destroy show update]
 
   def index
-    @users = User.all
+    if current_user.is_admin
+      @users = User.order(created_at: :asc)
+    else
+      @users = current_user
+    end
     render json: @users
   end
 
@@ -46,7 +50,7 @@ class Api::UsersController < ApplicationController
       # return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token
       token = @user.generate_token
       @user.update(token: token)
-      render json: { user_information_id: @user.user_information.id, auth_token: token, status: 200 }
+      render json: { user_information_id: @user.user_information.id, user_id: @user.id, auth_token: token, status: 200 }
     else
       render json: { errors: "Invalid credentials", status: 400 }
     end
