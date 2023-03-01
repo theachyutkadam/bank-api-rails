@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
 
   def index
     if current_user.is_admin
-      @users = User.all
+      @users = User.order(created_at: :asc)
     else
       @users = current_user
     end

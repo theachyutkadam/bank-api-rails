@@ -6,7 +6,7 @@ class Api::ParticularsController < ApplicationController
   before_action :set_particular, only: %i[destroy show update]
 
   def index
-    @particulars = Particular.where("receiver_id = ?  OR sender_id = ?", current_user_information.id, current_user_information.id)
+    @particulars = Particular.where("receiver_id = ?  OR sender_id = ?", current_user_information.id, current_user_information.id).order(created_at: :desc)
     render json: @particulars
   end
 
