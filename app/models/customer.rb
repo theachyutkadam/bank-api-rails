@@ -64,7 +64,6 @@ class Customer < ApplicationRecord
   def set_customer_details
     self.account_number ||= generate_account_number
     self.amount_limit ||= AMOUNT_LIMIT
-    self.account_type_id ||= AccountType.first.id
   end
 
   def generate_account_number
