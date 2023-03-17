@@ -7,7 +7,7 @@ class CreateSalaries < ActiveRecord::Migration[7.0]
       t.float :amount, null: false
       t.integer :status, null: false
       t.text :description, null: true
-      t.references :particular, type: :uuid, null: false, foreign_key: true
+      t.references :particular, type: :uuid, null: false, foreign_key: true, index: { unique: true }
 
       t.timestamps
     end

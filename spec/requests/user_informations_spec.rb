@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.describe UserInformation, type: :request do
-  let(:user) { create(:user, status: 'active') }
-  let(:user2) { create(:user, status: 'active') }
+  let(:user) { create(:user, status: "active") }
+  let(:user2) { create(:user, status: "active") }
   let(:account_type) { create(:account_type, title: "Saving") }
   let(:customer) { create(:customer, account_type: account_type) }
   let(:customer2) { create(:customer, account_type: account_type) }

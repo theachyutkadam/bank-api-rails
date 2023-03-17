@@ -18,6 +18,7 @@
 #
 # Indexes
 #
+#  index_customers_on_account_number   (account_number) UNIQUE
 #  index_customers_on_account_type_id  (account_type_id)
 #  index_customers_on_deleted_at       (deleted_at)
 #

@@ -9,9 +9,9 @@ class EmployeeSalaryWorker
     employees = Employee.not_resignate
     employees.each do |employee|
       check_amount
-      unless Salary.where("extract(month from created_at) = ?", Date.today.month).where(employee_id: employee.id).any?
-        create_particular(employee)
-      end
+      create_particular(employee)
+      # unless Salary.where("extract(month from created_at) = ?", Date.today.month).where(employee_id: employee.id).any?
+      # end
     end
   end
 

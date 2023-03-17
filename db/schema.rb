@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_account_types_on_deleted_at"
+    t.index ["title"], name: "index_account_types_on_title", unique: true
   end
 
   create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "deleted_at"
     t.index ["customer_id"], name: "index_cards_on_customer_id"
     t.index ["deleted_at"], name: "index_cards_on_deleted_at"
+    t.index ["number"], name: "index_cards_on_number", unique: true
   end
 
   create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.index ["account_number"], name: "index_customers_on_account_number", unique: true
     t.index ["account_type_id"], name: "index_customers_on_account_type_id"
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
   end
@@ -83,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_departments_on_deleted_at"
+    t.index ["name"], name: "index_departments_on_name", unique: true
   end
 
   create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -101,10 +105,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["customer_id"], name: "index_employees_on_customer_id"
+    t.index ["customer_id"], name: "index_employees_on_customer_id", unique: true
     t.index ["deleted_at"], name: "index_employees_on_deleted_at"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["manager_id"], name: "index_employees_on_manager_id"
+    t.index ["official_email"], name: "index_employees_on_official_email", unique: true
   end
 
   create_table "managers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -117,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_managers_on_deleted_at"
     t.index ["department_id"], name: "index_managers_on_department_id"
-    t.index ["user_id"], name: "index_managers_on_user_id"
+    t.index ["user_id"], name: "index_managers_on_user_id", unique: true
   end
 
   create_table "motor_alert_locks", force: :cascade do |t|
@@ -323,7 +328,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["customer_id"], name: "index_nominees_on_customer_id"
+    t.index ["contact"], name: "index_nominees_on_contact", unique: true
+    t.index ["customer_id"], name: "index_nominees_on_customer_id", unique: true
     t.index ["deleted_at"], name: "index_nominees_on_deleted_at"
   end
 
@@ -353,7 +359,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_salaries_on_deleted_at"
     t.index ["employee_id"], name: "index_salaries_on_employee_id"
-    t.index ["particular_id"], name: "index_salaries_on_particular_id"
+    t.index ["particular_id"], name: "index_salaries_on_particular_id", unique: true
   end
 
   create_table "user_informations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -375,8 +381,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["accountable_type", "accountable_id"], name: "index_user_informations_on_accountable"
+    t.index ["adhaar_card_number"], name: "index_user_informations_on_adhaar_card_number", unique: true
+    t.index ["contact"], name: "index_user_informations_on_contact", unique: true
     t.index ["deleted_at"], name: "index_user_informations_on_deleted_at"
-    t.index ["user_id"], name: "index_user_informations_on_user_id"
+    t.index ["pan_card_number"], name: "index_user_informations_on_pan_card_number", unique: true
+    t.index ["user_id"], name: "index_user_informations_on_user_id", unique: true
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -393,6 +402,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111615) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["token"], name: "index_users_on_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "cards", "customers"

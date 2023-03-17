@@ -1,61 +1,63 @@
 # frozen_string_literal: true
 
-class Api::SalariesController < ApplicationController
-  include Rails.application.routes.url_helpers
+module Api
+  class SalariesController < ApplicationController
+    include Rails.application.routes.url_helpers
 
-  before_action :set_user, only: %i[destroy show update]
+    before_action :set_user, only: %i[destroy show update]
 
-  def index
-    accountable = current_user_information.accountable
-    @salaries = if accountable.instance_of?(::Employee)
-      accountable.salaries
-    else
-      Salary.includes(:employee, :particular).all
+    def index
+      accountable = current_user_information.accountable
+      @salaries = if accountable.instance_of?(::Employee)
+        accountable.salaries
+      else
+        Salary.includes(:employee, :particular).all
+      end
+      render json: @salaries
     end
-    render json: @salaries
-  end
 
-  def create
-    @salary = Salary.new(salary_params)
-    if @salary.save
-      render json: @salary, status: :created
-    else
-      render json: @salary.errors, status: :unprocessable_entity
+    def create
+      @salary = Salary.new(salary_params)
+      if @salary.save
+        render json: @salary, status: :created
+      else
+        render json: @salary.errors, status: :unprocessable_entity
+      end
     end
-  end
 
-  def update
-    if @salary.update(salary_params)
+    def update
+      if @salary.update(salary_params)
+        render json: @salary
+      else
+        render json: @salary.errors, status: :unprocessable_entity
+      end
+    end
+
+    def show
       render json: @salary
-    else
-      render json: @salary.errors, status: :unprocessable_entity
     end
-  end
 
-  def show
-    render json: @salary
-  end
-
-  def destroy
-    if @salary.destroy
-      head :no_content
-    else
-      render json: @salary.errors, status: :unprocessable_entity
+    def destroy
+      if @salary.destroy
+        head :no_content
+      else
+        render json: @salary.errors, status: :unprocessable_entity
+      end
     end
-  end
 
-  private
+    private
 
-  def salary_params
-    params.permit(
-      :status,
-      :amount,
-      :employee_id,
-      :particular_id,
-    )
-  end
+    def salary_params
+      params.permit(
+        :status,
+        :amount,
+        :employee_id,
+        :particular_id,
+      )
+    end
 
-  def set_user
-    @salary = Salary.find(params[:id])
+    def set_user
+      @salary = Salary.find(params[:id])
+    end
   end
 end

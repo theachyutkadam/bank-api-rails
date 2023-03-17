@@ -15,6 +15,7 @@
 # Indexes
 #
 #  index_account_types_on_deleted_at  (deleted_at)
+#  index_account_types_on_title       (title) UNIQUE
 #
 class AccountType < ApplicationRecord
   acts_as_paranoid

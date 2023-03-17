@@ -9,7 +9,6 @@ def create_admin_user
 
     Department.create([
                         { name: "HR" },
-                        { name: "Finance" },
                         { name: "Loan" },
                         { name: "Finance" },
                         { name: "Marketing" },
@@ -42,7 +41,7 @@ def create_manager
 end
 
 def create_employee
-  90.times do |i|
+  40.times do |i|
     department = Department.all.shuffle.sample
     manager = Manager.all.shuffle.sample
     user = create_user
@@ -54,7 +53,7 @@ def create_employee
 end
 
 def create_customer
-  999.times do |i|
+  5000.times do |i|
     customer = create_customer_with_nominee(nil)
     nominee = customer.nominee
 
@@ -68,7 +67,7 @@ def create_customer
 end
 
 def customer_transactions
-  2000.times do |i|
+  20_000.times do |i|
     card = Card.take
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
@@ -80,7 +79,7 @@ end
 
 def employee_salary_transaction
   activate_admin_card
-  1000.times do |i|
+  15_000.times do |i|
     employee_user_information = Employee.all.shuffle.sample.user_information
 
     particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
@@ -88,18 +87,16 @@ def employee_salary_transaction
     salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
     Rails.logger.debug "Salary created #{i}"
   end
-  Rails.logger.debug "^^^^^^^^Total User creation field = #{@counter}^^^^^^^^"
+  Rails.logger.debug "^^^^^^^^Total #{@counter} User creation field^^^^^^^^"
 end
 
 def create_user
   user = FactoryBot.build(:user)
   user.save if user.valid?
-  user.reload
-  return user if user.save
 
-  Rails.logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each do |error|
-                                                        Rails.logger.debug error
-                                                      end}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  return User.find_by(email: user.email) if user.save
+
+  Rails.logger.debug "@@@@@@#{user.errors.each { |error| Rails.logger.debug error }}@@@@@@"
   @counter += 1
   create_user
 end
@@ -139,6 +136,10 @@ end
 
 def admin_user_information
   User.find_by(email: "admin@gmail.com").user_information
+end
+
+def check_object(object)
+  object.save if object.valid?
 end
 
 def admin_accountable

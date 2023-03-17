@@ -14,6 +14,7 @@
 # Indexes
 #
 #  index_departments_on_deleted_at  (deleted_at)
+#  index_departments_on_name        (name) UNIQUE
 #
 class Department < ApplicationRecord
   acts_as_paranoid

@@ -1,56 +1,58 @@
 # frozen_string_literal: true
 
-class Api::AddressesController < ApplicationController
-  before_action :set_user, only: %i[destroy show update]
-  def index
-    @addresss = Address.includes(:addressable).all
-    render json: @addresss
-  end
-
-  def create
-    @address = Address.new(address_params)
-    if @address.save
-      render json: @address, status: :created
-    else
-      render json: @address.errors, status: :unprocessable_entity
+module Api
+  class AddressesController < ApplicationController
+    before_action :set_user, only: %i[destroy show update]
+    def index
+      @addresss = Address.includes(:addressable).all
+      render json: @addresss
     end
-  end
 
-  def update
-    if @address.update(address_params)
+    def create
+      @address = Address.new(address_params)
+      if @address.save
+        render json: @address, status: :created
+      else
+        render json: @address.errors, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      if @address.update(address_params)
+        render json: @address
+      else
+        render json: @address.errors, status: :unprocessable_entity
+      end
+    end
+
+    def show
       render json: @address
-    else
-      render json: @address.errors, status: :unprocessable_entity
     end
-  end
 
-  def show
-    render json: @address
-  end
-
-  def destroy
-    if @address.destroy
-      head :no_content
-    else
-      render json: @address.errors, status: :unprocessable_entity
+    def destroy
+      if @address.destroy
+        head :no_content
+      else
+        render json: @address.errors, status: :unprocessable_entity
+      end
     end
-  end
 
-  private
+    private
 
-  def address_params
-    params.permit(
-      :addressable_type,
-      :building,
-      :description,
-      :flat_number,
-      :pin_code,
-      :street,
-      :addressable_id,
-    )
-  end
+    def address_params
+      params.permit(
+        :addressable_type,
+        :building,
+        :description,
+        :flat_number,
+        :pin_code,
+        :street,
+        :addressable_id,
+      )
+    end
 
-  def set_user
-    @address = Address.find(params[:id])
+    def set_user
+      @address = Address.find(params[:id])
+    end
   end
 end
