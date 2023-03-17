@@ -94,7 +94,8 @@ end
 def create_user
   user = FactoryBot.build(:user)
   user.save if user.valid?
-  return User.order(created_at: :asc).last if user.save
+  user.reload
+  return user if user.save
 
   Rails.logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each do |error|
                                                         Rails.logger.debug error
