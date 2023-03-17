@@ -16,9 +16,9 @@ RSpec.describe "Particular", type: :request do
   let(:employee_user) { create(:user) }
   let(:department) { create(:department, name: "HR") }
   let(:account_type) { create(:account_type) }
-  let(:customer) { create(:customer, account_type: account_type) }
-  let(:manager) { create(:manager, user: employee_user, department: department) }
-  let(:employee) { create(:employee, manager: manager, department: department, customer: customer) }
+  let(:customer1) { create(:customer, account_type: account_type) }
+  let(:manager1) { create(:manager, user: employee_user, department: department) }
+  let(:employee) { create(:employee, manager: manager1, department: department, customer: customer1) }
   let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
 
   # create admin customer

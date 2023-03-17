@@ -19,6 +19,6 @@
 #
 FactoryBot.define do
   factory :account_type do
-    title { "Saving" }
+    title { %w[Saving Current Jandhan Salary].shuffle.sample }
   end
 end
