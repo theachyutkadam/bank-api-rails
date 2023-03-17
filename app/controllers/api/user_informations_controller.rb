@@ -6,7 +6,7 @@ module Api
 
     def index
       # return only active users
-      @user_informations = UserInformation.where(user_id: User.active.ids).where.not(id: current_user_information.id)
+      @user_informations = UserInformation.includes(:user).where(user_id: User.active.ids).where.not(id: current_user_information.id)
       render json: @user_informations
     end
 

@@ -6,7 +6,7 @@ module Api
     before_action :set_user, only: %i[destroy show update]
 
     def index
-      @users = User.all
+      @users = User.first(10)
       render json: @users
     end
 

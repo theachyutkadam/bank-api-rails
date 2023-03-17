@@ -32,13 +32,13 @@
 #  fk_rails_...  (customer_id => customers.id)
 #
 class CardSerializer < ActiveModel::Serializer
-  attributes :id, :title, :number, :expire_date, :csv, :customer_id, :status, :is_deleted, :pin
+  attributes :id, :title, :number, :expire_date, :csv, :customer_id, :status, :is_deleted, :pin, :customer
 
   def expire_date
     object.expire_date.to_fs(:long)
   end
 
-  # def customer
-  #   ActiveModelSerializers::SerializableResource.new(object.customer, each_serializer: CustomerSerializer)
-  # end
+  def customer
+    ActiveModelSerializers::SerializableResource.new(object.customer, each_serializer: CustomerSerializer)
+  end
 end
