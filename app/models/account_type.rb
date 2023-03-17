@@ -26,6 +26,7 @@ class AccountType < ApplicationRecord
   SAVING_INTREST_RATE = 4.0
 
   validates :title, :saving_intrest_rate, :loan_intrest_rate, presence: true
+  validates :title, uniqueness: true
 
   def set_intrest_rate
     self.loan_intrest_rate = AccountType::LOAN_INTREST_RATE

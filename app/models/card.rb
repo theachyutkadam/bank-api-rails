@@ -44,8 +44,7 @@ class Card < ApplicationRecord
   validates :csv, :expire_date, :number, :pin, :title, presence: true
   validates :status, inclusion: { in: statuses.keys }
 
-  validates :number, uniqueness: true, numericality: true
-  validates :number, length: { is: 12 }
+  validates :number, uniqueness: true, numericality: true, length: { is: 12 }
   validates :csv, length: { is: 3 }
   validates :pin, length: { is: 4 }
 

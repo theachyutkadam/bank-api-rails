@@ -50,6 +50,7 @@ class Employee < ApplicationRecord
   enum work_status: { available: 0, on_leave: 1, resignate: 2 }, _default: "available"
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
+  validates :customer_id, :official_email, uniqueness: true
 
   after_create :update_employee_count
 

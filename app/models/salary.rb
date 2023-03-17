@@ -34,4 +34,6 @@ class Salary < ApplicationRecord
 
   validates :status, inclusion: { in: statuses.keys }
   validates :amount, length: { in: 1..200_000 }
+  validates :particular_id, uniqueness: true
+
 end

@@ -40,4 +40,5 @@ class Manager < ApplicationRecord
 
   validates :designation, presence: true
   validates :status, inclusion: { in: statuses.keys }
+  validates :user_id, uniqueness: true
 end
