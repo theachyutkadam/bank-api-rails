@@ -1,4 +1,8 @@
 # bank-api-rails
+* Factory Create Issues in console.
+  require 'factory_bot'
+  include FactoryBot::Syntax::Methods
+
 create a bank API for learning phase.
 Added a command for Fastly create a controller and models.
 *Create Controllers using following commands*
