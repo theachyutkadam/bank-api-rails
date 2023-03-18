@@ -67,7 +67,7 @@ def create_customer
 end
 
 def customer_transactions
-  20000.times do |i|
+  2000.times do |i|
     card = Card.take
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
@@ -79,7 +79,7 @@ end
 
 def employee_salary_transaction
   activate_admin_card
-  15000.times do |i|
+  1000.times do |i|
     employee_user_information = Employee.all.shuffle.sample.user_information
 
     particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
@@ -96,7 +96,7 @@ def create_user
 
   return User.find_by(email: user.email) if user.save
 
-  puts "@@@@@@User error - #{user.errors.each { |error| puts error }}@@@@@@"
+  puts "@@@@@@User error - #{user.errors.each { |error| puts error.messages }}@@@@@@"
   @counter += 1
   create_user
 end
@@ -123,11 +123,11 @@ def create_user_information(user, accountable, customer)
   card = FactoryBot.build(:card, customer: customer)
 
   if user_information.valid? && card.valid?
-    user_information.save 
+    user_information.save
     card.save
   else
-    puts "@@@@@@UserInformation Error - #{user_information.errors.each { |error| puts error }}@@@@@@" if user_information.errors
-    puts "@@@@@@Card Error - #{card.errors.each { |error| puts error }}@@@@@@" if card.errors
+    puts "@@@@@@UserInformation Error - #{user_information.errors.each { |error| puts errormessages }}@@@@@@" if user_information.errors
+    puts "@@@@@@Card Error - #{card.errors.each { |error| puts errormessages }}@@@@@@" if card.errors
     create_user_information(user, accountable, customer)
   end
 end
