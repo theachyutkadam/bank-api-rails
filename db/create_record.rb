@@ -53,7 +53,7 @@ def create_employee
 end
 
 def create_customer
-  5000.times do |i|
+  2450.times do |i|
     customer = create_customer_with_nominee(nil)
     nominee = customer.nominee
 
