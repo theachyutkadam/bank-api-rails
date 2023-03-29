@@ -68,10 +68,10 @@ end
 
 def customer_transactions
   2000.times do |i|
-    card = Card.take
+    card = Card.active.shuffle.sample
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
-    particular = FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
+    FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
     puts "customer particular #{i}"
   end
   employee_salary_transaction # create employee salary transactions

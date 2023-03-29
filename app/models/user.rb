@@ -29,6 +29,7 @@ class User < ApplicationRecord
   include AASM
   acts_as_paranoid
   has_one :user_information, :dependent => :destroy
+  has_many :visits, class_name: "Ahoy::Visit"
 
   enum status: { active: 0, inactive: 1, blocked: 2 }, _default: "active"
 

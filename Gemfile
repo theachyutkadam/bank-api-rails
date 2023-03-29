@@ -69,3 +69,4 @@ end
 gem "aasm"
 gem "acts_as_paranoid"
 gem "motor-admin", "~> 0.4.4"
+gem 'ahoy_matey'
