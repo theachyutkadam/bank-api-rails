@@ -72,7 +72,7 @@ def customer_transactions
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
     FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
-    puts "customer particular #{i}"
+    puts "customer particular #{i} #{card.id}"
   end
   employee_salary_transaction # create employee salary transactions
 end
@@ -84,7 +84,7 @@ def employee_salary_transaction
 
     particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
                                                 receiver: employee_user_information)
-    salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
+    FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
     puts "Salary created #{i}"
   end
   puts "^^^^^^^^Total #{@counter} User creation field^^^^^^^^"
@@ -138,9 +138,7 @@ end
 
 def set_admin_current_balance
   admin_customer = admin_accountable
-  unless admin_customer.active?
-    admin_customer.update(status: :active)
-  end
+  admin_customer.update(status: :active) unless admin_customer.active?
   admin_customer.update(current_balance: Employee.sum(:salary_amount)) if admin_customer.current_balance <= 100_000
   admin_customer.reload
 end
