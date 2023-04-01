@@ -30,9 +30,10 @@ module Api
       end
     end
 
-    def show
-      render json: @nominee
-    end
+  def show
+    return render json: { errors: "Address must be required for nominee." }, status: :unprocessable_entity if @nominee.address.nil?
+    render json: @nominee
+  end
 
     def destroy
       if @nominee.destroy
