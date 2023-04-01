@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration[7.0]
   def change
     create_table :cards, id: :uuid do |t|
       t.integer :title, null: false
-      t.bigint :number, null: false
+      t.bigint :number, null: false, index: { unique: true }
       t.datetime :expire_date, null: false
       t.integer :csv, null: false
       t.references :customer, type: :uuid, null: false, foreign_key: true

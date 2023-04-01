@@ -15,6 +15,7 @@
 # Indexes
 #
 #  index_account_types_on_deleted_at  (deleted_at)
+#  index_account_types_on_title       (title) UNIQUE
 #
 class AccountType < ApplicationRecord
   acts_as_paranoid
@@ -25,6 +26,7 @@ class AccountType < ApplicationRecord
   SAVING_INTREST_RATE = 4.0
 
   validates :title, :saving_intrest_rate, :loan_intrest_rate, presence: true
+  validates :title, uniqueness: true
 
   def set_intrest_rate
     self.loan_intrest_rate = AccountType::LOAN_INTREST_RATE

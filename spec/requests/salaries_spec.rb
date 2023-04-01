@@ -16,9 +16,9 @@ RSpec.describe "Salary", type: :request do
   let(:employee_user) { create(:user) }
   let(:department) { create(:department, name: "HR") }
   let(:account_type) { create(:account_type) }
-  let(:customer) { create(:customer, account_type: account_type) }
+  let(:customer1) { create(:customer, account_type: account_type) }
   let(:manager) { create(:manager, user: employee_user, department: department) }
-  let(:employee) { create(:employee, manager: manager, department: department, customer: customer) }
+  let(:employee) { create(:employee, manager: manager, department: department, customer: customer1) }
   let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
 
   # create admin customer
@@ -29,13 +29,15 @@ RSpec.describe "Salary", type: :request do
 
   let(:admin_sender) { create(:user_information, user: admin_user, accountable: admin_customer) }
   let(:particular) { create(:particular, card: admin_card, sender: admin_sender, receiver: employee_user_information) }
+  let(:particular1) { create(:particular, card: admin_card, sender: admin_sender, receiver: employee_user_information) }
+  let(:particular2) { create(:particular, card: admin_card, sender: admin_sender, receiver: employee_user_information) }
 
   describe "GET #index" do
-    let!(:salaries) { FactoryBot.create_list(:salary, 2, particular: particular, employee: employee) }
+    let!(:salaries) { FactoryBot.create_list(:salary, 1, particular: particular, employee: employee) }
 
     before { get "/api/salaries", headers: { Authorization: employee_user.token } }
     it "returns all salaries" do
-      expect(JSON.parse(response.body).size).to eq(2)
+      expect(JSON.parse(response.body).size).to eq(1)
     end
     it "returns status code 200" do
       expect(response).to have_http_status(:success)
@@ -43,7 +45,7 @@ RSpec.describe "Salary", type: :request do
   end
 
   describe "POST #create" do
-    let!(:salary) { build(:salary, particular: particular, employee: employee) }
+    let!(:salary) { build(:salary, particular: particular1, employee: employee) }
 
     context "when request attributes are valid" do
       it "returns status code 201" do
@@ -55,7 +57,7 @@ RSpec.describe "Salary", type: :request do
 
   describe "GET #show" do
     before { get "/api/salaries/#{salary.id}", headers: { Authorization: manager_user.token } }
-    let!(:salary) { create(:salary, particular: particular, employee: employee) }
+    let!(:salary) { create(:salary, particular: particular2, employee: employee) }
 
     it "returns http success" do
       expect(response).to have_http_status(:success)

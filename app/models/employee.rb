@@ -23,10 +23,11 @@
 #
 # Indexes
 #
-#  index_employees_on_customer_id    (customer_id)
-#  index_employees_on_deleted_at     (deleted_at)
-#  index_employees_on_department_id  (department_id)
-#  index_employees_on_manager_id     (manager_id)
+#  index_employees_on_customer_id     (customer_id) UNIQUE
+#  index_employees_on_deleted_at      (deleted_at)
+#  index_employees_on_department_id   (department_id)
+#  index_employees_on_manager_id      (manager_id)
+#  index_employees_on_official_email  (official_email) UNIQUE
 #
 # Foreign Keys
 #
@@ -49,6 +50,7 @@ class Employee < ApplicationRecord
   enum work_status: { available: 0, on_leave: 1, resignate: 2 }, _default: "available"
   validates :date_of_joining, :designation, presence: true
   validates :work_status, inclusion: { in: work_statuses.keys }
+  validates :customer_id, :official_email, uniqueness: true
 
   after_create :update_employee_count
 

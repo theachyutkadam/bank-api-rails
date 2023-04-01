@@ -28,16 +28,16 @@
 #  fk_rails_...  (sender_id => user_informations.id)
 #
 class ParticularSerializer < ActiveModel::Serializer
-  attributes :id, :card_id, :sender_id, :receiver_id, :amount, :created_at
-
+  attributes :id, :card_id, :sender_id, :receiver_id, :amount, :created_at, :sender, :receiver
   def created_at
     object.created_at.to_fs(:long)
   end
-  # def sender
-  #   ActiveModelSerializers::SerializableResource.new(object.sender, each_serializer: UserInformationSerializer)
-  # end
 
-  # def receiver
-  #   ActiveModelSerializers::SerializableResource.new(object.receiver, each_serializer: UserInformationSerializer)
-  # end
+  def sender
+    ActiveModelSerializers::SerializableResource.new(object.sender, each_serializer: UserInformationSerializer)
+  end
+
+  def receiver
+    ActiveModelSerializers::SerializableResource.new(object.receiver, each_serializer: UserInformationSerializer)
+  end
 end

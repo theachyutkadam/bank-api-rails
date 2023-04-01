@@ -18,7 +18,7 @@
 #
 #  index_salaries_on_deleted_at     (deleted_at)
 #  index_salaries_on_employee_id    (employee_id)
-#  index_salaries_on_particular_id  (particular_id)
+#  index_salaries_on_particular_id  (particular_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -34,4 +34,6 @@ class Salary < ApplicationRecord
 
   validates :status, inclusion: { in: statuses.keys }
   validates :amount, length: { in: 1..200_000 }
+  validates :particular_id, uniqueness: true
+
 end

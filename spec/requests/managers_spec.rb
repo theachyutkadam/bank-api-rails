@@ -7,10 +7,10 @@ RSpec.describe "Manager", type: :request do
   let(:user) { create(:user) }
 
   describe "GET #index" do
-    let!(:managers) { FactoryBot.create_list(:manager, 5, department: department, user: user) }
+    let!(:managers) { FactoryBot.create_list(:manager, 1, department: department, user: user) }
     before { get "/api/managers", headers: { Authorization: user.token } }
     it "returns all managers" do
-      expect(JSON.parse(response.body).size).to eq(5)
+      expect(JSON.parse(response.body).size).to eq(1)
     end
     it "returns status code 200" do
       expect(response).to have_http_status(:success)

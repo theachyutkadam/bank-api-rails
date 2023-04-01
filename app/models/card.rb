@@ -25,6 +25,7 @@
 #
 #  index_cards_on_customer_id  (customer_id)
 #  index_cards_on_deleted_at   (deleted_at)
+#  index_cards_on_number       (number) UNIQUE
 #
 # Foreign Keys
 #
@@ -43,8 +44,7 @@ class Card < ApplicationRecord
   validates :csv, :expire_date, :number, :pin, :title, presence: true
   validates :status, inclusion: { in: statuses.keys }
 
-  validates :number, uniqueness: true, numericality: true
-  validates :number, length: { is: 12 }
+  validates :number, uniqueness: true, numericality: true, length: { is: 12 }
   validates :csv, length: { is: 3 }
   validates :pin, length: { is: 4 }
 

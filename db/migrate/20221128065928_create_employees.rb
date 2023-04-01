@@ -4,9 +4,9 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
   def change
     create_table :employees, id: :uuid do |t|
       t.references :manager, type: :uuid, null: false, foreign_key: true
-      t.references :customer, type: :uuid, null: false, foreign_key: true
+      t.references :customer, type: :uuid, null: false, foreign_key: true, index: { unique: true }
       t.references :department, type: :uuid, null: false, foreign_key: true
-      t.string :official_email
+      t.string :official_email, index: { unique: true }
       t.string :education, null: false
       t.integer :work_status, null: false, default: 0
       t.string :designation, null: false

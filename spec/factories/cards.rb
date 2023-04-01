@@ -25,6 +25,7 @@
 #
 #  index_cards_on_customer_id  (customer_id)
 #  index_cards_on_deleted_at   (deleted_at)
+#  index_cards_on_number       (number) UNIQUE
 #
 # Foreign Keys
 #

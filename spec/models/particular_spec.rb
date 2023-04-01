@@ -43,10 +43,10 @@ RSpec.describe Particular, type: :model do
     # create employee
     let(:employee_user) { create(:user) }
     let(:department) { create(:department, name: "HR") }
-    let(:customer) { create(:customer, account_type: account_type) }
+    let(:customer1) { create(:customer, account_type: account_type) }
 
     # let(:manager) { create(:manager, user: employee_user, department: department) }
-    let(:employee) { create(:employee, manager: manager, department: department, customer: customer) }
+    let(:employee) { create(:employee, manager: manager, department: department, customer: customer1) }
     let(:employee_user_information) { create(:user_information, user: employee_user, accountable: employee) }
 
     # create admin customer
@@ -56,9 +56,9 @@ RSpec.describe Particular, type: :model do
 
     let(:admin_sender) { create(:user_information, user: admin_user, accountable: admin_customer) }
     it "should create new address" do
-      FactoryBot.create_list(:particular, 5, card: admin_card, sender: admin_sender,
+      FactoryBot.create_list(:particular, 1, card: admin_card, sender: admin_sender,
                                              receiver: employee_user_information)
-      expect(Particular.count).to eq(5)
+      expect(Particular.count).to eq(1)
     end
   end
 

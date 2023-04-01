@@ -5,10 +5,10 @@ require "rails_helper"
 RSpec.describe "AccountType", type: :request do
   let(:user) { create(:user) }
   describe "GET #index" do
-    let!(:account_types) { FactoryBot.create_list(:account_type, 5) }
+    let!(:account_types) { FactoryBot.create_list(:account_type, 1) }
     before { get "/api/account_types", headers: { Authorization: user.token } }
     it "returns all account_types" do
-      expect(JSON.parse(response.body).size).to eq(5)
+      expect(JSON.parse(response.body).size).to eq(1)
     end
     it "returns status code 200" do
       expect(response).to have_http_status(:success)

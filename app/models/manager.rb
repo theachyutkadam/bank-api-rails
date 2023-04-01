@@ -17,7 +17,7 @@
 #
 #  index_managers_on_deleted_at     (deleted_at)
 #  index_managers_on_department_id  (department_id)
-#  index_managers_on_user_id        (user_id)
+#  index_managers_on_user_id        (user_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -40,4 +40,5 @@ class Manager < ApplicationRecord
 
   validates :designation, presence: true
   validates :status, inclusion: { in: statuses.keys }
+  validates :user_id, uniqueness: true
 end

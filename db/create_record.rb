@@ -9,7 +9,6 @@ def create_admin_user
 
     Department.create([
                         { name: "HR" },
-                        { name: "Finance" },
                         { name: "Loan" },
                         { name: "Finance" },
                         { name: "Marketing" },
@@ -36,25 +35,25 @@ def create_manager
     manager = FactoryBot.create(:manager, user: user, department: department)
 
     create_employee_information(user, department, manager)
-    Rails.logger.debug "manager created #{i}"
+    puts "manager created #{i}"
   end
   create_employee # create employees
 end
 
 def create_employee
-  90.times do |i|
+  40.times do |i|
     department = Department.all.shuffle.sample
     manager = Manager.all.shuffle.sample
     user = create_user
 
     create_employee_information(user, department, manager)
-    Rails.logger.debug "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
+    puts "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
   end
   create_customer # create customers
 end
 
 def create_customer
-  999.times do |i|
+  2450.times do |i|
     customer = create_customer_with_nominee(nil)
     nominee = customer.nominee
 
@@ -62,7 +61,7 @@ def create_customer
     create_address(customer)
     create_address(nominee)
     create_user_information(user, customer, customer)
-    Rails.logger.debug "customer created #{i} customer card: #{customer.cards.first.status}"
+    puts "customer created #{i} customer card: #{customer.cards.first.status}"
   end
   customer_transactions # create customer transactions
 end
@@ -73,7 +72,7 @@ def customer_transactions
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
     particular = FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
-    Rails.logger.debug "customer particular #{i}"
+    puts "customer particular #{i}"
   end
   employee_salary_transaction # create employee salary transactions
 end
@@ -86,20 +85,18 @@ def employee_salary_transaction
     particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
                                                 receiver: employee_user_information)
     salary = FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
-    Rails.logger.debug "Salary created #{i}"
+    puts "Salary created #{i}"
   end
-  Rails.logger.debug "^^^^^^^^Total User creation field = #{@counter}^^^^^^^^"
+  puts "^^^^^^^^Total #{@counter} User creation field^^^^^^^^"
 end
 
 def create_user
   user = FactoryBot.build(:user)
   user.save if user.valid?
-  user.reload
-  return user if user.save
 
-  Rails.logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#{user.errors.each do |error|
-                                                        Rails.logger.debug error
-                                                      end}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  return User.find_by(email: user.email) if user.save
+
+  puts "@@@@@@User error - #{user.errors.each { |error| puts error.messages }}@@@@@@"
   @counter += 1
   create_user
 end
@@ -122,8 +119,17 @@ def create_employee_information(user, department, manager)
 end
 
 def create_user_information(user, accountable, customer)
-  FactoryBot.create(:user_information, user: user, accountable: accountable)
-  FactoryBot.create(:card, customer: customer)
+  user_information = FactoryBot.build(:user_information, user: user, accountable: accountable)
+  card = FactoryBot.build(:card, customer: customer)
+
+  if user_information.valid? && card.valid?
+    user_information.save
+    card.save
+  else
+    puts "@@@@@@UserInformation Error - #{user_information.errors.each { |error| puts errormessages }}@@@@@@" if user_information.errors
+    puts "@@@@@@Card Error - #{card.errors.each { |error| puts errormessages }}@@@@@@" if card.errors
+    create_user_information(user, accountable, customer)
+  end
 end
 
 def create_address(addressable)
@@ -132,7 +138,9 @@ end
 
 def set_admin_current_balance
   admin_customer = admin_accountable
-  admin_customer.activate! unless admin_customer.active?
+  unless admin_customer.active?
+    admin_customer.update(status: :active)
+  end
   admin_customer.update(current_balance: Employee.sum(:salary_amount)) if admin_customer.current_balance <= 100_000
   admin_customer.reload
 end

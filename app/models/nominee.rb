@@ -18,7 +18,8 @@
 #
 # Indexes
 #
-#  index_nominees_on_customer_id  (customer_id)
+#  index_nominees_on_contact      (contact) UNIQUE
+#  index_nominees_on_customer_id  (customer_id) UNIQUE
 #  index_nominees_on_deleted_at   (deleted_at)
 #
 # Foreign Keys
@@ -45,4 +46,6 @@ class Nominee < ApplicationRecord
   validates :gender, inclusion: { in: genders.keys }
   validates :relation, inclusion: { in: relations.keys }
   validates :contact, numericality: true, length: { is: 10 }
+  validates :customer_id, :contact, uniqueness: true
+
 end

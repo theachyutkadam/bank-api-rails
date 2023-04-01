@@ -23,10 +23,11 @@
 #
 # Indexes
 #
-#  index_employees_on_customer_id    (customer_id)
-#  index_employees_on_deleted_at     (deleted_at)
-#  index_employees_on_department_id  (department_id)
-#  index_employees_on_manager_id     (manager_id)
+#  index_employees_on_customer_id     (customer_id) UNIQUE
+#  index_employees_on_deleted_at      (deleted_at)
+#  index_employees_on_department_id   (department_id)
+#  index_employees_on_manager_id      (manager_id)
+#  index_employees_on_official_email  (official_email) UNIQUE
 #
 # Foreign Keys
 #
@@ -36,7 +37,7 @@
 #
 class EmployeeSerializer < ActiveModel::Serializer
   attributes :id, :salary_amount, :customer_id, :manager_id, :department_id, :education, :date_of_joining, :work_status,
-             :designation, :official_email, :user_information
+             :designation, :official_email, :user_information, :manager ,:customer
 
   def date_of_joining
     object.date_of_joining.to_fs(:long)
