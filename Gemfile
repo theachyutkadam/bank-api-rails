@@ -4,7 +4,8 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
-
+gem "bundler-audit", "~> 0.9.1"
+gem "jekyll", "~> 4.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
@@ -68,4 +69,5 @@ end
 
 gem "aasm"
 gem "acts_as_paranoid"
+gem "ahoy_matey"
 gem "motor-admin", "~> 0.4.4"

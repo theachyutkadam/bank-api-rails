@@ -47,7 +47,9 @@ module Api
         # return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token
         token = @user.generate_token
         @user.update(token: token)
-        render json: { user_information_id: @user.user_information.id, auth_token: token, status: 200 }
+        ahoy.authenticate(@user)
+        render json: { user_information_id: @user.user_information.id, auth_token: token, user_id: @user.id,
+                       status: 200 }
       else
         render json: { errors: "Invalid credentials", status: 400 }
       end

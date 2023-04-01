@@ -47,5 +47,4 @@ class Nominee < ApplicationRecord
   validates :relation, inclusion: { in: relations.keys }
   validates :contact, numericality: true, length: { is: 10 }
   validates :customer_id, :contact, uniqueness: true
-
 end

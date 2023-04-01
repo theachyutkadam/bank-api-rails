@@ -37,7 +37,7 @@
 #
 class EmployeeSerializer < ActiveModel::Serializer
   attributes :id, :salary_amount, :customer_id, :manager_id, :department_id, :education, :date_of_joining, :work_status,
-             :designation, :official_email, :user_information, :manager ,:customer
+             :designation, :official_email, :user_information, :manager, :customer
 
   def date_of_joining
     object.date_of_joining.to_fs(:long)
