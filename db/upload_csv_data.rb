@@ -1,19 +1,21 @@
-require 'csv'
+# frozen_string_literal: true
+
+require "csv"
 
 def start_csv_uploading
   uploading_user
 end
 # def array_of_records
-  # records = []
-  # CSV.read("db/csv_files/demo.csv").each do |record|
-  # CSV.foreach('db/csv_files/demo.csv', headers: true)  do |record|
-  # CSV.foreach('db/csv_files/managers.csv', headers: true)  do |record|
-  #   puts "++++++++++++++++"
-  #   puts record.to_h
-  #   puts "++++++++++++++++"
-  #   # records << extract_(record)
-  # end
-  # records
+# records = []
+# CSV.read("db/csv_files/demo.csv").each do |record|
+# CSV.foreach('db/csv_files/demo.csv', headers: true)  do |record|
+# CSV.foreach('db/csv_files/managers.csv', headers: true)  do |record|
+#   puts "++++++++++++++++"
+#   puts record.to_h
+#   puts "++++++++++++++++"
+#   # records << extract_(record)
+# end
+# records
 # end
 # counter = 0
 # CSV.foreach("db/csv_files/addresses.csv", headers: true)  do |record|
@@ -80,31 +82,33 @@ end
 
 def uploading_user
   counter = 0
-  CSV.foreach("db/csv_files/users.csv", headers: true)  do |row|
-    break if counter==10
+  CSV.foreach("db/csv_files/users.csv", headers: true) do |row|
+    break if counter == 10
+
     user = User.new(
-                username: row[1],
-                password: row[2],
-                email: row[3],
-                token: row[4],
-                status: row[5].to_i,
-                is_admin: row[6],
-                active_at: row[7],
-                inactive_at: row[8],
-                blocked_at: row[9],
-                created_at: row[10],
-                updated_at: row[11],
-                deleted_at: row[12]
-            )
+      username: row[1],
+      password: row[2],
+      email: row[3],
+      token: row[4],
+      status: row[5].to_i,
+      is_admin: row[6],
+      active_at: row[7],
+      inactive_at: row[8],
+      blocked_at: row[9],
+      created_at: row[10],
+      updated_at: row[11],
+      deleted_at: row[12],
+    )
     is_valid_object(user)
     counter += 1
   end
-  puts "Finish users.csv file"
+  Rails.logger.debug "Finish users.csv file"
 end
 
 def is_valid_object(object)
-  puts "++++++++++"
+  Rails.logger.debug "++++++++++"
   return object.save if object.valid?
-  puts object.errors.messages
+
+  Rails.logger.debug object.errors.messages
   false
 end

@@ -38,7 +38,6 @@ RSpec.describe "Nominee", type: :request do
     let(:address) { create(:address, addressable: nominee, building: "LR/R16-G") }
 
     context "when request attributes are valid" do
-
       it "returns http success" do
         expect(response).to have_http_status(:success)
       end

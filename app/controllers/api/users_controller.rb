@@ -48,7 +48,8 @@ module Api
         token = @user.generate_token
         @user.update(token: token)
         ahoy.authenticate(@user)
-        render json: { user_information_id: @user.user_information.id, auth_token: token, user_id: @user.id, status: 200 }
+        render json: { user_information_id: @user.user_information.id, auth_token: token, user_id: @user.id,
+                       status: 200 }
       else
         render json: { errors: "Invalid credentials", status: 400 }
       end
