@@ -33,11 +33,15 @@ RSpec.describe "Nominee", type: :request do
   end
 
   describe "GET #show" do
-    before { get "/api/nominees/#{nominee.id}", headers: { Authorization: user.token } }
+    before { get "/api/nominees/#{address.addressable_id}", headers: { Authorization: user.token } }
     let(:nominee) { create(:nominee, customer: customer) }
+    let(:address) { create(:address, addressable: nominee, building: "LR/R16-G") }
 
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
+    context "when request attributes are valid" do
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 end
