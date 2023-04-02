@@ -43,7 +43,7 @@ class UserInformation < ApplicationRecord
   def avatar_url
     Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
   end
-  
+
   enum gender: { male: 0, female: 1, other: 2 }
   enum maritial_status: { single: 0, married: 1, devorsed: 2 }
 
