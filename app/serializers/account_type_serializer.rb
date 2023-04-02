@@ -15,7 +15,6 @@
 # Indexes
 #
 #  index_account_types_on_deleted_at  (deleted_at)
-#  index_account_types_on_title       (title) UNIQUE
 #
 class AccountTypeSerializer < ActiveModel::Serializer
   attributes :id, :title, :loan_intrest_rate, :saving_intrest_rate

@@ -18,7 +18,7 @@
 #
 #  index_salaries_on_deleted_at     (deleted_at)
 #  index_salaries_on_employee_id    (employee_id)
-#  index_salaries_on_particular_id  (particular_id) UNIQUE
+#  index_salaries_on_particular_id  (particular_id)
 #
 # Foreign Keys
 #

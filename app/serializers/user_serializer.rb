@@ -21,9 +21,6 @@
 # Indexes
 #
 #  index_users_on_deleted_at  (deleted_at)
-#  index_users_on_email       (email) UNIQUE
-#  index_users_on_token       (token) UNIQUE
-#  index_users_on_username    (username) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :password, :email, :token, :status, :deleted_at, :is_admin
