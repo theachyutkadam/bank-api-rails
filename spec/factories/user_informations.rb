@@ -46,5 +46,11 @@ FactoryBot.define do
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
     handicap_details { "MyText" }
+
+    # after :create do |user_information|
+    #   file_path = Rails.root.join('spec', 'support', 'assets', 'piano.jpg')
+    #   file = fixture_file_upload(file_path, 'image/jpg')
+    #   user_information.avatar.attach(file)
+    # end
   end
 end
