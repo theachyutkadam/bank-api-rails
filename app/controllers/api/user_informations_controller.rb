@@ -15,6 +15,11 @@ module Api
         @user_information = UserInformation.new(user_information_params)
         customer = Customer.create
         @user_information.update(accountable: customer)
+        puts "++++++++++"
+        puts "++++++++++"
+        p @user_information.inspect
+        puts "++++++++++"
+        puts "++++++++++"
         if @user_information.save
           render json: @user_information, status: :created
         else
@@ -50,6 +55,7 @@ module Api
     def user_information_params
       params.permit(
         :gender,
+        :avatar,
         :contact,
         :user_id,
         :last_name,
