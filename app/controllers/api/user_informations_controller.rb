@@ -50,6 +50,7 @@ module Api
     def user_information_params
       params.permit(
         :gender,
+        :avatar,
         :contact,
         :user_id,
         :last_name,

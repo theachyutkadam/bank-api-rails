@@ -25,12 +25,9 @@
 #
 # Indexes
 #
-#  index_user_informations_on_accountable         (accountable_type,accountable_id)
-#  index_user_informations_on_adhaar_card_number  (adhaar_card_number) UNIQUE
-#  index_user_informations_on_contact             (contact) UNIQUE
-#  index_user_informations_on_deleted_at          (deleted_at)
-#  index_user_informations_on_pan_card_number     (pan_card_number) UNIQUE
-#  index_user_informations_on_user_id             (user_id) UNIQUE
+#  index_user_informations_on_accountable  (accountable_type,accountable_id)
+#  index_user_informations_on_deleted_at   (deleted_at)
+#  index_user_informations_on_user_id      (user_id)
 #
 # Foreign Keys
 #
@@ -40,6 +37,12 @@ class UserInformation < ApplicationRecord
   acts_as_paranoid
   belongs_to :user
   belongs_to :accountable, polymorphic: true
+
+  has_one_attached :avatar
+
+  def avatar_url
+    Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
+  end
 
   enum gender: { male: 0, female: 1, other: 2 }
   enum maritial_status: { single: 0, married: 1, devorsed: 2 }

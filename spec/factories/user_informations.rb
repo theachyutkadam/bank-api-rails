@@ -25,12 +25,9 @@
 #
 # Indexes
 #
-#  index_user_informations_on_accountable         (accountable_type,accountable_id)
-#  index_user_informations_on_adhaar_card_number  (adhaar_card_number) UNIQUE
-#  index_user_informations_on_contact             (contact) UNIQUE
-#  index_user_informations_on_deleted_at          (deleted_at)
-#  index_user_informations_on_pan_card_number     (pan_card_number) UNIQUE
-#  index_user_informations_on_user_id             (user_id) UNIQUE
+#  index_user_informations_on_accountable  (accountable_type,accountable_id)
+#  index_user_informations_on_deleted_at   (deleted_at)
+#  index_user_informations_on_user_id      (user_id)
 #
 # Foreign Keys
 #
@@ -49,5 +46,11 @@ FactoryBot.define do
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
     handicap_details { "MyText" }
+
+    # after :create do |user_information|
+    #   file_path = Rails.root.join('spec', 'support', 'assets', 'piano.jpg')
+    #   file = fixture_file_upload(file_path, 'image/jpg')
+    #   user_information.avatar.attach(file)
+    # end
   end
 end

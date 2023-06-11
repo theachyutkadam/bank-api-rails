@@ -5,9 +5,9 @@ require "rails_helper"
 RSpec.describe UserInformation, type: :request do
   let(:user) { create(:user, status: "active") }
   let(:user2) { create(:user, status: "active") }
+  let(:customer2) { create(:customer, account_type: account_type) }
   let(:account_type) { create(:account_type, title: "Saving") }
   let(:customer) { create(:customer, account_type: account_type) }
-  let(:customer2) { create(:customer, account_type: account_type) }
   let!(:user_information) { create(:user_information, user: user, accountable: customer) }
   # let!(:user_information2) { create(:user_information, user: user2, accountable: customer2) }
 
