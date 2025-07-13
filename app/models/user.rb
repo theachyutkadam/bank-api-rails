@@ -21,6 +21,9 @@
 # Indexes
 #
 #  index_users_on_deleted_at  (deleted_at)
+#  index_users_on_email       (email) UNIQUE
+#  index_users_on_token       (token) UNIQUE
+#  index_users_on_username    (username) UNIQUE
 #
 class User < ApplicationRecord
   include AASM
@@ -30,8 +33,8 @@ class User < ApplicationRecord
 
   enum status: { active: 0, inactive: 1, blocked: 2 }, _default: "active"
 
-  validates :email, :password, :username, presence: true
   validates :email, :username, :token, uniqueness: true
+  validates :email, :password, :username, presence: true
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
 

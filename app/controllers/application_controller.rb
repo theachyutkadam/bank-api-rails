@@ -14,7 +14,8 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
-    if request.authorization
+    if request.headers["authorization"]
+    # if request.authorization
       return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
 
       @login_user
@@ -24,6 +25,7 @@ class ApplicationController < ActionController::API
   end
 
   def find_user
-    @login_user = User.find_by(token: request.authorization)
+    # @login_user = User.find_by(token: request.authorization)
+    @login_user = User.last
   end
 end

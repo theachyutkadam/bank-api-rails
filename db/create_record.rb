@@ -35,25 +35,25 @@ def create_manager
     manager = FactoryBot.create(:manager, user: user, department: department)
 
     create_employee_information(user, department, manager)
-    Rails.logger.debug "manager created #{i}"
+    puts "manager created #{i}"
   end
   create_employee # create employees
 end
 
 def create_employee
-  40.times do |i|
+  1000.times do |i|
     department = Department.all.shuffle.sample
     manager = Manager.all.shuffle.sample
     user = create_user
 
     create_employee_information(user, department, manager)
-    Rails.logger.debug "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
+    puts "employee created #{i} Department emp count #{Department.find(department.id).employee_count}"
   end
   create_customer # create customers
 end
 
 def create_customer
-  2450.times do |i|
+  1450.times do |i|
     customer = create_customer_with_nominee(nil)
     nominee = customer.nominee
 
@@ -61,7 +61,7 @@ def create_customer
     create_address(customer)
     create_address(nominee)
     create_user_information(user, customer, customer)
-    Rails.logger.debug "customer created #{i} customer card: #{customer.cards.first.status}"
+    puts "customer created #{i} customer card: #{customer.cards.first.status}"
   end
   customer_transactions # create customer transactions
 end
@@ -72,7 +72,7 @@ def customer_transactions
     sender = card.user_information
     receiver = UserInformation.all.shuffle.sample
     FactoryBot.create(:particular, card: card, sender: sender, receiver: receiver)
-    Rails.logger.debug "customer particular #{i} #{card.id}"
+    puts "customer particular #{i} #{card.id}"
   end
   employee_salary_transaction # create employee salary transactions
 end
@@ -85,9 +85,9 @@ def employee_salary_transaction
     particular = FactoryBot.create(:particular, card: admin_card, sender: admin_user_information,
                                                 receiver: employee_user_information)
     FactoryBot.create(:salary, particular: particular, employee: employee_user_information.accountable)
-    Rails.logger.debug "Salary created #{i}"
+    puts "Salary created #{i}"
   end
-  Rails.logger.debug "^^^^^^^^Total #{@counter} User creation field^^^^^^^^"
+  puts "^^^^^^^^Total #{@counter} User creation field^^^^^^^^"
 end
 
 def create_user
@@ -96,7 +96,7 @@ def create_user
 
   return User.find_by(email: user.email) if user.save
 
-  Rails.logger.debug "@@@@@@User error - #{user.errors.each { |error| Rails.logger.debug error.messages }}@@@@@@"
+  puts "@@@@@@User error - #{user.errors.each { |error| puts error.messages }}@@@@@@"
   @counter += 1
   create_user
 end
@@ -127,13 +127,13 @@ def create_user_information(user, accountable, customer)
     card.save
   else
     if user_information.errors
-      Rails.logger.debug "@@@@@@UserInformation Error - #{user_information.errors.each do |_error|
-                                                            Rails.logger.debug errormessages
+      puts "@@@@@@UserInformation Error - #{user_information.errors.each do |_error|
+                                                            puts errormessages
                                                           end}@@@@@@"
     end
     if card.errors
-      Rails.logger.debug "@@@@@@Card Error - #{card.errors.each do |_error|
-                                                 Rails.logger.debug errormessages
+      puts "@@@@@@Card Error - #{card.errors.each do |_error|
+                                                 puts errormessages
                                                end}@@@@@@"
     end
     create_user_information(user, accountable, customer)

@@ -4,7 +4,7 @@ class EmployeeSalaryWorker
   include Sidekiq::Worker
 
   def perform(*_args)
-    Rails.logger.debug "start salary process"
+    puts "start salary process"
     @sender = User.where(is_admin: true).first.user_information
     employees = Employee.not_resignate
     employees.each do |employee|
@@ -16,18 +16,26 @@ class EmployeeSalaryWorker
   end
 
   def create_particular(employee)
-    particular = Particular.new(amount: employee.salary_amount, card_id: @sender.accountable.cards.first.id,
-                                sender_id: @sender.id, receiver_id: employee.user_information.id)
+    particular = Particular.new(
+      amount: employee.salary_amount,
+      card_id: @sender.accountable.cards.first.id,
+      sender_id: @sender.id,
+      receiver_id: employee.user_information.id,
+    )
     return particular.errors unless particular.save
 
     particular.update_current_balance(particular.sender_id, particular.receiver_id, particular.amount)
     create_salary(particular, employee)
-    Rails.logger.debug "employee salary #{employee.id}"
+    puts "employee salary #{employee.id}"
   end
 
   def create_salary(particular, employee)
-    salary = Salary.new(status: "paid", employee_id: employee.id, particular_id: particular.id,
-                        amount: particular.amount)
+    salary = Salary.new(
+      status: "paid",
+      employee_id: employee.id,
+      particular_id: particular.id,
+      amount: particular.amount,
+    )
     salary.save
   end
 
